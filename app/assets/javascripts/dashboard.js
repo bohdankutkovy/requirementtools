@@ -83,7 +83,7 @@ $(function() {
         });
     }
 
-    
+
 
     $(document).on('change', '#project_select_id', function(evt) {
         draw_tree();

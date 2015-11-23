@@ -23,12 +23,21 @@
   .modal-dialog
     .modal-content
       .modal-header
-        %h4.modal-title Select the project
+        .row
+          .col-md-4
+            %h4.modal-title Select the project
+          .col-md-2.col-md-offset-6
+            =link_to "Sign Out", destroy_user_session_path, method: :delete
       .modal-body
         #project_select
           .form-group
             = select_tag 'project_select_modal',  options_for_select(@projects.collect{ |u| [u.title, u.id] }),{multiple: "", class: "form-control"}
-
+      .modal-footer
+        .list-group
+          =link_to(current_user.name, profile_path(current_user.id), class: 'list-group-item')
+          -if current_user.is_super_admin
+            =link_to("Projects", admin_projects_path, class: 'list-group-item')
+            =link_to("People", admin_people_path, class: 'list-group-item')
 
 
 :javascript
