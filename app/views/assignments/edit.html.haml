@@ -5,7 +5,7 @@
         .col-sm-10
           Update for assignment
     %br
-    .form-group
+    .form-group.well.well-lg
       = form_for @assignment do |f|
         = f.label "User: "
         = link_to_user_for(@assignment)
@@ -15,3 +15,4 @@
         = f.hidden_field :project_id
         %br
         = f.submit :class => 'btn btn-success'
+        = link_to 'Cancel', assignment_path(@assignment.project), class: "btn btn-default frame-link"

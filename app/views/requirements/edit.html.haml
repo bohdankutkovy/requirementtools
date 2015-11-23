@@ -5,47 +5,48 @@
         .col-sm-10
           Update for requirement
     %br
-    = simple_form_for(@requirement, html: {multipart: true}) do |f|
-      %fieldset
-        .row
-          = f.label "Title", class: 'col-lg-2 control-label'
-          .col-lg-10
-            = f.text_field :title, required: false, autofocus: true, class: 'form-control', placeholder: "Title"
-        %br
-        .row
-          = f.label "Description", class: 'col-lg-2 control-label'
-          .col-lg-10
-            = f.text_area :description, required: false, autofocus: true, class: 'form-control', placeholder: "Description"
-        %br
-        .row
-          = f.label "Priority", class: 'col-lg-2 control-label'
-          .col-lg-10
-            = f.select :priority, (1..10), class: "form-control"
-        %br
-        .row
-          = f.label "Worth", class: 'col-lg-2 control-label'
-          .col-lg-10
-            = f.select :worth, (1..10), class: "form-control"
-        %br
-        - if !@requirement.attachments.empty?
-          = f.label "Files:"
-        - @attachments.each do |attachment|
-          .col-lg-offset-2.col-condensed
-            .col-lg-6
-              = link_to File.basename(attachment.file.to_s) , attachment.file_url, :target => "_blank"
-            .col-lg-offset-8
-              = delete_link("Delete Attachment", attachment)
-            %hr
-      .row
-        .col-xs-12
-          %button.btn.btn-warning{"data-target" => "#myModal", "data-toggle" => "modal", :type => "button"}
-            New Attachment
-      .row
-        .col-xs-12
+    .well.well-lg
+      = simple_form_for(@requirement, html: {multipart: true}) do |f|
+        %fieldset
+          .row
+            = f.label "Title", class: 'col-lg-2 control-label'
+            .col-lg-10
+              = f.text_field :title, required: false, autofocus: true, class: 'form-control', placeholder: "Title"
           %br
-          = f.submit :class => 'btn btn-success'
-          = link_to 'Cancel', requirement_path(@requirement.id), class: "btn btn-default frame-link"
-      %br
+          .row
+            = f.label "Description", class: 'col-lg-2 control-label'
+            .col-lg-10
+              = f.text_area :description, required: false, autofocus: true, class: 'form-control', placeholder: "Description"
+          %br
+          .row
+            = f.label "Priority", class: 'col-lg-2 control-label'
+            .col-lg-10
+              = f.select :priority, (1..10), class: "form-control"
+          %br
+          .row
+            = f.label "Worth", class: 'col-lg-2 control-label'
+            .col-lg-10
+              = f.select :worth, (1..10), class: "form-control"
+          %br
+          - if !@requirement.attachments.empty?
+            = f.label "Files:"
+          - @attachments.each do |attachment|
+            .col-lg-offset-2.col-condensed
+              .col-lg-6
+                = link_to File.basename(attachment.file.to_s) , attachment.file_url, :target => "_blank"
+              .col-lg-offset-8
+                = delete_link("Delete Attachment", attachment)
+              %hr
+        .row
+          .col-xs-12
+            %button.btn.btn-warning{"data-target" => "#myModal", "data-toggle" => "modal", :type => "button"}
+              New Attachment
+        .row
+          .col-xs-12
+            %br
+            = f.submit :class => 'btn btn-success'
+            = link_to 'Cancel', requirement_path(@requirement.id), class: "btn btn-default frame-link"
+        %br
 
 
 

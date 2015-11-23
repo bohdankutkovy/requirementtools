@@ -5,13 +5,13 @@
       .col-xs-8
         Assignments for
         = @project.title
-      .col-sm-offset-9.col-sm-5 
-        = link_to 'To project', project_path(@project), class: "btn btn-info frame-link"
+      .col-xs-offset-8.col-sm-4
         - if can? :create, Assignment.new(:project_id => @project.id)
-          = link_to '+ Assign', new_assignment_path(:assignment => {:project_id => @project.id}), class: "btn btn-success frame-link"
+          = link_to 'New Assignment', new_assignment_path(:assignment => {:project_id => @project.id}), class: "btn btn-success frame-link"
+          = link_to 'To project', project_path(@project), class: "btn btn-info frame-link"
 
   %br
-  %table.table.table-bordered
+  %table.table.table-stripped
     %thead
       %tr
         %th User

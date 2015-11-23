@@ -6,7 +6,7 @@
           New assignment for
           = @assignment.project.title
     %br
-    .form-group
+    .form-group.well.well-lg
       = form_for @assignment, {class: "save_form"} do |f|
         = f.label :user_id
         = f.select :user_id, @assignment.project.unassigned_users.map {|user| [user.name, user.id] },{}, { :class => "form-control" }
@@ -16,6 +16,6 @@
         = f.hidden_field :project_id
         %br
         = f.submit "Save", {class: "btn btn-success savebutton"}
-    = link_to 'Cancel', assignment_path(@assignment.project), class: "btn btn-default frame-link"
+        = link_to 'Cancel', assignment_path(@assignment.project), class: "btn btn-default frame-link"
 
 

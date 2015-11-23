@@ -56,6 +56,7 @@
         - if !@requirement.attachments.empty?
           - @requirement.attachments.each do |file|
             = link_to File.basename(file.file.to_s) , file.file.url, :target => "_blank"
+            %br
         - else
           %span -
     %hr

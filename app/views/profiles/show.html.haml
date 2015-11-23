@@ -17,18 +17,26 @@
         - else
           %h1 Profile
         = simple_form_for(@user, url: profile_path, html: { method: :patch, multipart: true })  do |f|
-          %p
-            %label Avatar:
-            %br/
-            = image_tag(@user.avatar_url.to_s) if @user.avatar?
-          .form-group
-            = f.label "Name:"
-            = f.input_field :name, disabled: true
+          .row
+            .col-lg-4
+              %p
+                %label Avatar:
+                %br/
+                = image_tag(@user.avatar_url.to_s) if @user.avatar?
+            .form-group.col-lg-offset-4
+              %br
+              .col-lg-1.control-label
+                %label Name:
+              .col-lg-11
+                = f.input_field :name, disabled: true, class: 'form-control'
+              %br
             %br
+            .form-group.col-lg-offset-4
+              = f.label "E-mail:", class: 'col-lg-1 control-label'
+              .col-lg-11
+                = f.input_field :email, disabled: true, class: 'form-control'
             %br
-            = f.label "E-mail:"
-            = f.input_field :email, disabled: true
-        %br
-        .bs-componen
+          %br
           - if can? :update, @user
-            = link_to "Edit", edit_profile_path(@user), class: "btn btn-primary"
+            = link_to "Edit", edit_profile_path(@user), class: "btn btn-primary "
+
