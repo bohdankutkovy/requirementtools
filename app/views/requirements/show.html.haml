@@ -18,58 +18,59 @@
             - else
               %li.active
                 = cur_br[0]
+  #requirement-info.row.col-xs-12
+    .row
+      .col-xs-3
+        %strong Title
+      .col-xs-9
+        = @requirement.title
+    %hr
+    .row
+      .col-xs-3
+        %strong Description
+      .col-xs-9
+        = @requirement.description
+    %hr
+    .row
+      .col-xs-3
+        %strong Priority
+      .col-xs-9
+        = @requirement.priority
+    %hr
+    .row
+      .col-xs-3
+        %strong Worth
+      .col-xs-9
+        = @requirement.worth
+    %hr
+    .row
+      .col-xs-3
+        %strong Author
+      .col-xs-9
+        = link_to_author(@requirement.author_id)
+    %hr
+    .row
+      .col-xs-3
+        %strong Attachment
+      .col-xs-9
+        - if !@requirement.attachments.empty?
+          - @requirement.attachments.each do |file|
+            = link_to File.basename(file.file.to_s) , file.file.url, :target => "_blank"
+        - else
+          %span -
+    %hr
+    %br
 
-  %br
-  .row
-    %table.table.table-striped
-      %tbody
-        %tr
-          %td
-            %strong Title
-          %td
-            = @requirement.title
-      %tbody
-        %td
-          %strong Description
-        %td
-          = @requirement.description
-      %tbody
-        %td
-          %strong Priority
-        %td
-          = @requirement.priority
-      %tbody
-        %td
-          %strong Worth
-        %td
-          = @requirement.worth
-      %tbody
-        %td
-          %strong Author
-        %td
-          = link_to_author(@requirement.author_id)
-      %tbody
-        %td
-          %strong Attachment
-        %td
-          - if !@requirement.attachments.empty?
-            - @requirement.attachments.each do |file|
-              = link_to File.basename(file.file.to_s) , file.file.url, :target => "_blank"
-              %br
-          %br
-  .row
+  .row.col-xs-12
     .crudblock
-      .form-group
-        .col-sm-offset-9.col-sm-5 
-          = link_to "Versions", "#", class: "btn btn-info", id: "version_toggler"
-          - if can? :update, @requirement
-            = edit_link("Edit", edit_requirement_path(requirement: @requirement.id))
-          - if can? :destroy, @requirement
-            = delete_link("Destroy", @requirement)
-  %br
+      = link_to "Versions", "#", class: "btn btn-info", id: "version_toggler"
+      - if can? :update, @requirement
+        = edit_link("Edit", edit_requirement_path(requirement: @requirement.id))
+      - if can? :destroy, @requirement
+        = delete_link("Destroy", @requirement)
+    %br
 
 %input{:value => "#{@requirement.project_id}", :type => "hidden", :id => "project_id"}
-
   = render("version_form")
 
 
