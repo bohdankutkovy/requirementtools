@@ -1,0 +1,33 @@
+@import "fileinput";
+@import 'normalize.css.scss';
+//@import 'global.css.scss';
+
+//@import 'welcome.css.scss';
+//@import 'projects.css.scss';
+
+@import 'gritter';
+@import 'active_scaffold';
+
+@import 'bootstrap-sprockets';
+@import "bootswatch/yeti/variables";
+
+@import "bootstrap";
+@import 'bootstrap-treeview';
+
+body {
+  padding-top: 45px;
+  background-image: url("Elegant_Background-7.jpg");
+}
+@import "bootswatch/yeti/bootswatch";
+@import "modal";
+@import "sessions";
+//@import "base";
+
+
+
+
+
+
+
+
+

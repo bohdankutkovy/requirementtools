@@ -1,0 +1,45 @@
+.container.col-xs-12
+  %br
+    .row
+      %h2
+        .col-sm-10
+          New requirement for
+          = @requirement.project.title
+    %br
+    .well.bs-component
+      = form_for(@requirement, html: {multipart: true}, class: 'form-horizontal') do |f|
+        %fieldset
+          = f.label "Choose parent:"
+          = f.select :parent_id, project_requirements_for_select(@requirement.project.id).unshift(['New Branch', 0]),{}, { :class => "form-control" } 
+          %br
+          .form-group
+            = f.label "Title", class: 'col-lg-2 control-label'
+            .col-lg-10
+              = f.text_field :title, required: false, autofocus: true, class: 'form-control', placeholder: "Title"
+        %br
+          .form-group
+            = f.label "Description", class: 'col-lg-2 control-label'
+            .col-lg-10
+              = f.text_area :description, required: false, autofocus: true, class: 'form-control', placeholder: "Description"
+          %br
+        %br
+          .form-group
+            = f.label "Priority", class: 'col-lg-2 control-label'
+            .col-lg-10
+              = f.select :priority, (1..10), class: "form-control"
+          .form-group
+            = f.label "Worth", class: 'col-lg-2 control-label'
+            .col-lg-10
+              = f.select :worth, (1..10), class: "form-control"
+          = f.hidden_field :project_id
+        %br
+          %br
+          = f.fields_for :attachments do |attachment|
+            .form-group
+              = attachment.label "File:", class: 'col-lg-2 control-label'
+              .col-lg-10
+                = attachment.file_field :file, multiple: true, name: "attachments[file][]", class: "btn btn-warning"
+        %br 
+          = f.submit :class => 'actions btn btn-success'
+        %br
+        = link_to 'Cancel', project_path(@requirement.project.id), class: "btn btn-default frame-link"

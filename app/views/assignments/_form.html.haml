@@ -1,0 +1,10 @@
+.form-group
+  = form_for @assignment do |f|
+    = f.label :user_id
+    = f.select :user_id, @assignment.project.unassigned_users.map {|user| [user.name, user.id] },{}, { :class => "form-control" }
+    %br
+    = f.label "Status"
+    = f.select :acl_level, project_acl_levels_for_select(@assignment.project_id),{}, { :class => "form-control" }
+    = f.hidden_field :project_id
+    %br
+    = f.submit :class => 'btn btn-success'

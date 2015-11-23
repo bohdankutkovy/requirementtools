@@ -1,0 +1,75 @@
+.container.col-xs-12
+  %br
+    .row
+      %h2
+        .col-sm-10
+          Update for requirement
+    %br
+    .well.bs-component
+      = simple_form_for(@requirement, html: {multipart: true}) do |f|
+        %fieldset
+          .form-group
+            = f.label "Title", class: 'col-lg-2 control-label'
+            .col-lg-10
+              = f.text_field :title, required: false, autofocus: true, class: 'form-control', placeholder: "Title"
+        %br
+          .form-group
+            = f.label "Description", class: 'col-lg-2 control-label'
+            .col-lg-10
+              = f.text_area :description, required: false, autofocus: true, class: 'form-control', placeholder: "Description"
+          %br
+        %br
+          .form-group
+            = f.label "Priority", class: 'col-lg-2 control-label'
+            .col-lg-10
+              = f.select :priority, (1..10), class: "form-control"
+          .form-group
+            = f.label "Worth", class: 'col-lg-2 control-label'
+            .col-lg-10
+              = f.select :worth, (1..10), class: "form-control"
+        %br
+          %br
+          .row
+            .col-xs-1
+              %button.btn.btn-warning{"data-target" => "#myModal", "data-toggle" => "modal", :type => "button"}
+                New Attachment
+          %br
+          .row
+            - if !@requirement.attachments.empty?
+              .col-xs-1
+                = f.label "Files:"
+              .col-xs-11
+                - @attachments.each do |attachment|
+                  .row
+                    .col-xs-6
+                      = link_to File.basename(attachment.file.to_s) , attachment.file_url, :target => "_blank"
+                    .col-xs-6
+                      = delete_link("Delete Attachment", attachment)
+                    %br
+                  %br
+          %br
+          = f.submit :class => 'btn btn-success'
+      %br
+      = link_to 'Cancel', requirement_path(@requirement.id), class: "btn btn-default frame-link"
+
+
+
+
+
+#myModal.modal.fade{"aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4#myModalLabel.modal-title New Attachment
+      .modal-body
+        = simple_form_for(@requirement_attachment, html: {multipart: true}) do |f|
+          = f.label "File:"
+          = f.file_field :file, multiple: true, class: "btn btn-warning"
+          = f.hidden_field :requirement_id, value: @requirement.id
+          %br
+          .modal-footer
+            = f.submit :class => 'btn btn-success'
+            %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+      

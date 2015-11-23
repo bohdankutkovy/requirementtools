@@ -1,0 +1,77 @@
+.container.col-xs-12
+  %br
+  .row
+    .col-xs-3
+      - if can? :create, Requirement.new(:project_id => @requirement.project.id)
+        = link_to 'New Requirement', new_requirement_path(:requirement => {:project_id => @requirement.project.id}), class: "btn btn-success frame-link"
+  %br
+  - breadcrumbs_arr = breadcrumbs_for_requirement(@requirement)
+  - if breadcrumbs_arr
+    .row
+      .breadcrumb_block.col-sm-12
+        %ul.breadcrumb
+          - breadcrumbs_arr.each_with_index do |cur_br, i|
+            - if breadcrumbs_arr.length-1 != i
+              %li
+                %a{:href => "#{cur_br[1]}", :class => "frame-link"}
+                  = cur_br[0]
+            - else
+              %li.active
+                = cur_br[0]
+
+  %br
+  .row
+    %table.table.table-striped
+      %tbody
+        %tr
+          %td
+            %strong Title
+          %td
+            = @requirement.title
+      %tbody
+        %td
+          %strong Description
+        %td
+          = @requirement.description
+      %tbody
+        %td
+          %strong Priority
+        %td
+          = @requirement.priority
+      %tbody
+        %td
+          %strong Worth
+        %td
+          = @requirement.worth
+      %tbody
+        %td
+          %strong Author
+        %td
+          = link_to_author(@requirement.author_id)
+      %tbody
+        %td
+          %strong Attachment
+        %td
+          - if !@requirement.attachments.empty?
+            - @requirement.attachments.each do |file|
+              = link_to File.basename(file.file.to_s) , file.file.url, :target => "_blank"
+              %br
+          %br
+  .row
+    .crudblock
+      .form-group
+        .col-sm-offset-9.col-sm-5 
+          = link_to "Versions", "#", class: "btn btn-info", id: "version_toggler"
+          - if can? :update, @requirement
+            = edit_link("Edit", edit_requirement_path(requirement: @requirement.id))
+          - if can? :destroy, @requirement
+            = delete_link("Destroy", @requirement)
+  %br
+
+%input{:value => "#{@requirement.project_id}", :type => "hidden", :id => "project_id"}
+
+  = render("version_form")
+
+
+
+

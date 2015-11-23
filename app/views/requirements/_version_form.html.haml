@@ -1,0 +1,43 @@
+#version_table
+  .row
+    %table.table.table-bordered
+      %thead
+        %tr
+          %th Version
+          %th Changes
+          - if can? :update, @requirement
+            %th Actions
+      %tbody
+        %tr
+          %td
+            1
+          %td
+            %strong
+              \-
+          - if can? :update, @requirement
+            %td
+              = link_to "Apply", requirement_version_rollback_path(@requirement, version: 1), class: "btn btn-warning version-frame-link"
+        - @requirement.versions.map do |version|
+          %tr
+            %td
+              = version.number
+            %td
+              .row
+                - changed_attribute_of_version(version).each do |key|
+                  %strong
+                    .col-sm-3
+                      = key.to_s.capitalize+":"
+                  .col-sm-9
+                    - changed_values_of_version(version, key).each_with_index do |value, index|
+                      - if index == 1
+                        .bg-success
+                          %span +
+                          = value 
+                      - else
+                        .bg-danger
+                          %span -
+                          =value
+                    %br
+            - if can? :update, @requirement
+              %td
+                = link_to "Apply", requirement_version_rollback_path(@requirement, version: version.number), class: "version-frame-link btn btn-warning"

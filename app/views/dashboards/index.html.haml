@@ -1,0 +1,44 @@
+.container
+  .row
+    .menublock.col-xs-3
+      .project_block
+        %h2 Projects
+        #project_select
+          .form-group
+            = select_tag 'project_select_id',  options_for_select(@projects.collect{ |u| [u.title, u.id] }.unshift(['-'])),{class: "form-control"}
+        -#%button.btn.btn-warning{"data-target" => "#project_modal", "data-toggle" => "modal", :type => "button"}
+      .assignment_block
+        .frame-link#project_assign
+          = link_to "Assignments", ""
+      .tree_block
+        %h2 Requirements
+        .treeview
+          #tree
+
+
+    .frame.col-xs-9
+      %div#myFrame
+
+#project_modal.modal{"data-backdrop" => "static", "data-keyboard" => "false"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %h4.modal-title Select the project
+      .modal-body
+        #project_select
+          .form-group
+            = select_tag 'project_select_modal',  options_for_select(@projects.collect{ |u| [u.title, u.id] }),{multiple: "", class: "form-control"}
+
+
+
+:javascript
+  $( document ).ready(function() {
+    $('.tree_block').hide();
+    $('#project_modal').modal('show');
+  });
+
+
+
+
+
+

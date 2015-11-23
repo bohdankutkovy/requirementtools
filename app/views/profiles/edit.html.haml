@@ -1,0 +1,48 @@
+.container
+  - provide(:title, "Edit profile")
+  .row
+    %h1 Update your profile
+    .col-md-12
+      .well.bs-component
+        = form_for(@user, url: profile_path, html: { method: :patch, multipart: true }, class: 'form-horizontal')  do |f|
+          %label Avatar:
+          %br/
+
+          - if @user.avatar.url.present?
+            = image_tag(@user.avatar.url)
+            %br
+            = f.label :remove_avatar do
+              %label Delete avatar:
+              = f.check_box :remove_avatar
+            %br/
+            %br/
+          %label.control-label Select File
+          = f.file_field :avatar, class: "file"
+          = f.hidden_field :avatar_cache
+          %br
+          %fieldset
+            %legend Info
+            .form-group
+              = f.label "Name", class: 'col-lg-2 control-label'
+              .col-lg-10
+                = f.text_field :name, required: false, autofocus: true, class: 'form-control'
+          %br
+            .form-group
+              = f.label "Email", class: 'col-lg-2 control-label'
+              .col-lg-10
+                = f.text_field :email, required: false, autofocus: true, class: 'form-control'
+          %br
+            .form-group
+              = f.label "Password", class: 'col-lg-2 control-label'
+              .col-lg-10
+                = f.text_field :password, required: false, autofocus: true, class: 'form-control'
+          %br
+            .form-group
+              = f.label "Password Confirmation", class: 'col-lg-2 control-label'
+              .col-lg-10
+                = f.text_field :password_confirmation, required: false, autofocus: true, class: 'form-control'
+          %br
+            .form-actions
+              = f.submit "Save changes", class: "btn btn-primary"
+
+= javascript_include_tag 'fileinput'

@@ -1,0 +1,32 @@
+.container.col-xs-12
+  %br
+  .row
+    %h2
+      .col-xs-8
+        Assignments for
+        = @project.title
+      .col-sm-offset-9.col-sm-5 
+        = link_to 'To project', project_path(@project), class: "btn btn-info frame-link"
+        - if can? :create, Assignment.new(:project_id => @project.id)
+          = link_to '+ Assign', new_assignment_path(:assignment => {:project_id => @project.id}), class: "btn btn-success frame-link"
+
+  %br
+  %table.table.table-bordered
+    %thead
+      %tr
+        %th User
+        %th Status
+        %th Actions
+    - @assignments.map do |assignment|
+      - if assignment.user.is_active
+        %tbody
+          %tr
+            %td
+              = link_to_user_for(assignment)
+            %td
+              = status_of_user_for(assignment)
+            %td
+              - if can? :update, assignment
+                = edit_link("Edit", edit_assignment_path( :assignment => assignment.id))
+              - if can? :destroy, assignment
+                = delete_link("Destroy", assignment)

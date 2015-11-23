@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  parent_id: 1
+  project_id: 1
+  title: MyString
+  description: MyText
+  priority: 1
+  worth: 1
+
+two:
+  parent_id: 1
+  project_id: 1
+  title: MyString
+  description: MyText
+  priority: 1
+  worth: 1

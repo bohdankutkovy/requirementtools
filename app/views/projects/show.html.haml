@@ -1,0 +1,35 @@
+%br
+.container.col-sm-12
+  .row
+    .col-sm-12
+      .text-center
+        %h1
+          %i
+            %dl
+              = @project.title
+  .row
+    .col-sm-2
+      - if can? :create, Requirement.new(:project_id => @project.id)
+        = create_link('New Requirement', (new_requirement_path(:requirement => {:project_id => @project.id})) )
+  .row
+    .tableblock
+      = form_for @project, :html => {:class => "form-horizontal"} do |f|
+        .col-sm-12
+          = f.text_area :description, :readonly => true, class: "form-control"
+  %br
+  .project_counter_block
+    .row
+      .col-sm-3
+        %i
+          %dt Requirements created:
+      .col-sm-9
+        = @project.requirements.count
+    .row
+      .col-sm-3
+        %i
+          %dt People assigned:
+      .col-sm-9
+        = @project.assignments.count
+
+:javascript
+  $("textarea").height( $("textarea")[0].scrollHeight );

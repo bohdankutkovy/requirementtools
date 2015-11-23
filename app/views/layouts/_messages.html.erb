@@ -1,0 +1,14 @@
+<% flash.each do |key, value| %>
+  <%if key == "notice"%>
+	  <script>
+	  	<%= add_gritter(  value, :title => "Please pay attention!", :time => 3000, :image => :success ) %>
+	  	<%= extend_gritter :position => :top_right %>
+	  </script>
+  <%else%>
+  	<script>
+	  	<%= add_gritter(  value, :title => "Please pay attention!", :time => 3000, :image => :error ) %>
+	  	<%= extend_gritter :position => :top_right %>
+	  </script>
+	<%end%>
+<% end %>
+        	

@@ -1,0 +1,17 @@
+.container.col-xs-12
+  %br
+    .row
+      %h2
+        .col-sm-10
+          Update for assignment
+    %br
+    .form-group
+      = form_for @assignment do |f|
+        = f.label "User: "
+        = link_to_user_for(@assignment)
+        %br
+        = f.label "Status"
+        = f.select :acl_level, project_acl_levels_for_select(@assignment.project_id),{}, { :class => "form-control" }
+        = f.hidden_field :project_id
+        %br
+        = f.submit :class => 'btn btn-success'
