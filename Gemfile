@@ -58,7 +58,7 @@ gem 'faker', '~> 1.5.0'
 
 
 group :test do
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 3.0'
   gem 'factory_girl'
   gem 'factory_girl_rails', '~> 4.5.0'
   gem 'simplecov', :require => false
@@ -68,6 +68,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   # gem 'byebug'
   gem 'pry'
+  gem 'rspec-rails', '~> 3.0'
 end
 
 group :development do
