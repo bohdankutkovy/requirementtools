@@ -14,7 +14,6 @@ class RequirementsController < ApplicationController
       @requirements = Requirement.where(project_id: params[:project_id], parent_id: 0)
     end
     render json: JSON::dump({ requirements: @requirements.map { |req| requirement_to_bootstrap_tree_item(req) if req.is_active }.compact})
-
   end
 
   def show

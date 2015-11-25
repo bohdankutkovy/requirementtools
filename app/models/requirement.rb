@@ -1,7 +1,7 @@
 class Requirement < ActiveRecord::Base
 	versioned
 
-	after_initialize :init
+	before_create :set_project_id
 
 	before_create    :set_author
 
@@ -72,7 +72,7 @@ class Requirement < ActiveRecord::Base
 
 	private
 	
-	def init
+	def set_project_id
 		if self.parent
 			self.project_id = self.parent.project_id
 		end
