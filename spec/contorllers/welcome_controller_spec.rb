@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe WelcomeController, type: :controller do
+RSpec.describe WelcomeController, type: :controller do
 
   it "renders the index template" do
     get :index

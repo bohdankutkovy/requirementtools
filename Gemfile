@@ -56,10 +56,12 @@ gem 'bootswatch-rails'
 gem 'faker', '~> 1.5.0'
 
 
+
 group :test do
   gem 'rspec-rails'
   gem 'factory_girl'
   gem 'factory_girl_rails', '~> 4.5.0'
+  gem 'simplecov', :require => false
 end
 
 group :development, :test do

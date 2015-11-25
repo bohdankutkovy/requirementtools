@@ -1,13 +1,13 @@
 .container
   - provide(:title, "Edit profile")
   .row
-    .col-md-12
+    .col-md-5
       - if @user.is_active
         %dt
-          %p.text-success Active
+          %p.text-success Status active
       -else
         %dt
-          %p.text-danger Disabled
+          %p.text-danger Status disabled
 
   .row
     .col-md-12
