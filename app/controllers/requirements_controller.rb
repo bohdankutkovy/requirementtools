@@ -25,9 +25,7 @@ class RequirementsController < ApplicationController
 
   def create
     @requirement = Requirement.create(params.require(:requirement).permit(:title, :description, :priority, :worth, :parent_id, :project_id, attachments_attributes: [:id, :requirement_id, :file]))
-
     if @requirement.save
-
       if params[:attachments]
         params[:attachments]['file'].each do |a|
           @requirement_attachment = @requirement.attachments.create!(:file => a)
@@ -43,8 +41,8 @@ class RequirementsController < ApplicationController
 
   def new
     @requirement = Requirement.new(params.require(:requirement).permit(:project_id))
-    authorize! :new, @requirement
     @requirement_attachment = @requirement.attachments.build
+    authorize! :new, @requirement
   end
 
 

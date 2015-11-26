@@ -58,10 +58,9 @@ describe RequirementsController, type: :controller do
         expect(response.body).to eq("{\"requirements\":[{\"text\":\"<a class=\\\"treerequirement frame-link\\\" id=\\\"#{r1.id}\\\" href=\\\"/requirements/#{r1.id}\\\">some title</a>\",\"nodes\":[{\"text\":\"<a class=\\\"treerequirement frame-link\\\" id=\\\"#{r3.id}\\\" href=\\\"/requirements/#{r3.id}\\\">some title</a>\",\"nodes\":[]}]}]}")
         expect(response.status).to eq(200)
       end
-
     end
 
-    describe 'GET show'do
+    describe 'GET show' do
 
       it 'assigns the requested requirement to @requirement' do
         r1 = FactoryGirl.create(:requirement, author_id: user.id)
@@ -81,6 +80,46 @@ describe RequirementsController, type: :controller do
         get :show, :id => r1
         expect(assigns(:requirement_attachments)).to eq(r1.attachments)
         expect(response.status).to eq(200)
+      end
+    end
+
+    describe 'GET new' do
+
+      let(:project){ FactoryGirl.create(:project) }
+
+      it 'passes project_id params to new action' do
+        params = {:project_id => project.id}
+        get :new, :requirement => params
+        expect(controller.params[:requirement]).to eq({"project_id" => project.id.to_s})
+      end
+
+      it 'assigns the requirement build to @requirement' do
+        params = {:project_id => project.id}
+        get :new, :requirement => params
+        expect(assigns(:requirement).project_id).to eq(project.id)
+      end
+
+      it 'assigns the attachment build to @requirement_attachments' do
+        params = {project_id: project.id}
+        get :new, :requirement => params
+        expect(assigns(:requirement_attachment)).not_to be_nil
+        expect(assigns(:requirement_attachment)).not_to eq([])
+      end
+    end
+
+    describe 'POST create' do
+
+      context 'creates with valid attributes' do
+        it 'creates a new requirement' do
+          expect{
+            post :create, requirement: FactoryGirl.attributes_for(:requirement)
+          }.to change(Requirement,:count).by(1)
+        end
+
+        it 'renders requirement show path (json)' do
+          post :create, requirement: { project_id: 1, parent_id: 0, title: "some title", description: "some description", priority: 5, worth: 10, created_at: "2015-11-26 15:17:55", updated_at: "2015-11-26 15:17:55", author_id: nil, is_active: true}
+          expect(response.body).to eq("{\"page\":\"/requirements/#{Requirement.last.id}\"}")
+        end
       end
 
     end

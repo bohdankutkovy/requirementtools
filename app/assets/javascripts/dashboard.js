@@ -13,7 +13,6 @@ $(function() {
         $.get( path, function(data){
             $('#myFrame').html(data);
             $('#version_table').hide();
-
         });
     }
 

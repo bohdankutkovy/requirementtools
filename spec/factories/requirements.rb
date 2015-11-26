@@ -8,6 +8,7 @@ FactoryGirl.define do
     is_active      true
     project_id     1
 
+    association(:project)
     Requirement.skip_callback(:create, :before, :set_author)
   end
 end
