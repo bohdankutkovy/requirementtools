@@ -120,6 +120,24 @@ describe RequirementsController, type: :controller do
           post :create, requirement: { project_id: 1, parent_id: 0, title: "some title", description: "some description", priority: 5, worth: 10, created_at: "2015-11-26 15:17:55", updated_at: "2015-11-26 15:17:55", author_id: nil, is_active: true}
           expect(response.body).to eq("{\"page\":\"/requirements/#{Requirement.last.id}\"}")
         end
+
+        it 'creates a new attachment for requirement' do
+          post :create, requirement: { project_id: 1, parent_id: 0, title: "some title", description: "some description", priority: 5, worth: 10, created_at: "2015-11-26 15:17:55", updated_at: "2015-11-26 15:17:55", author_id: nil, is_active: true}, attachments: {file: [fixture_file_upload('spec/fixtures/file/pdf.pdf', 'pdf/pdf')]}
+          expect(assigns(:requirement).attachments).not_to eq([])
+        end
+      end
+
+      context 'with invalid attributes' do
+        it 'does not save requirement' do
+          expect{
+            post :create, requirement: FactoryGirl.attributes_for(:requirement, title: '' )
+          }.not_to change(Requirement,:count)
+        end
+
+        it 'renders new requirement path (json)' do
+          post :create, requirement: FactoryGirl.attributes_for(:requirement, title: '' )
+          expect(response.body).to eq("{\"page\":\"/requirements/new\"}")
+        end
       end
 
     end
