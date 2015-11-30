@@ -31,19 +31,21 @@ describe ProjectsController, type: :controller do
 
     describe 'GET show' do
       let(:project){FactoryGirl.create(:project)}
+      context 'valid param'
+        it 'passes project id param to show template and assigns @project with found project' do
+          get :show, id: project.id
 
-      it 'passes project id param to show template and assigns @project with found project' do
-        get :show, id: project.id
-
-        expect(controller.params[:id]).to eq(project.id.to_s)
-        expect(assigns(:project)).to eq(project)
+          expect(controller.params[:id]).to eq(project.id.to_s)
+          expect(assigns(:project)).to eq(project)
+        end
       end
+      context 'invalid param' do
+        it 'renders nothing if param is not valid' do
+          get :show, id: '-'
 
-      it 'renders nothing' do
-        get :show, id: '-'
-
-        expect(response.body).to eq("")
-        expect(response.status).to eq(200)
+          expect(response.body).to eq("")
+          expect(response.status).to eq(200)
+        end
       end
     end
 
