@@ -48,9 +48,10 @@ class RequirementsController < ApplicationController
 
   def edit
     @requirement = Requirement.find(params[:requirement])
-    authorize! :update, @requirement
     @attachments = @requirement.attachments.all
     @requirement_attachment = Attachment.new
+    authorize! :update, @requirement
+
   end
 
   def update
@@ -85,8 +86,6 @@ class RequirementsController < ApplicationController
 
       if @requirement.revert_to!(params[:version].to_i)
         render json: {page: page_path}
-      else
-        render json: {page: new_requirement_path}
       end
     end
   end

@@ -142,6 +142,118 @@ describe RequirementsController, type: :controller do
 
     end
 
+    describe 'GET edit' do
+      let(:requirement){ FactoryGirl.create(:requirement) }
+
+      it 'passes requrement & id params to edit action' do
+        get :edit, {requirement: requirement.id, id: requirement.id}
+        expect(controller.params[:requirement]).to eq(requirement.id.to_s)
+        expect(controller.params[:id]).to eq(requirement.id.to_s)
+      end
+
+      it 'finds existing requirement and assigns it to @requirement' do
+
+        get :edit, {requirement: requirement.id, id: requirement.id}
+        expect(assigns(:requirement)).to eq(requirement)
+      end
+
+      it 'finds all attachments of @requirement and assigns them to @attachments' do
+
+        get :edit, {requirement: requirement.id, id: requirement.id}
+        expect(assigns(:attachments)).to eq(assigns(:requirement).attachments.all)
+      end
+
+      it 'initalize @requirement_attachment in case of new attachment' do
+        get :edit, {requirement: requirement.id, id: requirement.id}
+        expect(assigns(:requirement_attachment)).not_to be_nil
+        expect(assigns(:requirement_attachment)).not_to eq([])
+      end
+    end
+
+    describe 'PUT update' do
+      let(:requirement){FactoryGirl.create(:requirement)}
+
+      it 'passes id & requirement params to update action' do
+        put :update, {id: requirement.id, requirement: requirement.attributes}
+        expect(controller.params[:id]).to eq(requirement.id.to_s)
+        expect(controller.params[:requirement]).not_to be_nil
+      end
+
+      it 'finds the requirement and assigns it to @requirement' do
+        put :update, {id: requirement.id, requirement: requirement.attributes}
+        expect(assigns(:requirement)).to eq(requirement)
+      end
+
+
+      context 'updates with invalid attributes' do
+
+        it 'does not update a requirement and redirects to edit_requirement path' do
+          put :update, {id: requirement.id, requirement: FactoryGirl.attributes_for(:requirement, title: '',
+                                                                                                  description: "invalid update")}
+          assigns(:requirement).reload
+          expect(assigns(:requirement).description).not_to eq('invalid update')
+          expect(response).to render_template :edit
+        end
+      end
+
+      context 'updates with valid attributes' do
+        it 'updates with valid attributes and renders requirement_path json' do
+          put :update, {id: requirement.id, requirement: requirement.attributes}
+          expect(response.body).to eq("{\"page\":\"/requirements/#{requirement.id}\"}")
+        end
+      end
+    end
+
+    describe 'POST clear' do
+      it 'renders fathers show template' do
+        project = FactoryGirl.create(:project)
+        requirement_father = FactoryGirl.create(:requirement, project_id: project.id)
+        requirement_child = FactoryGirl.create(:requirement, project_id: project.id, parent_id: requirement_father.id)
+
+        post :clear, requirement_id: requirement_child.id
+        expect(response.body).to eq("{\"page\":\"/requirements/#{requirement_father.id}\"}")
+      end
+
+      it 'renders projects show template' do
+        project = FactoryGirl.create(:project)
+        requirement_father = FactoryGirl.create(:requirement, project_id: project.id)
+
+        post :clear, requirement_id: requirement_father.id
+        expect(response.body).to eq("{\"page\":\"/projects/#{project.id}\"}")
+      end
+    end
+
+    describe 'POST version_rollback' do
+      let(:requirement){FactoryGirl.create(:requirement)}
+      it 'passes requirement_id and version_id and and assigns @requirement' do
+        post :version_rollback, {version: 1, requirement_id: requirement.id}
+        expect(assigns(:requirement)).to eq(requirement)
+      end
+
+      context 'with valid version param' do
+        it 'passes requirement_id and version_id, rollbacks to the previous version and renders requirement_path json' do
+          requirement.update_attributes(title: 'Updated')
+          post :version_rollback, {version: 1, requirement_id: requirement.id}
+
+          expect(controller.params[:requirement_id]).to eq(requirement.id.to_s)
+          expect(controller.params[:version]).to eq(1.to_s)
+          expect(assigns(:requirement).title).to eq("some title")
+          expect(response.body).to eq("{\"page\":\"/requirements/#{requirement.id}\"}")
+        end
+      end
+
+      context 'with invalid version param' do
+        it 'doesnt rollback to previous version' do
+          requirement.update_attributes(title: 'Updated')
+          post :version_rollback, {version: '300', requirement_id: requirement.id}
+
+          expect(assigns(:requirement).title).to eq("Updated")
+          expect(response.body).to eq("{\"page\":\"/requirements/#{requirement.id}\"}")
+        end
+      end
+
+    end
+
   end
 
 end
