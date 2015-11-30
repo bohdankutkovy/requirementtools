@@ -55,7 +55,7 @@ gem 'bootswatch-rails'
 
 gem 'faker', '~> 1.5.0'
 gem 'factory_girl_rails'
-gem 'database_cleaner', '~> 1.3.0'
+
 
 group :test do
   gem 'simplecov', :require => false
@@ -67,7 +67,7 @@ group :development, :test do
   gem 'pry'
   gem 'rspec-rails', '~> 3.0'
   gem 'factory_girl_rails'
-  gem 'database_cleaner', '~> 1.3.0'
+  gem 'database_cleaner'
 end
 
 group :development do
