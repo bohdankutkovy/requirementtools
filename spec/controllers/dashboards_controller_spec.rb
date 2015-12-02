@@ -21,7 +21,7 @@ describe DashboardsController, type: :controller do
 
     end
 
-    context 'index action' do
+    describe 'GET index' do
 
       it 'assigns @user with current user' do
         get :index

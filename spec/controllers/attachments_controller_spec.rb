@@ -15,7 +15,7 @@ describe AttachmentsController, type: :controller do
       sign_in user
     end
 
-    context 'create action' do
+    describe 'POST create' do
       it 'passes attachment params to action' do
         r = FactoryGirl.create(:requirement)
         post :create, attachment: {requirement_id: r.id, file: [fixture_file_upload('spec/fixtures/file/pdf.pdf', 'pdf/pdf')]}
@@ -33,7 +33,7 @@ describe AttachmentsController, type: :controller do
 
     end
 
-    context 'clear action' do
+    describe 'POST clear' do
       it 'finds the attachment and assigns it to @attachment' do
         attachment = FactoryGirl.create(:attachment)
         post :clear, attachment_id: attachment.id

@@ -21,14 +21,14 @@ describe ProfilesController, type: :controller do
     end
 
 
-    context 'get show' do
+    describe 'GET show' do
       it 'assigns @user with found user' do
         get :show, id: user.id
         expect(assigns(:user)).to eq(user)
       end
     end
 
-    context 'get edit' do
+    describe 'GET edit' do
       it 'triggers @Edit your password@ message if user didnt edit password' do
         user.update_attributes(info_edited: false)
         get :edit, id: user.id
@@ -36,7 +36,7 @@ describe ProfilesController, type: :controller do
       end
     end
 
-    context 'put update' do
+    describe 'PUT update' do
       let(:user_1){FactoryGirl.create(:user)}
       let(:admin){FactoryGirl.create(:user, is_super_admin: true)}
       context 'with valid params' do
