@@ -70,6 +70,10 @@ class Requirement < ActiveRecord::Base
 		self.save
 	end
 
+	def set_author
+		self.author_id = current_user.id
+	end
+
 	private
 	
 	def set_project_id
@@ -78,9 +82,7 @@ class Requirement < ActiveRecord::Base
 		end
 	end
 
-	def set_author
-		self.author_id = current_user.id
-	end
+
 
 	def parent_exists?
 		if self.parent

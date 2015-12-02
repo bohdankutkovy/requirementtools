@@ -31,7 +31,7 @@ describe ProjectsController, type: :controller do
 
     describe 'GET show' do
       let(:project){FactoryGirl.create(:project)}
-      context 'valid param'
+      context 'valid param' do
         it 'passes project id param to show template and assigns @project with found project' do
           get :show, id: project.id
 
