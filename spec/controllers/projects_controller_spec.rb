@@ -11,19 +11,14 @@ describe ProjectsController, type: :controller do
 
   context 'controller actions' do
 
-    user = User.new
-    user.name = Faker::Name.first_name
-    user.email = Faker::Internet.email
-    user.password = "password"
-    user.password_confirmation = "password"
-    user.info_edited = true
-    user.is_super_admin = false
-    user.is_active = true
-    user.save
-
-    user.confirm!
+    let(:user){FactoryGirl.create(:user)}
 
     before :each do
+      User.destroy_all
+      Project.destroy_all
+      Attachment.destroy_all
+      Requirement.destroy_all
+
       @request.env["devise.mapping"] = Devise.mappings[:user]
       sign_in user
     end
