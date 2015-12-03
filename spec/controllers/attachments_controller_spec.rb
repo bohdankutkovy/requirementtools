@@ -23,7 +23,7 @@ describe AttachmentsController, type: :controller do
       end
 
       it 'creates new attachment and renders the edit_requirement path json' do
-        r = FactoryGirl.create(:requirement)
+        r = FactoryGirl.create(:requirement, author_id: user.id)
         expect{
           post :create, attachment: {requirement_id: r.id, file: [fixture_file_upload('spec/fixtures/file/pdf.pdf', 'pdf/pdf')]}
         }.to change(Attachment,:count).by(1)
