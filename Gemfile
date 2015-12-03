@@ -54,7 +54,7 @@ gem 'vestal_versions', :github => 'altagem/vestal_versions', branch: 'rails-4_1'
 gem 'bootswatch-rails'
 
 gem 'faker', '~> 1.5.0'
-gem 'factory_girl_rails'
+
 
 
 group :test do

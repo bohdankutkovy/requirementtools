@@ -20,7 +20,7 @@ describe RequirementsController, type: :controller do
   describe 'controller actions' do
 
     user = FactoryGirl.create(:user)
-    user.confirm!
+
     before :each do
       @request.env["devise.mapping"] = Devise.mappings[:user]
       sign_in user

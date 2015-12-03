@@ -26,8 +26,10 @@ class ProfilesController < ApplicationController
         redirect_to profile_path
       end
     else
+      flash[:error] = "Profile was not updated! Some attribute is invalid!"
       render :edit
     end
+
   end
 
   def set_user
