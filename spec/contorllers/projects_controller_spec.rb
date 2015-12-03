@@ -49,5 +49,5 @@ describe ProjectsController, type: :controller do
       end
     end
 
-  end
+
 end
