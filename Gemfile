@@ -59,6 +59,7 @@ gem 'faker', '~> 1.5.0'
 
 group :test do
   gem 'simplecov', :require => false
+  gem 'shoulda-matchers'
 end
 
 group :development, :test do
