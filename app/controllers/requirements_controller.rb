@@ -24,7 +24,8 @@ class RequirementsController < ApplicationController
   end
 
   def create
-    @requirement = Requirement.create(params.require(:requirement).permit(:title, :description, :priority, :worth, :parent_id, :project_id, attachments_attributes: [:id, :requirement_id, :file]))
+    @requirement = Requirement.create(params.require(:requirement).permit(:title, :description,  :priority, :worth, :parent_id, :project_id, attachments_attributes: [:id, :requirement_id, :file])
+                                          .merge(author_id: current_user.id) )
     if @requirement.save
       if params[:attachments]
         params[:attachments]['file'].each do |a|
@@ -40,7 +41,7 @@ class RequirementsController < ApplicationController
   end
 
   def new
-    @requirement = Requirement.new(params.require(:requirement).permit(:project_id))
+    @requirement = Requirement.new(params.require(:requirement).permit(:project_id), author_id: current_user.id)
     @requirement_attachment = @requirement.attachments.build
     authorize! :new, @requirement
   end

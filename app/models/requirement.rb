@@ -1,7 +1,7 @@
 class Requirement < ActiveRecord::Base
 	versioned
 
-	before_create :set_project_id, :set_author
+	before_create :set_project_id
 
 	has_many :attachments, dependent: :destroy
 	has_many :children, class_name: "Requirement", foreign_key: "parent_id", dependent: :destroy
@@ -68,13 +68,7 @@ class Requirement < ActiveRecord::Base
 		self.save
 	end
 
-	def set_author
-		self.author_id = current_user.id
-	end
-
-
 	private
-
 
 	def set_project_id
 		if self.parent
