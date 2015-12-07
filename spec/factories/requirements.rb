@@ -9,6 +9,6 @@ FactoryGirl.define do
     project_id     1
 
     association(:project)
-    Requirement.skip_callback(:create, :before, :set_author)
+    Requirement.skip_callback(:create, :before)
   end
 end

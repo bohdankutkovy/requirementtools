@@ -1,7 +1,9 @@
 class Requirement < ActiveRecord::Base
 	versioned
 
-	before_create :set_project_id#, :set_author
+
+	before_create :set_project_id
+
 
 	has_many :attachments, dependent: :destroy
 	has_many :children, class_name: "Requirement", foreign_key: "parent_id", dependent: :destroy
@@ -20,13 +22,7 @@ class Requirement < ActiveRecord::Base
 	validates_numericality_of :worth,    greater_than: 0, less_than: 11
 
 	def authorized_for?(action)
-		if action[:crud_type]==:read
-			true
-		else
-			if current_user.is_super_admin?
-				true
-			end
-		end
+		action[:crud_type]==:read && current_user.is_super_admin?
 	end
 
 	def available_for_create?(user)
@@ -68,17 +64,11 @@ class Requirement < ActiveRecord::Base
 		self.save
 	end
 
-	def set_author
-		self.author_id = current_user.id
-	end
-
-
 	private
 	def set_project_id
 		if self.parent
 			self.project_id = self.parent.project_id
 		end
-		set_author
 	end
 
 	def parent_exists?
