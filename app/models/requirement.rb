@@ -1,7 +1,7 @@
 class Requirement < ActiveRecord::Base
 	versioned
 
-	before_create :set_project_id, :set_author
+	before_create :set_project_id#, :set_author
 
 	has_many :attachments, dependent: :destroy
 	has_many :children, class_name: "Requirement", foreign_key: "parent_id", dependent: :destroy
@@ -74,12 +74,11 @@ class Requirement < ActiveRecord::Base
 
 
 	private
-
-
 	def set_project_id
 		if self.parent
 			self.project_id = self.parent.project_id
 		end
+		set_author
 	end
 
 	def parent_exists?
