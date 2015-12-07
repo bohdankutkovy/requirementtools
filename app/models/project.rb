@@ -6,9 +6,6 @@ class Project < ActiveRecord::Base
   validates_presence_of :title, :description
   validates_uniqueness_of :title
 
-  def user_name
-  end
-
   def authorized_for?(action)
     true if current_user.is_super_admin?
   end
