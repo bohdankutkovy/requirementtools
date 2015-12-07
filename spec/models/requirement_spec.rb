@@ -1,20 +1,13 @@
 require 'spec_helper'
 
-<<<<<<< HEAD
-describe Requirement do
-=======
 
 describe Requirement do
 
->>>>>>> fdd350a0b646cf721b9fbf3f16c07607909d5ae4
+
   it 'has a valid factory' do
     expect(FactoryGirl.build(:requirement)).to be_valid
   end
 
-<<<<<<< HEAD
-
-end
-=======
   let(:requirement){FactoryGirl.create(:requirement)}
 
   let(:user){FactoryGirl.create(:user)}
@@ -150,4 +143,3 @@ end
 
 end
 
->>>>>>> fdd350a0b646cf721b9fbf3f16c07607909d5ae4
