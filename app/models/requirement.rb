@@ -20,13 +20,7 @@ class Requirement < ActiveRecord::Base
 	validates_numericality_of :worth,    greater_than: 0, less_than: 11
 
 	def authorized_for?(action)
-		if action[:crud_type]==:read
-			true
-		else
-			if current_user.is_super_admin?
-				true
-			end
-		end
+		action[:crud_type]==:read && current_user.is_super_admin?
 	end
 
 	def available_for_create?(user)

@@ -13,6 +13,7 @@ describe Requirement do
   before :each do
     Requirement.destroy_all
     Project.destroy_all
+    Assignment.destroy_all
   end
 
   describe 'ActiveModel validations' do
@@ -103,9 +104,38 @@ describe Requirement do
         end
       end
 
-      it 'checks if authorized for read' do
-        expect(requirement.authorized_for?({crud_type: 'read'})).to eq(true)
+      context 'assigned to project with rich rights' do
+        let!(:assignment){FactoryGirl.create(:assignment, user_id: user.id, project_id: project.id, acl_level: 1)}
+        it 'allows to read, create, update and delete requirement' do
+          requirement.update_attributes(project_id: project.id)
+          expect(requirement.available_for_read?(user)).to eq(true)
+          expect(requirement.available_for_create?(user)).to eq(true)
+          expect(requirement.available_for_update?(user)).to eq(true)
+          expect(requirement.available_for_delete?(user)).to eq(true)
+        end
       end
+
+      context 'assigned to project with poor rights' do
+        let!(:assignment){FactoryGirl.create(:assignment, user_id: user.id, project_id: project.id, acl_level: 3)}
+        it 'allows to read, create, update and delete requirement' do
+          requirement.update_attributes(project_id: project.id)
+          expect(requirement.available_for_read?(user)).to eq(true)
+          expect(requirement.available_for_create?(user)).to eq(false)
+          expect(requirement.available_for_update?(user)).to eq(false)
+          expect(requirement.available_for_delete?(user)).to eq(false)
+        end
+      end
+      context 'assigned to project with super_admin rights' do
+        it 'allows to read, create, update and delete requirement' do
+          user.update_attributes(is_super_admin: true)
+          requirement.update_attributes(project_id: project.id)
+          expect(requirement.available_for_read?(user)).to eq(true)
+          expect(requirement.available_for_create?(user)).to eq(true)
+          expect(requirement.available_for_update?(user)).to eq(true)
+          expect(requirement.available_for_delete?(user)).to eq(true)
+        end
+      end
+
 
     end
   end
