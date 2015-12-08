@@ -7,7 +7,7 @@ class Project < ActiveRecord::Base
   validates_uniqueness_of :title
 
   def authorized_for?(action)
-    true if current_user.is_super_admin?
+    current_user.is_super_admin?
   end
 
   def available_for_read?(user)
