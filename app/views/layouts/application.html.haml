@@ -18,17 +18,24 @@
         %ul.nav.navbar-nav.navbar-right
           - if user_signed_in?
             %li
-              =link_to current_user.name, profile_path(current_user.id)
+              = link_to profile_path(current_user.id) do
+                %i.glyphicon.glyphicon-user
+                = current_user.name
+
             -if current_user.is_super_admin
               %li
                 =link_to "Projects", admin_projects_path
               %li
-                =link_to "People", admin_people_path
+                =link_to "Users", admin_people_path
             %li
-              =link_to "Sign Out", destroy_user_session_path, method: :delete
+              = link_to destroy_user_session_path, method: :delete do
+                %i.glyphicon.glyphicon-log-out
+
           -else
             %li
-              =link_to "Log In", new_user_session_path
+              = link_to new_user_session_path do
+                %i.glyphicon.glyphicon-log-in
+                Log in
 
   = render 'layouts/messages'
   = yield
