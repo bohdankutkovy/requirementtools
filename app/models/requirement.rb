@@ -1,9 +1,7 @@
 class Requirement < ActiveRecord::Base
 	versioned
 
-
 	before_create :set_project_id
-
 
 	has_many :attachments, dependent: :destroy
 	has_many :children, class_name: "Requirement", foreign_key: "parent_id", dependent: :destroy
@@ -22,7 +20,11 @@ class Requirement < ActiveRecord::Base
 	validates_numericality_of :worth,    greater_than: 0, less_than: 11
 
 	def authorized_for?(action)
-		action[:crud_type]==:read && current_user.is_super_admin?
+		if action[:crud_type]==:read
+			return true
+		elsif current_user.is_super_admin?
+			return true
+		end
 	end
 
 	def available_for_create?(user)
