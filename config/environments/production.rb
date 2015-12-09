@@ -79,7 +79,7 @@ Rails.application.configure do
 
 
 
-  config.action_mailer.default_url_options = { :host => 'requirementtools.herokuapp.com'} 
+  config.action_mailer.default_url_options = { :host => 'requirementtools.herokuapp.com'}
 
   # ActionMailer Config
   # Setup for production - deliveries, no errors raised
@@ -91,7 +91,7 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
       address: "smtp.gmail.com",
       port: 587,
-      domain: "heroku.com",
+      domain: "requirementtools.herokuapp.com",
       authentication: "plain",
       enable_starttls_auto: true,
       user_name: ENV["kutkovybohdan"],
