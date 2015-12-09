@@ -16,8 +16,16 @@
 
 body {
   padding-top: 45px;
-  background-image: url("Elegant_Background-7.jpg");
+  background-image: asset_url('Elegant_Background-7.jpg');
 }
+.banner{
+  background-image: asset_url('banner-bg.jpg');
+}
+
+.intro-header{
+  background-image: asset_url('intro-bg.jpg');
+}
+
 @import "bootswatch/yeti/bootswatch";
 @import "modal";
 @import "sessions";
