@@ -14,18 +14,18 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2015-12-11T12:36:39+02:00">2015-12-11T12:36:39+02:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2015-12-11T17:26:54+02:00">2015-12-11T17:26:54+02:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="red">17.65%</span></span>
+    (<span class="covered_percent"><span class="red">19.22%</span></span>
      covered at
      <span class="covered_strength">
        <span class="red">
-         0.49
+         0.58
        </span>
     </span> hits/line)
   </h2>
@@ -33,8 +33,8 @@
   <div>
     <b>35</b> files in total.
     <b>952</b> relevant lines. 
-    <span class="green"><b>168</b> lines covered</span> and
-    <span class="red"><b>784</b> lines missed </span>
+    <span class="green"><b>183</b> lines covered</span> and
+    <span class="red"><b>769</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -332,12 +332,12 @@
       
       <tr>
         <td class="strong"><a href="#ef860a87d0a7e12879595a3ed1cbf4dc867978f8" class="src_link" title="app/models/assignment.rb">app/models/assignment.rb</a></td>
-        <td class="red strong">52.78 %</td>
+        <td class="green strong">94.44 %</td>
         <td>70</td>
         <td>36</td>
-        <td>19</td>
-        <td>17</td>
-        <td>0.6</td>
+        <td>34</td>
+        <td>2</td>
+        <td>2.3</td>
       </tr>
       
       <tr>
@@ -377,7 +377,7 @@
         <td>39</td>
         <td>38</td>
         <td>1</td>
-        <td>4.5</td>
+        <td>5.1</td>
       </tr>
       
       <tr>
@@ -586,11 +586,11 @@
           <div class="file_list_container" id="Models">
   <h2>
     <span class="group_name">Models</span>
-    (<span class="covered_percent"><span class="red">50.64%</span></span>
+    (<span class="covered_percent"><span class="red">57.08%</span></span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         1.8
+         2.17
        </span>
     </span> hits/line)
   </h2>
@@ -598,8 +598,8 @@
   <div>
     <b>6</b> files in total.
     <b>233</b> relevant lines. 
-    <span class="green"><b>118</b> lines covered</span> and
-    <span class="red"><b>115</b> lines missed </span>
+    <span class="green"><b>133</b> lines covered</span> and
+    <span class="red"><b>100</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -627,12 +627,12 @@
       
       <tr>
         <td class="strong"><a href="#ef860a87d0a7e12879595a3ed1cbf4dc867978f8" class="src_link" title="app/models/assignment.rb">app/models/assignment.rb</a></td>
-        <td class="red strong">52.78 %</td>
+        <td class="green strong">94.44 %</td>
         <td>70</td>
         <td>36</td>
-        <td>19</td>
-        <td>17</td>
-        <td>0.6</td>
+        <td>34</td>
+        <td>2</td>
+        <td>2.3</td>
       </tr>
       
       <tr>
@@ -672,7 +672,7 @@
         <td>39</td>
         <td>38</td>
         <td>1</td>
-        <td>4.5</td>
+        <td>5.1</td>
       </tr>
       
     </tbody>
@@ -6553,11 +6553,11 @@
         <div class="source_table" id="ef860a87d0a7e12879595a3ed1cbf4dc867978f8">
   <div class="header">
     <h3>app/models/assignment.rb</h3>
-    <h4><span class="red">52.78 %</span> covered</h4>
+    <h4><span class="green">94.44 %</span> covered</h4>
     <div>
       <b>36</b> relevant lines. 
-      <span class="green"><b>19</b> lines covered</span> and
-      <span class="red"><b>17</b> lines missed.</span>
+      <span class="green"><b>34</b> lines covered</span> and
+      <span class="red"><b>2</b> lines missed.</span>
     </div>
   </div>
   
@@ -6798,8 +6798,8 @@
           <code class="ruby">  def available_for_update?(user)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="40">
-          
+        <li class="covered" data-hits="6" data-linenumber="40">
+          <span class="hits">6</span>
           
           <code class="ruby">    current_user_acl = user.assignments.where(project_id: project.id).first.acl_level</code>
         </li>
@@ -6810,8 +6810,8 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="42">
-          
+        <li class="covered" data-hits="6" data-linenumber="42">
+          <span class="hits">6</span>
           
           <code class="ruby">    case current_user_acl</code>
         </li>
@@ -6822,8 +6822,8 @@
           <code class="ruby">      when 0</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="44">
-          
+        <li class="covered" data-hits="1" data-linenumber="44">
+          <span class="hits">1</span>
           
           <code class="ruby">        user_has_ability = true</code>
         </li>
@@ -6834,14 +6834,14 @@
           <code class="ruby">      when 1, 2</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="46">
-          
+        <li class="covered" data-hits="4" data-linenumber="46">
+          <span class="hits">4</span>
           
           <code class="ruby">        assignment = User.find_by_id(user_id).assignments.find_by_id(id)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="47">
-          
+        <li class="covered" data-hits="4" data-linenumber="47">
+          <span class="hits">4</span>
           
           <code class="ruby">        user_has_ability = true if assignment &amp;&amp; assignment.acl_level &gt; current_user_acl</code>
         </li>
@@ -6852,8 +6852,8 @@
           <code class="ruby">      when 3</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="49">
-          
+        <li class="covered" data-hits="1" data-linenumber="49">
+          <span class="hits">1</span>
           
           <code class="ruby">        user_has_ability = false</code>
         </li>
@@ -6864,8 +6864,8 @@
           <code class="ruby">    end</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="51">
-          
+        <li class="covered" data-hits="6" data-linenumber="51">
+          <span class="hits">6</span>
           
           <code class="ruby">    user.is_super_admin? || user_has_ability</code>
         </li>
@@ -6888,14 +6888,14 @@
           <code class="ruby">  def available_for_delete?(user)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="55">
-          
+        <li class="covered" data-hits="6" data-linenumber="55">
+          <span class="hits">6</span>
           
           <code class="ruby">    user_has_ability = false</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="56">
-          
+        <li class="covered" data-hits="6" data-linenumber="56">
+          <span class="hits">6</span>
           
           <code class="ruby">    current_user_acl = user.assignments.where(project_id: project.id).first.acl_level</code>
         </li>
@@ -6906,8 +6906,8 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="58">
-          
+        <li class="covered" data-hits="6" data-linenumber="58">
+          <span class="hits">6</span>
           
           <code class="ruby">    case current_user_acl</code>
         </li>
@@ -6918,8 +6918,8 @@
           <code class="ruby">      when 0</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="60">
-          
+        <li class="covered" data-hits="1" data-linenumber="60">
+          <span class="hits">1</span>
           
           <code class="ruby">        user_has_ability = true</code>
         </li>
@@ -6930,14 +6930,14 @@
           <code class="ruby">      when 1, 2</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="62">
-          
+        <li class="covered" data-hits="4" data-linenumber="62">
+          <span class="hits">4</span>
           
           <code class="ruby">        assignment = User.find_by_id(user_id).assignments.find_by_id(id)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="63">
-          
+        <li class="covered" data-hits="4" data-linenumber="63">
+          <span class="hits">4</span>
           
           <code class="ruby">        user_has_ability = true if assignment &amp;&amp; assignment.acl_level &gt; current_user_acl</code>
         </li>
@@ -6948,8 +6948,8 @@
           <code class="ruby">      when 3</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="65">
-          
+        <li class="covered" data-hits="1" data-linenumber="65">
+          <span class="hits">1</span>
           
           <code class="ruby">        user_has_ability = false</code>
         </li>
@@ -6960,8 +6960,8 @@
           <code class="ruby">    end</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="67">
-          
+        <li class="covered" data-hits="6" data-linenumber="67">
+          <span class="hits">6</span>
           
           <code class="ruby">    user.is_super_admin? || user_has_ability</code>
         </li>
@@ -8262,8 +8262,8 @@
           <code class="ruby">  def check_password_changed</code>
         </li>
       
-        <li class="covered" data-hits="38" data-linenumber="66">
-          <span class="hits">38</span>
+        <li class="covered" data-hits="46" data-linenumber="66">
+          <span class="hits">46</span>
           
           <code class="ruby">    if self.sign_in_count != 0</code>
         </li>
@@ -8310,8 +8310,8 @@
           <code class="ruby">  def password_required?</code>
         </li>
       
-        <li class="covered" data-hits="96" data-linenumber="74">
-          <span class="hits">96</span>
+        <li class="covered" data-hits="112" data-linenumber="74">
+          <span class="hits">112</span>
           
           <code class="ruby">   !persisted? || password.present? || password_confirmation.present?</code>
         </li>
