@@ -27,17 +27,17 @@ class Assignment < ActiveRecord::Base
   end
 
   def available_for_create?(user)
-    user_has_ability = current_user.assignments.where(project_id: project_id).first.acl_level < 3
+    user_has_ability = user.assignments.where(project_id: project_id).first.acl_level < 3
     user.is_super_admin? || user_has_ability
   end
 
   def available_for_read?(user)
-    user_has_ability = current_user.assignments.where(project_id: project.id).first.acl_level <= 0
+    user_has_ability = user.assignments.where(project_id: project.id).first.acl_level >= 0
     user.is_super_admin? || user_has_ability
   end
 
   def available_for_update?(user)
-    current_user_acl = current_user.assignments.where(project_id: project.id).first.acl_level
+    current_user_acl = user.assignments.where(project_id: project.id).first.acl_level
 
     case current_user_acl
       when 0
@@ -53,7 +53,7 @@ class Assignment < ActiveRecord::Base
 
   def available_for_delete?(user)
     user_has_ability = false
-    current_user_acl = current_user.assignments.where(project_id: project.id).first.acl_level
+    current_user_acl = user.assignments.where(project_id: project.id).first.acl_level
 
     case current_user_acl
       when 0

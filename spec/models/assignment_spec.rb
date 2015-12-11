@@ -40,5 +40,35 @@ describe Assignment do
     end
   end
 
+  describe 'model methods' do
+    it 'return users name of current assignment' do
+      expect(FactoryGirl.create(:assignment, user_id: user.id, project_id: project.id).name).to eq(user.name)
+    end
+
+
+    context 'assigned with rich rights' do
+      it 'allows user to create assignment' do
+        user_assignment = FactoryGirl.create(:assignment, project_id: project.id, user_id: user.id, acl_level: 1)
+        expect(user_assignment.available_for_create?(user)).to eq(true)
+      end
+
+      it 'allows user to read assignment' do
+        user_assignment = FactoryGirl.create(:assignment, project_id: project.id, user_id: user.id, acl_level: 3)
+        expect(user_assignment.available_for_read?(user)).to eq(true)
+      end
+    end
+
+    context 'assigned with poor rights' do
+      it 'doesnt allow user to create assignment' do
+        user_assignment = FactoryGirl.create(:assignment, project_id: project.id, user_id: user.id, acl_level: 3)
+        expect(user_assignment.available_for_create?(user)).to eq(false)
+      end
+    end
+
+
+
+
+  end
+
 
 end
