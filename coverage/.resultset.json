@@ -1,13 +1,11 @@
 {
   "RSpec": {
     "coverage": {
-      "/home/julesabrams/sigma-vpn/requrementtools/app/models/requirement.rb": [
+      "/home/bkutkovy/FolderForRepo/sigma-tools/requrementtools/app/models/requirement.rb": [
         1,
         1,
         null,
-        null,
         1,
-        null,
         null,
         1,
         1,
@@ -27,6 +25,10 @@
         null,
         1,
         0,
+        0,
+        0,
+        0,
+        null,
         null,
         null,
         1,
@@ -83,7 +85,7 @@
         null,
         null
       ],
-      "/home/julesabrams/sigma-vpn/requrementtools/app/models/user.rb": [
+      "/home/bkutkovy/FolderForRepo/sigma-tools/requrementtools/app/models/user.rb": [
         1,
         1,
         1,
@@ -149,7 +151,7 @@
         1,
         null,
         1,
-        71,
+        72,
         4,
         null,
         null,
@@ -157,12 +159,12 @@
         1,
         null,
         1,
-        164,
+        166,
         null,
         null,
         null
       ],
-      "/home/julesabrams/sigma-vpn/requrementtools/app/uploaders/avatar_uploader.rb": [
+      "/home/bkutkovy/FolderForRepo/sigma-tools/requrementtools/app/uploaders/avatar_uploader.rb": [
         null,
         null,
         1,
@@ -228,7 +230,7 @@
         null,
         null
       ],
-      "/home/julesabrams/sigma-vpn/requrementtools/app/helpers/acl_redirection_helper.rb": [
+      "/home/bkutkovy/FolderForRepo/sigma-tools/requrementtools/app/helpers/acl_redirection_helper.rb": [
         1,
         null,
         1,
@@ -255,7 +257,7 @@
         null,
         null
       ],
-      "/home/julesabrams/sigma-vpn/requrementtools/app/helpers/admin/assignments_helper.rb": [
+      "/home/bkutkovy/FolderForRepo/sigma-tools/requrementtools/app/helpers/admin/assignments_helper.rb": [
         1,
         null,
         1,
@@ -267,7 +269,7 @@
         null,
         null
       ],
-      "/home/julesabrams/sigma-vpn/requrementtools/app/helpers/admin/attachments_helper.rb": [
+      "/home/bkutkovy/FolderForRepo/sigma-tools/requrementtools/app/helpers/admin/attachments_helper.rb": [
         1,
         null,
         1,
@@ -278,7 +280,7 @@
         null,
         null
       ],
-      "/home/julesabrams/sigma-vpn/requrementtools/app/helpers/admin/people_helper.rb": [
+      "/home/bkutkovy/FolderForRepo/sigma-tools/requrementtools/app/helpers/admin/people_helper.rb": [
         1,
         null,
         1,
@@ -296,7 +298,7 @@
         null,
         null
       ],
-      "/home/julesabrams/sigma-vpn/requrementtools/app/helpers/admin/project_helper.rb": [
+      "/home/bkutkovy/FolderForRepo/sigma-tools/requrementtools/app/helpers/admin/project_helper.rb": [
         1,
         1,
         0,
@@ -315,7 +317,7 @@
         null,
         null
       ],
-      "/home/julesabrams/sigma-vpn/requrementtools/app/helpers/admin/projects_helper.rb": [
+      "/home/bkutkovy/FolderForRepo/sigma-tools/requrementtools/app/helpers/admin/projects_helper.rb": [
         1,
         null,
         1,
@@ -329,7 +331,7 @@
         null,
         null
       ],
-      "/home/julesabrams/sigma-vpn/requrementtools/app/helpers/admin/requirements_helper.rb": [
+      "/home/bkutkovy/FolderForRepo/sigma-tools/requrementtools/app/helpers/admin/requirements_helper.rb": [
         1,
         1,
         0,
@@ -357,11 +359,11 @@
         null,
         null
       ],
-      "/home/julesabrams/sigma-vpn/requrementtools/app/helpers/admin/users_helper.rb": [
+      "/home/bkutkovy/FolderForRepo/sigma-tools/requrementtools/app/helpers/admin/users_helper.rb": [
         1,
         null
       ],
-      "/home/julesabrams/sigma-vpn/requrementtools/app/helpers/application_helper.rb": [
+      "/home/bkutkovy/FolderForRepo/sigma-tools/requrementtools/app/helpers/application_helper.rb": [
         1,
         1,
         0,
@@ -371,47 +373,47 @@
         0,
         null,
         null,
-        1,
-        0,
-        null,
-        null
-      ],
-      "/home/julesabrams/sigma-vpn/requrementtools/app/helpers/assignments_helper.rb": [
-        1,
-        null,
-        null,
-        1,
-        0,
-        null,
-        null,
-        null,
-        null,
-        1,
-        0,
-        null,
-        null,
-        1,
-        0,
-        null,
-        0,
-        0,
-        0,
-        null,
-        null,
-        0,
-        null,
-        null,
-        null,
-        null
-      ],
-      "/home/julesabrams/sigma-vpn/requrementtools/app/helpers/devise_helper.rb": [
-        1,
         1,
         0,
         null,
         null
       ],
-      "/home/julesabrams/sigma-vpn/requrementtools/app/helpers/requirements_helper.rb": [
+      "/home/bkutkovy/FolderForRepo/sigma-tools/requrementtools/app/helpers/assignments_helper.rb": [
+        1,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null,
+        1,
+        0,
+        null,
+        0,
+        0,
+        0,
+        null,
+        null,
+        0,
+        null,
+        null,
+        null,
+        null
+      ],
+      "/home/bkutkovy/FolderForRepo/sigma-tools/requrementtools/app/helpers/devise_helper.rb": [
+        1,
+        1,
+        0,
+        null,
+        null
+      ],
+      "/home/bkutkovy/FolderForRepo/sigma-tools/requrementtools/app/helpers/requirements_helper.rb": [
         1,
         null,
         1,
@@ -479,11 +481,11 @@
         null,
         null
       ],
-      "/home/julesabrams/sigma-vpn/requrementtools/app/helpers/welcome_helper.rb": [
+      "/home/bkutkovy/FolderForRepo/sigma-tools/requrementtools/app/helpers/welcome_helper.rb": [
         1,
         null
       ],
-      "/home/julesabrams/sigma-vpn/requrementtools/app/controllers/assignments_controller.rb": [
+      "/home/bkutkovy/FolderForRepo/sigma-tools/requrementtools/app/controllers/assignments_controller.rb": [
         1,
         1,
         null,
@@ -547,7 +549,7 @@
         null,
         null
       ],
-      "/home/julesabrams/sigma-vpn/requrementtools/app/controllers/application_controller.rb": [
+      "/home/bkutkovy/FolderForRepo/sigma-tools/requrementtools/app/controllers/application_controller.rb": [
         1,
         1,
         1,
@@ -592,7 +594,7 @@
         null,
         null
       ],
-      "/home/julesabrams/sigma-vpn/requrementtools/app/controllers/attachments_controller.rb": [
+      "/home/bkutkovy/FolderForRepo/sigma-tools/requrementtools/app/controllers/attachments_controller.rb": [
         1,
         null,
         1,
@@ -623,7 +625,7 @@
         null,
         null
       ],
-      "/home/julesabrams/sigma-vpn/requrementtools/app/controllers/dashboards_controller.rb": [
+      "/home/bkutkovy/FolderForRepo/sigma-tools/requrementtools/app/controllers/dashboards_controller.rb": [
         1,
         1,
         null,
@@ -640,7 +642,7 @@
         null,
         null
       ],
-      "/home/julesabrams/sigma-vpn/requrementtools/app/controllers/profiles_controller.rb": [
+      "/home/bkutkovy/FolderForRepo/sigma-tools/requrementtools/app/controllers/profiles_controller.rb": [
         1,
         null,
         1,
@@ -684,7 +686,7 @@
         null,
         null
       ],
-      "/home/julesabrams/sigma-vpn/requrementtools/app/controllers/projects_controller.rb": [
+      "/home/bkutkovy/FolderForRepo/sigma-tools/requrementtools/app/controllers/projects_controller.rb": [
         1,
         1,
         1,
@@ -702,7 +704,7 @@
         null,
         null
       ],
-      "/home/julesabrams/sigma-vpn/requrementtools/app/controllers/requirements_controller.rb": [
+      "/home/bkutkovy/FolderForRepo/sigma-tools/requrementtools/app/controllers/requirements_controller.rb": [
         1,
         1,
         1,
@@ -819,7 +821,7 @@
         null,
         null
       ],
-      "/home/julesabrams/sigma-vpn/requrementtools/app/controllers/welcome_controller.rb": [
+      "/home/bkutkovy/FolderForRepo/sigma-tools/requrementtools/app/controllers/welcome_controller.rb": [
         1,
         null,
         1,
@@ -829,7 +831,79 @@
         null,
         null
       ],
-      "/home/julesabrams/sigma-vpn/requrementtools/app/models/project.rb": [
+      "/home/bkutkovy/FolderForRepo/sigma-tools/requrementtools/app/models/assignment.rb": [
+        1,
+        1,
+        1,
+        null,
+        1,
+        1,
+        null,
+        1,
+        null,
+        1,
+        null,
+        1,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null,
+        1,
+        0,
+        0,
+        null,
+        null,
+        null,
+        1,
+        1,
+        1,
+        null,
+        null,
+        1,
+        0,
+        0,
+        null,
+        null,
+        1,
+        1,
+        null,
+        1,
+        null,
+        0,
+        null,
+        0,
+        0,
+        null,
+        1,
+        null,
+        1,
+        null,
+        null,
+        1,
+        2,
+        2,
+        null,
+        2,
+        null,
+        0,
+        null,
+        1,
+        1,
+        null,
+        1,
+        null,
+        2,
+        null,
+        null,
+        null
+      ],
+      "/home/bkutkovy/FolderForRepo/sigma-tools/requrementtools/app/models/project.rb": [
         1,
         1,
         1,
@@ -863,79 +937,7 @@
         null,
         null
       ],
-      "/home/julesabrams/sigma-vpn/requrementtools/app/models/assignment.rb": [
-        1,
-        1,
-        1,
-        null,
-        1,
-        1,
-        null,
-        1,
-        null,
-        1,
-        null,
-        1,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        1,
-        0,
-        null,
-        null,
-        1,
-        0,
-        0,
-        null,
-        null,
-        null,
-        1,
-        1,
-        1,
-        null,
-        null,
-        1,
-        0,
-        0,
-        null,
-        null,
-        1,
-        1,
-        null,
-        1,
-        null,
-        0,
-        null,
-        0,
-        0,
-        null,
-        1,
-        null,
-        1,
-        null,
-        null,
-        1,
-        2,
-        2,
-        null,
-        2,
-        null,
-        0,
-        null,
-        1,
-        1,
-        null,
-        1,
-        null,
-        2,
-        null,
-        null,
-        null
-      ],
-      "/home/julesabrams/sigma-vpn/requrementtools/app/models/attachment.rb": [
+      "/home/bkutkovy/FolderForRepo/sigma-tools/requrementtools/app/models/attachment.rb": [
         1,
         1,
         null,
@@ -959,7 +961,7 @@
         null,
         null
       ],
-      "/home/julesabrams/sigma-vpn/requrementtools/app/uploaders/file_uploader.rb": [
+      "/home/bkutkovy/FolderForRepo/sigma-tools/requrementtools/app/uploaders/file_uploader.rb": [
         null,
         null,
         1,
@@ -1012,7 +1014,7 @@
         null,
         null
       ],
-      "/home/julesabrams/sigma-vpn/requrementtools/app/models/ability.rb": [
+      "/home/bkutkovy/FolderForRepo/sigma-tools/requrementtools/app/models/ability.rb": [
         1,
         1,
         null,
@@ -1084,7 +1086,7 @@
         null,
         null
       ],
-      "/home/julesabrams/sigma-vpn/requrementtools/app/controllers/confirmations_controller.rb": [
+      "/home/bkutkovy/FolderForRepo/sigma-tools/requrementtools/app/controllers/admin/projects_controller.rb": [
         0,
         0,
         0,
@@ -1107,6 +1109,16 @@
         0,
         0,
         0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "/home/bkutkovy/FolderForRepo/sigma-tools/requrementtools/app/controllers/admin/assignments_controller.rb": [
         0,
         0,
         0,
@@ -1150,7 +1162,49 @@
         0,
         0
       ],
-      "/home/julesabrams/sigma-vpn/requrementtools/app/controllers/admin/people_controller.rb": [
+      "/home/bkutkovy/FolderForRepo/sigma-tools/requrementtools/app/controllers/admin/attachments_controller.rb": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "/home/bkutkovy/FolderForRepo/sigma-tools/requrementtools/app/controllers/admin/requirements_controller.rb": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "/home/bkutkovy/FolderForRepo/sigma-tools/requrementtools/app/controllers/admin/people_controller.rb": [
         0,
         0,
         0,
@@ -1192,7 +1246,7 @@
         0,
         0
       ],
-      "/home/julesabrams/sigma-vpn/requrementtools/app/controllers/admin/requirements_controller.rb": [
+      "/home/bkutkovy/FolderForRepo/sigma-tools/requrementtools/app/controllers/confirmations_controller.rb": [
         0,
         0,
         0,
@@ -1218,9 +1272,6 @@
         0,
         0,
         0,
-        0
-      ],
-      "/home/julesabrams/sigma-vpn/requrementtools/app/controllers/admin/assignments_controller.rb": [
         0,
         0,
         0,
@@ -1248,55 +1299,6 @@
         0,
         0,
         0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      "/home/julesabrams/sigma-vpn/requrementtools/app/controllers/admin/projects_controller.rb": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      "/home/julesabrams/sigma-vpn/requrementtools/app/controllers/admin/attachments_controller.rb": [
         0,
         0,
         0,
@@ -1311,6 +1313,6 @@
         0
       ]
     },
-    "timestamp": 1449563948
+    "timestamp": 1449827046
   }
 }

@@ -1,0 +1,44 @@
+require 'spec_helper'
+
+
+describe Assignment do
+
+  it 'has a valid factory' do
+    expect(FactoryGirl.build(:assignment)).to be_valid
+  end
+
+  let(:assignment){FactoryGirl.create(:assignment)}
+  let(:project){FactoryGirl.create(:project)}
+  let(:user){FactoryGirl.create(:user)}
+
+  before :each do
+    Project.destroy_all
+    Assignment.destroy_all
+    User.destroy_all
+  end
+
+  describe 'ActiveModel validations' do
+    it { expect(assignment).to validate_presence_of(:acl_level) }
+    it { expect(assignment).to validate_presence_of(:project_id) }
+    # it { should validate_uniqueness_of(:user_id).scoped_to(:project_id) }
+
+    it 'validates the numericality of acl_level' do
+      assignment.update_attributes(acl_level: -1)
+      expect(assignment).to be_invalid
+      assignment.update_attributes(acl_level: 3)
+      expect(assignment).to be_valid
+      assignment.update_attributes(acl_level: 4)
+      expect(assignment).to be_invalid
+    end
+
+    it 'validates uniqueness of user scope project and raises a message' do
+      expect(FactoryGirl.create(:assignment, project_id: project.id, user_id: user.id))
+          .to be_valid
+      invalid_assignment = FactoryGirl.build(:assignment, project_id: project.id, user_id: user.id)
+      expect(invalid_assignment).not_to be_valid
+      expect(invalid_assignment.errors[:user_id]).to include('cannot be assigned to one project more than once')
+    end
+  end
+
+
+end
