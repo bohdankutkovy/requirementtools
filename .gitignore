@@ -15,5 +15,7 @@
 /log/*
 !/log/.keep
 /tmp
+/public
+/doc
 
 .idea/*
