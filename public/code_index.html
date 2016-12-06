@@ -1,0 +1,1390 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>RubyCritic</title>
+    <link href="assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <header class="project-header group">
+      <div class="container">
+        <h1 class="logo"><a href="overview.html" class="logo-link">RubyCritic</a></h1>
+        <nav class="project-nav">
+          <a href="overview.html" class="project-nav-item">Overview</a>
+          <a href="code_index.html" class="project-nav-item">Code</a>
+          <a href="smells_index.html" class="project-nav-item">Smells</a>
+        </nav>
+      </div>
+    </header>
+    <div class="container">
+      <table id="js-index-table" class="index-table sortable-table">
+<thead>
+  <tr>
+    <th>Name</th>
+    <th class="numeric-cell" title="Number of times a file has changed">Churn</th>
+    <th class="numeric-cell" title="Overall amount of code in a file">Complexity</th>
+    <th class="numeric-cell" title="Amount of code that is similar to other code">Duplication</th>
+    <th class="numeric-cell">Smells</th>
+    
+      <th class="centered-cell">Rating</th>
+    
+  </tr>
+</thead>
+<tbody>
+  
+    <tr>
+      <td>
+        <a href="db/seeds.html">Seeds</a>
+      </td>
+      <td class="numeric-cell">2</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="db/migrate/20151109110208_add_active_field_to_requirements.html">AddActiveFieldToRequirements</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">1</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="db/migrate/20151001123042_add_name_to_users.html">AddNameToUsers</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">1</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="db/migrate/20151028104932_create_vestal_versions.html">CreateVestalVersions</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">19</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">3</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="db/migrate/20151008135812_create_assignments.html">CreateAssignments</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">6</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">3</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="db/migrate/20150930134005_add_user_id_to_projects.html">AddUserIdToProjects</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">1</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="db/migrate/20150930133810_devise_create_users.html">DeviseCreateUsers</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">21</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">4</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="db/migrate/20151008103224_add_edited_field_to_users.html">AddEditedFieldToUsers</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">1</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="db/migrate/20151026090830_add_author_id_to_requirements.html">AddAuthorIdToRequirements</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">1</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="db/migrate/20151021132457_add_avatar_to_users.html">AddAvatarToUsers</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">1</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="db/migrate/20150930111655_create_requirements.html">CreateRequirements</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">11</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">4</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="db/migrate/20151001090402_create_gritter_notices_table.html">CreateGritterNoticesTable</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">11</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">3</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="db/migrate/20151026083645_add_requirement_id_to_attachments.html">AddRequirementIdToAttachments</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">1</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="db/migrate/20151026083553_add_file_field_to_attachments.html">AddFileFieldToAttachments</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">1</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="db/migrate/20150930111108_create_projects.html">CreateProjects</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">5</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">3</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="db/migrate/20151106123008_add_active_field_to_users.html">AddActiveFieldToUsers</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">1</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="db/migrate/20151026083225_create_attachments.html">CreateAttachments</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">2</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">2</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="db/migrate/20151008103307_add_super_admin_field_to_users.html">AddSuperAdminFieldToUsers</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">1</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="db/schema.html">Schema</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">97</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">1</td>
+      
+        <td class="centered-cell"><span class="rating-b circled-text circle">B</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="app/helpers/welcome_helper.html">WelcomeHelper</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">1</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="app/helpers/admin/people_helper.html">Admin::PeopleHelper</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">17</td>
+      <td class="numeric-cell">16</td>
+      <td class="numeric-cell">5</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="app/helpers/admin/project_helper.html">Admin::ProjectHelper</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">7</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">5</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="app/helpers/admin/projects_helper.html">Admin::ProjectsHelper</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">22</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">6</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="app/helpers/admin/assignments_helper.html">Admin::AssignmentsHelper</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">10</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">5</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="app/helpers/admin/users_helper.html">Admin::UsersHelper</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">1</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="app/helpers/admin/attachments_helper.html">Admin::AttachmentsHelper</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">7</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">5</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="app/helpers/admin/requirements_helper.html">Admin::RequirementsHelper</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">29</td>
+      <td class="numeric-cell">54</td>
+      <td class="numeric-cell">16</td>
+      
+        <td class="centered-cell"><span class="rating-b circled-text circle">B</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="app/helpers/devise_helper.html">DeviseHelper</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">6</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">1</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="app/helpers/assignments_helper.html">AssignmentsHelper</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">30</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">6</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="app/helpers/acl_redirection_helper.html">AclRedirectionHelper</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">37</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">4</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="app/helpers/application_helper.html">ApplicationHelper</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">3</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">2</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="app/helpers/requirements_helper.html">RequirementsHelper</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">87</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">23</td>
+      
+        <td class="centered-cell"><span class="rating-b circled-text circle">B</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="app/models/requirement.html">Requirement</a>
+      </td>
+      <td class="numeric-cell">10</td>
+      <td class="numeric-cell">61</td>
+      <td class="numeric-cell">83</td>
+      <td class="numeric-cell">5</td>
+      
+        <td class="centered-cell"><span class="rating-c circled-text circle">C</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="app/models/user.html">User</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">30</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">5</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="app/models/ability.html">Ability</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">42</td>
+      <td class="numeric-cell">72</td>
+      <td class="numeric-cell">7</td>
+      
+        <td class="centered-cell"><span class="rating-b circled-text circle">B</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="app/models/assignment.html">Assignment</a>
+      </td>
+      <td class="numeric-cell">2</td>
+      <td class="numeric-cell">73</td>
+      <td class="numeric-cell">64</td>
+      <td class="numeric-cell">7</td>
+      
+        <td class="centered-cell"><span class="rating-c circled-text circle">C</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="app/models/project.html">Project</a>
+      </td>
+      <td class="numeric-cell">3</td>
+      <td class="numeric-cell">31</td>
+      <td class="numeric-cell">62</td>
+      <td class="numeric-cell">4</td>
+      
+        <td class="centered-cell"><span class="rating-c circled-text circle">C</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="app/models/attachment.html">Attachment</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">15</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">2</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="app/controllers/welcome_controller.html">WelcomeController</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">1</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="app/controllers/requirements_controller.html">RequirementsController</a>
+      </td>
+      <td class="numeric-cell">5</td>
+      <td class="numeric-cell">137</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">12</td>
+      
+        <td class="centered-cell"><span class="rating-c circled-text circle">C</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="app/controllers/dashboards_controller.html">DashboardsController</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">10</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">1</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="app/controllers/admin/requirements_controller.html">Admin::RequirementsController</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">20</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">1</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="app/controllers/admin/people_controller.html">Admin::PeopleController</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">37</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">2</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="app/controllers/admin/projects_controller.html">Admin::ProjectsController</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">23</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">2</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="app/controllers/admin/assignments_controller.html">Admin::AssignmentsController</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">91</td>
+      <td class="numeric-cell">92</td>
+      <td class="numeric-cell">15</td>
+      
+        <td class="centered-cell"><span class="rating-c circled-text circle">C</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="app/controllers/admin/attachments_controller.html">Admin::AttachmentsController</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">7</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="app/controllers/projects_controller.html">ProjectsController</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">17</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">3</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="app/controllers/assignments_controller.html">AssignmentsController</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">59</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">3</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="app/controllers/attachments_controller.html">AttachmentsController</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">28</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">3</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="app/controllers/application_controller.html">ApplicationController</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">17</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">2</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="app/controllers/confirmations_controller.html">ConfirmationsController</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">49</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">3</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="app/controllers/profiles_controller.html">ProfilesController</a>
+      </td>
+      <td class="numeric-cell">2</td>
+      <td class="numeric-cell">35</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">3</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="app/uploaders/file_uploader.html">FileUploader</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">8</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">1</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="app/uploaders/avatar_uploader.html">AvatarUploader</a>
+      </td>
+      <td class="numeric-cell">2</td>
+      <td class="numeric-cell">11</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">1</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="test/models/attachment_test.html">AttachmentTest</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">1</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="test/models/subrequirement_test.html">SubrequirementTest</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">1</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="test/models/assignment_test.html">AssignmentTest</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">1</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="test/models/user_test.html">UserTest</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">1</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="test/models/project_test.html">ProjectTest</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">1</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="test/models/requirement_test.html">RequirementTest</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">1</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="test/controllers/requirements_controller_test.html">RequirementsControllerTest</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">1</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="test/controllers/project_controller_test.html">ProjectControllerTest</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">1</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="test/controllers/users_controller_test.html">UsersControllerTest</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">1</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="test/controllers/projects_controller_test.html">ProjectsControllerTest</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">1</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="test/controllers/welcome_controller_test.html">WelcomeControllerTest</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">1</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="test/test_helper.html">ActiveSupport::TestCase</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="config/initializers/vestal_versions.html">VestalVersions</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="config/initializers/backtrace_silencers.html">BacktraceSilencers</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="config/initializers/mime_types.html">MimeTypes</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="config/initializers/session_store.html">SessionStore</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="config/initializers/assets.html">Assets</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="config/initializers/cookies_serializer.html">CookiesSerializer</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="config/initializers/devise.html">Devise</a>
+      </td>
+      <td class="numeric-cell">3</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="config/initializers/wrap_parameters.html">WrapParameters</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="config/initializers/simple_form.html">SimpleForm</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="config/initializers/inflections.html">Inflections</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="config/initializers/filter_parameter_logging.html">FilterParameterLogging</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="config/application.html">RequirementTools::Application</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="config/environments/test.html">Test</a>
+      </td>
+      <td class="numeric-cell">2</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="config/environments/production.html">Production</a>
+      </td>
+      <td class="numeric-cell">16</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="config/environments/development.html">Development</a>
+      </td>
+      <td class="numeric-cell">4</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="config/environment.html">Environment</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="config/routes.html">Routes</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">30</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="config/boot.html">Boot</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="spec/rails_helper.html">RailsHelper</a>
+      </td>
+      <td class="numeric-cell">5</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="spec/factories/attachments.html">Attachments</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">8</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="spec/factories/projects.html">Projects</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">5</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="spec/factories/assignments.html">Assignments</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">8</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="spec/factories/requirements.html">Requirements</a>
+      </td>
+      <td class="numeric-cell">2</td>
+      <td class="numeric-cell">12</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="spec/factories/users.html">Users</a>
+      </td>
+      <td class="numeric-cell">2</td>
+      <td class="numeric-cell">15</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="spec/spec_helper.html">SpecHelper</a>
+      </td>
+      <td class="numeric-cell">6</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="spec/models/project_spec.html">ProjectSpec</a>
+      </td>
+      <td class="numeric-cell">2</td>
+      <td class="numeric-cell">238</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">4</td>
+      
+        <td class="centered-cell"><span class="rating-d circled-text circle">D</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="spec/models/requirement_spec.html">RequirementSpec</a>
+      </td>
+      <td class="numeric-cell">4</td>
+      <td class="numeric-cell">583</td>
+      <td class="numeric-cell">80</td>
+      <td class="numeric-cell">12</td>
+      
+        <td class="centered-cell"><span class="rating-f circled-text circle">F</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="spec/models/assignment_spec.html">AssignmentSpec</a>
+      </td>
+      <td class="numeric-cell">3</td>
+      <td class="numeric-cell">406</td>
+      <td class="numeric-cell">178</td>
+      <td class="numeric-cell">6</td>
+      
+        <td class="centered-cell"><span class="rating-f circled-text circle">F</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="spec/models/attachment_spec.html">AttachmentSpec</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">59</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="spec/models/user_spec.html">UserSpec</a>
+      </td>
+      <td class="numeric-cell">2</td>
+      <td class="numeric-cell">203</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">2</td>
+      
+        <td class="centered-cell"><span class="rating-c circled-text circle">C</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="spec/controllers/assignments_controller_spec.html">AssignmentsControllerSpec</a>
+      </td>
+      <td class="numeric-cell">1</td>
+      <td class="numeric-cell">356</td>
+      <td class="numeric-cell">100</td>
+      <td class="numeric-cell">9</td>
+      
+        <td class="centered-cell"><span class="rating-f circled-text circle">F</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="spec/controllers/dashboards_controller_spec.html">DashboardsControllerSpec</a>
+      </td>
+      <td class="numeric-cell">2</td>
+      <td class="numeric-cell">97</td>
+      <td class="numeric-cell">22</td>
+      <td class="numeric-cell">2</td>
+      
+        <td class="centered-cell"><span class="rating-f circled-text circle">F</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="spec/controllers/profiles_controller_spec.html">ProfilesControllerSpec</a>
+      </td>
+      <td class="numeric-cell">2</td>
+      <td class="numeric-cell">312</td>
+      <td class="numeric-cell">226</td>
+      <td class="numeric-cell">8</td>
+      
+        <td class="centered-cell"><span class="rating-f circled-text circle">F</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="spec/controllers/attachments_controller_spec.html">AttachmentsControllerSpec</a>
+      </td>
+      <td class="numeric-cell">3</td>
+      <td class="numeric-cell">107</td>
+      <td class="numeric-cell">22</td>
+      <td class="numeric-cell">2</td>
+      
+        <td class="centered-cell"><span class="rating-f circled-text circle">F</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="spec/controllers/projects_controller_spec.html">ProjectsControllerSpec</a>
+      </td>
+      <td class="numeric-cell">4</td>
+      <td class="numeric-cell">104</td>
+      <td class="numeric-cell">22</td>
+      <td class="numeric-cell">2</td>
+      
+        <td class="centered-cell"><span class="rating-f circled-text circle">F</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="spec/controllers/requirements_controller_spec.html">RequirementsControllerSpec</a>
+      </td>
+      <td class="numeric-cell">13</td>
+      <td class="numeric-cell">825</td>
+      <td class="numeric-cell">104</td>
+      <td class="numeric-cell">16</td>
+      
+        <td class="centered-cell"><span class="rating-f circled-text circle">F</span></td>
+      
+    </tr>
+  
+    <tr>
+      <td>
+        <a href="spec/controllers/welcome_controller_spec.html">WelcomeControllerSpec</a>
+      </td>
+      <td class="numeric-cell">4</td>
+      <td class="numeric-cell">9</td>
+      <td class="numeric-cell">0</td>
+      <td class="numeric-cell">0</td>
+      
+        <td class="centered-cell"><span class="rating-a circled-text circle">A</span></td>
+      
+    </tr>
+  
+</tbody>
+</table>
+
+    </div>
+    <script src='assets/javascripts/jquery-2.1.0.js'></script>
+    <script src='assets/javascripts/jquery.tablesorter.js'></script>
+    <script src='assets/javascripts/jquery.floatThead-v1.2.7.js'></script>
+    <script src='assets/javascripts/jquery.timeago-v1.4.1.js'></script>
+    <script src='assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='assets/javascripts/jquery.scrollTo-1.4.11.js'></script>
+    <script src='assets/javascripts/prettify-4-Mar-2013.js'></script>
+    <script src='assets/javascripts/application.js'></script>
+  </body>
+</html>

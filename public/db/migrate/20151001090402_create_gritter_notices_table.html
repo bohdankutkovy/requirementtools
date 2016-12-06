@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>RubyCritic</title>
+    <link href="../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <header class="project-header group">
+      <div class="container">
+        <h1 class="logo"><a href="../../overview.html" class="logo-link">RubyCritic</a></h1>
+        <nav class="project-nav">
+          <a href="../../overview.html" class="project-nav-item">Overview</a>
+          <a href="../../code_index.html" class="project-nav-item">Code</a>
+          <a href="../../smells_index.html" class="project-nav-item">Smells</a>
+        </nav>
+      </div>
+    </header>
+    <div class="container">
+      <div class="file-header group rated">
+  <span class="rating rating-a circled-text circle">
+    A
+  </span>
+  <h2 class="file-name">CreateGritterNoticesTable</h2>
+
+  <span class="file-committed-at">
+    
+      Updated <time class='js-timeago' datetime='2015-11-23 11:18:25 +0200'>2015-11-23 11:18:25 +0200</time>
+    
+  </span>
+
+  <div class="file-stats group">
+    <div class="file-stat">
+      11 complexity
+    </div>
+    <div class="file-stat">
+      5.5 complexity per method
+    </div>
+    <div class="file-stat">
+      1 churn
+    </div>
+    <div class="file-stat">
+      2 methods
+    </div>
+    <div class="file-stat">
+      0 duplication
+    </div>
+  </div>
+
+  
+    <button id="js-toggle-smells" class="smells-toggle-button button">Toggle Smells</button>
+  
+</div>
+
+<code class="prettyprint linenums lang-ruby file-code js-file-code">class CreateGritterNoticesTable &lt; ActiveRecord::Migration<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank">IrresponsibleModule</a>)      CreateGritterNoticesTable has no descriptive comment          </span>  </li></ul>
+  def self.up<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank">TooManyStatements</a>)      CreateGritterNoticesTable#self.up has approx 9 statements          </span>  </li></ul>
+    create_table :gritter_notices, :force =&gt; true do |t|<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="https://github.com/troessner/reek/blob/master/docs/Uncommunicative-Variable-Name.md" target="_blank">UncommunicativeVariableName</a>)      CreateGritterNoticesTable#self.up has the variable name 't'          </span>  </li></ul>
+      t.integer  :owner_id,                           :null =&gt; false
+      t.string  :owner_type,                          :null =&gt; false
+      t.text     :message,                            :null =&gt; false
+      # t.string   :level,        :default =&gt; &quot;notice&quot;, :null =&gt; false
+      # t.string   :title
+      # t.string   :image
+      # t.boolean  :sticky, :default=&gt;false, :null=&gt;false
+      t.text     :options, :null=&gt;false
+      t.datetime :delivered_at
+      t.datetime :created_at
+      t.datetime :updated_at
+    end
+
+    add_index :gritter_notices, [:owner_id, :delivered_at]
+  end
+
+  def self.down
+    drop_table :gritter_notices
+  end
+end
+</code>
+
+    </div>
+    <script src='../../assets/javascripts/jquery-2.1.0.js'></script>
+    <script src='../../assets/javascripts/jquery.tablesorter.js'></script>
+    <script src='../../assets/javascripts/jquery.floatThead-v1.2.7.js'></script>
+    <script src='../../assets/javascripts/jquery.timeago-v1.4.1.js'></script>
+    <script src='../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../assets/javascripts/jquery.scrollTo-1.4.11.js'></script>
+    <script src='../../assets/javascripts/prettify-4-Mar-2013.js'></script>
+    <script src='../../assets/javascripts/application.js'></script>
+  </body>
+</html>

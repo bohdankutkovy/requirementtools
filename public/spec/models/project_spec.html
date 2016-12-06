@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>RubyCritic</title>
+    <link href="../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <header class="project-header group">
+      <div class="container">
+        <h1 class="logo"><a href="../../overview.html" class="logo-link">RubyCritic</a></h1>
+        <nav class="project-nav">
+          <a href="../../overview.html" class="project-nav-item">Overview</a>
+          <a href="../../code_index.html" class="project-nav-item">Code</a>
+          <a href="../../smells_index.html" class="project-nav-item">Smells</a>
+        </nav>
+      </div>
+    </header>
+    <div class="container">
+      <div class="file-header group rated">
+  <span class="rating rating-d circled-text circle">
+    D
+  </span>
+  <h2 class="file-name">ProjectSpec</h2>
+
+  <span class="file-committed-at">
+    
+      Updated <time class='js-timeago' datetime='2015-12-08 10:49:37 +0200'>2015-12-08 10:49:37 +0200</time>
+    
+  </span>
+
+  <div class="file-stats group">
+    <div class="file-stat">
+      238 complexity
+    </div>
+    <div class="file-stat">
+      N/A complexity per method
+    </div>
+    <div class="file-stat">
+      2 churn
+    </div>
+    <div class="file-stat">
+      0 methods
+    </div>
+    <div class="file-stat">
+      0 duplication
+    </div>
+  </div>
+
+  
+    <button id="js-toggle-smells" class="smells-toggle-button button">Toggle Smells</button>
+  
+</div>
+
+<code class="prettyprint linenums lang-ruby file-code js-file-code">require &#39;spec_helper&#39;
+
+
+describe Project do
+
+  it &#39;has a valid factory&#39; do
+    expect(FactoryGirl.build(:project)).to be_valid
+  end
+
+  let(:project){FactoryGirl.create(:project)}
+  let(:user){FactoryGirl.create(:user)}
+
+  before :each do
+    Project.destroy_all
+    Assignment.destroy_all
+  end
+
+  describe &#39;ActiveModel validations&#39; do
+    it { expect(project).to validate_presence_of(:title) }
+    it { expect(project).to validate_presence_of(:description) }
+    it { should validate_uniqueness_of(:title) }
+  end
+
+  describe &#39;Model methods&#39; do
+    it &#39;returns unassigned active users to project&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">VeryHighComplexity</a>)      describe(Model methods)::it#returns unassigned active users to project has a flog score of 62          </span>  </li></ul>
+      u1 = FactoryGirl.create(:user)
+      u2 = FactoryGirl.create(:user)
+      u3 = FactoryGirl.create(:user, is_active: false)
+      u4 = FactoryGirl.create(:user)
+      FactoryGirl.create(:assignment, project_id: project.id, user_id: user.id, acl_level: 3)
+      FactoryGirl.create(:assignment, project_id: project.id, user_id: u1.id, acl_level: 3)
+      FactoryGirl.create(:assignment, project_id: project.id, user_id: u2.id, acl_level: 3)
+      FactoryGirl.create(:assignment, project_id: project.id, user_id: u3.id, acl_level: 3)
+
+      expect(project.unassigned_users).to include(u4)
+      expect(project.unassigned_users).not_to include(u1, u2, user, u3)
+    end
+
+    context &#39;assigned to project with rich rights&#39; do
+      let!(:assignment){FactoryGirl.create(:assignment, user_id: user.id, project_id: project.id, acl_level: 1)}
+      it &#39;allows to read, update and delete project&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">HighComplexity</a>)      describe(Model methods)::context(assigned to project with rich rights)::it#allows to read, update and delete project has a flog score of 36          </span>  </li></ul>
+
+        expect(project.available_for_read?(user)).to eq(true)
+        expect(project.available_for_update?(user)).to eq(true)
+        expect(project.available_for_delete?(user)).to eq(false)
+      end
+    end
+
+    context &#39;assigned to project with poor rights&#39; do
+      let!(:assignment){FactoryGirl.create(:assignment, user_id: user.id, project_id: project.id, acl_level: 3)}
+      it &#39;allows to read, update and delete project&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">HighComplexity</a>)      describe(Model methods)::context(assigned to project with poor rights)::it#allows to read, update and delete project has a flog score of 36          </span>  </li></ul>
+        expect(project.available_for_read?(user)).to eq(true)
+        expect(project.available_for_update?(user)).to eq(false)
+        expect(project.available_for_delete?(user)).to eq(false)
+      end
+    end
+    context &#39;assigned to project with super_admin rights&#39; do
+      it &#39;allows to read, update and delete project&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">HighComplexity</a>)      describe(Model methods)::context(assigned to project with super_admin rights)::it#allows to read, update and delete project has a flog score of 38          </span>  </li></ul>
+        user.update_attributes(is_super_admin: true)
+        expect(project.available_for_read?(user)).to eq(true)
+        expect(project.available_for_update?(user)).to eq(true)
+        expect(project.available_for_delete?(user)).to eq(true)
+      end
+    end
+  end
+
+end
+</code>
+
+    </div>
+    <script src='../../assets/javascripts/jquery-2.1.0.js'></script>
+    <script src='../../assets/javascripts/jquery.tablesorter.js'></script>
+    <script src='../../assets/javascripts/jquery.floatThead-v1.2.7.js'></script>
+    <script src='../../assets/javascripts/jquery.timeago-v1.4.1.js'></script>
+    <script src='../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../assets/javascripts/jquery.scrollTo-1.4.11.js'></script>
+    <script src='../../assets/javascripts/prettify-4-Mar-2013.js'></script>
+    <script src='../../assets/javascripts/application.js'></script>
+  </body>
+</html>

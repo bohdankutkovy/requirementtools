@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>RubyCritic</title>
+    <link href="../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <header class="project-header group">
+      <div class="container">
+        <h1 class="logo"><a href="../../overview.html" class="logo-link">RubyCritic</a></h1>
+        <nav class="project-nav">
+          <a href="../../overview.html" class="project-nav-item">Overview</a>
+          <a href="../../code_index.html" class="project-nav-item">Code</a>
+          <a href="../../smells_index.html" class="project-nav-item">Smells</a>
+        </nav>
+      </div>
+    </header>
+    <div class="container">
+      <div class="file-header group rated">
+  <span class="rating rating-c circled-text circle">
+    C
+  </span>
+  <h2 class="file-name">RequirementsController</h2>
+
+  <span class="file-committed-at">
+    
+      Updated <time class='js-timeago' datetime='2015-12-07 15:52:24 +0200'>2015-12-07 15:52:24 +0200</time>
+    
+  </span>
+
+  <div class="file-stats group">
+    <div class="file-stat">
+      137 complexity
+    </div>
+    <div class="file-stat">
+      12.5 complexity per method
+    </div>
+    <div class="file-stat">
+      5 churn
+    </div>
+    <div class="file-stat">
+      11 methods
+    </div>
+    <div class="file-stat">
+      0 duplication
+    </div>
+  </div>
+
+  
+    <button id="js-toggle-smells" class="smells-toggle-button button">Toggle Smells</button>
+  
+</div>
+
+<code class="prettyprint linenums lang-ruby file-code js-file-code">class RequirementsController &lt; ApplicationController<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank">IrresponsibleModule</a>)      RequirementsController has no descriptive comment          </span>  </li>  <li class="smell ">    <span class="description">      (<a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Instance-Variables.md" target="_blank">TooManyInstanceVariables</a>)      RequirementsController has at least 5 instance variables          </span>  </li></ul>
+  include ActionView::Helpers::UrlHelper
+  include RequirementsHelper
+
+  layout &quot;simple&quot;
+
+  before_filter :ensure_user_is_signed_in?
+  before_filter :entry_accessed?
+
+  def index
+    @requirements = []
+
+    if params[:project_id]<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank">DuplicateMethodCall</a>)      RequirementsController#index calls params[:project_id] 2 times                        <a href="requirements_controller.html#L13" class="js-smell-location">0</a>                  <a href="requirements_controller.html#L14" class="js-smell-location">1</a>                  </span>  </li></ul>
+      @requirements = Requirement.where(project_id: params[:project_id], parent_id: 0)<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank">DuplicateMethodCall</a>)      RequirementsController#index calls params[:project_id] 2 times                        <a href="requirements_controller.html#L13" class="js-smell-location">0</a>                  <a href="requirements_controller.html#L14" class="js-smell-location">1</a>                  </span>  </li></ul>
+    end
+    render json: JSON::dump({ requirements: @requirements.map { |req| requirement_to_bootstrap_tree_item(req) if req.is_active }.compact})
+  end
+
+  def show
+    if params[:id]<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank">DuplicateMethodCall</a>)      RequirementsController#show calls params[:id] 2 times                        <a href="requirements_controller.html#L20" class="js-smell-location">0</a>                  <a href="requirements_controller.html#L21" class="js-smell-location">1</a>                  </span>  </li></ul>
+      @requirement = Requirement.find(params[:id])<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank">DuplicateMethodCall</a>)      RequirementsController#show calls params[:id] 2 times                        <a href="requirements_controller.html#L20" class="js-smell-location">0</a>                  <a href="requirements_controller.html#L21" class="js-smell-location">1</a>                  </span>  </li></ul>
+      @requirement_attachments = @requirement.attachments.all
+    end
+  end
+
+  def create<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">HighComplexity</a>)      RequirementsController#create has a flog score of 30          </span>  </li>  <li class="smell ">    <span class="description">      (<a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank">TooManyStatements</a>)      RequirementsController#create has approx 6 statements          </span>  </li></ul>
+    @requirement = Requirement.create(params.require(:requirement).permit(:title, :description,  :priority, :worth, :parent_id, :project_id, attachments_attributes: [:id, :requirement_id, :file])
+                                          .merge(author_id: current_user.id) )
+    if @requirement.save
+      if params[:attachments]<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank">DuplicateMethodCall</a>)      RequirementsController#create calls params[:attachments] 2 times                        <a href="requirements_controller.html#L30" class="js-smell-location">0</a>                  <a href="requirements_controller.html#L31" class="js-smell-location">1</a>                  </span>  </li></ul>
+        params[:attachments][&#39;file&#39;].each do |a|<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank">DuplicateMethodCall</a>)      RequirementsController#create calls params[:attachments] 2 times                        <a href="requirements_controller.html#L30" class="js-smell-location">0</a>                  <a href="requirements_controller.html#L31" class="js-smell-location">1</a>                  </span>  </li>  <li class="smell ">    <span class="description">      (<a href="https://github.com/troessner/reek/blob/master/docs/Uncommunicative-Variable-Name.md" target="_blank">UncommunicativeVariableName</a>)      RequirementsController#create has the variable name 'a'          </span>  </li></ul>
+          @requirement_attachment = @requirement.attachments.create!(:file =&gt; a)
+        end
+      end
+
+      page_path = after_change_path(@requirement.id)
+      render json: {page: page_path}
+    else
+      render json: {page: new_requirement_path}
+    end
+  end
+
+  def new
+    @requirement = Requirement.new(params.require(:requirement).permit(:project_id), author_id: current_user.id)
+    @requirement_attachment = @requirement.attachments.build
+    authorize! :new, @requirement
+  end
+
+
+  def edit
+    @requirement = Requirement.find(params[:requirement])
+    @attachments = @requirement.attachments.all
+    @requirement_attachment = Attachment.new
+    authorize! :update, @requirement
+
+  end
+
+  def update
+    @requirement = Requirement.find(params[:id])
+    if @requirement.update(params.require(:requirement).permit(:title, :description, :priority, :worth, attachments_attributes: [:id, :requirement_id, :file] ))
+      page_path = after_change_path(@requirement.id)
+      render json: {page: page_path}
+    else
+      render action: :edit
+    end
+  end
+
+  def clear
+    if params[:requirement_id]<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank">DuplicateMethodCall</a>)      RequirementsController#clear calls params[:requirement_id] 2 times                        <a href="requirements_controller.html#L69" class="js-smell-location">0</a>                  <a href="requirements_controller.html#L70" class="js-smell-location">1</a>                  </span>  </li></ul>
+      requirement = Requirement.find(params[:requirement_id])<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank">DuplicateMethodCall</a>)      RequirementsController#clear calls params[:requirement_id] 2 times                        <a href="requirements_controller.html#L69" class="js-smell-location">0</a>                  <a href="requirements_controller.html#L70" class="js-smell-location">1</a>                  </span>  </li></ul>
+      parent_id   = requirement.parent_id
+      disable_requirements(requirement)
+
+      if parent_id
+        page_path = after_clear_path(parent_id)
+        render json: {page: page_path}
+      end
+    end
+  end
+
+  def version_rollback
+    if params[:requirement_id] &amp;&amp; params[:version]<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank">DuplicateMethodCall</a>)      RequirementsController#version_rollback calls params[:requirement_id] 3 times                        <a href="requirements_controller.html#L82" class="js-smell-location">0</a>                  <a href="requirements_controller.html#L84" class="js-smell-location">1</a>                  <a href="requirements_controller.html#L86" class="js-smell-location">2</a>                  </span>  </li>  <li class="smell ">    <span class="description">      (<a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank">DuplicateMethodCall</a>)      RequirementsController#version_rollback calls params[:version] 2 times                        <a href="requirements_controller.html#L82" class="js-smell-location">0</a>                  <a href="requirements_controller.html#L88" class="js-smell-location">1</a>                  </span>  </li></ul>
+
+      page_path = after_change_path(params[:requirement_id])<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank">DuplicateMethodCall</a>)      RequirementsController#version_rollback calls params[:requirement_id] 3 times                        <a href="requirements_controller.html#L82" class="js-smell-location">0</a>                  <a href="requirements_controller.html#L84" class="js-smell-location">1</a>                  <a href="requirements_controller.html#L86" class="js-smell-location">2</a>                  </span>  </li></ul>
+
+      @requirement = Requirement.find(params[:requirement_id])<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank">DuplicateMethodCall</a>)      RequirementsController#version_rollback calls params[:requirement_id] 3 times                        <a href="requirements_controller.html#L82" class="js-smell-location">0</a>                  <a href="requirements_controller.html#L84" class="js-smell-location">1</a>                  <a href="requirements_controller.html#L86" class="js-smell-location">2</a>                  </span>  </li></ul>
+
+      if @requirement.revert_to!(params[:version].to_i)<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank">DuplicateMethodCall</a>)      RequirementsController#version_rollback calls params[:version] 2 times                        <a href="requirements_controller.html#L82" class="js-smell-location">0</a>                  <a href="requirements_controller.html#L88" class="js-smell-location">1</a>                  </span>  </li></ul>
+        render json: {page: page_path}
+      end
+    end
+  end
+
+  private
+
+  def disable_requirements(requirement)<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="https://github.com/troessner/reek/blob/master/docs/Utility-Function.md" target="_blank">UtilityFunction</a>)      RequirementsController#disable_requirements doesn't depend on instance state (maybe move it to another class?)          </span>  </li></ul>
+    requirement.self_and_descendents.each do |requirement|
+      requirement.disable_requirement
+    end
+  end
+
+  def after_clear_path(parent_id)
+    if parent_id &gt; 0
+      requirement_path(parent_id)
+    elsif parent_id == 0
+      project_id = Requirement.find(params[:requirement_id]).project_id
+      project_path(project_id)
+    end    
+  end
+
+  def after_change_path(requirement_id)
+    requirement_path(requirement_id)
+  end
+
+end
+</code>
+
+    </div>
+    <script src='../../assets/javascripts/jquery-2.1.0.js'></script>
+    <script src='../../assets/javascripts/jquery.tablesorter.js'></script>
+    <script src='../../assets/javascripts/jquery.floatThead-v1.2.7.js'></script>
+    <script src='../../assets/javascripts/jquery.timeago-v1.4.1.js'></script>
+    <script src='../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../assets/javascripts/jquery.scrollTo-1.4.11.js'></script>
+    <script src='../../assets/javascripts/prettify-4-Mar-2013.js'></script>
+    <script src='../../assets/javascripts/application.js'></script>
+  </body>
+</html>

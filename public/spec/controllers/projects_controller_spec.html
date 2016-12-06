@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>RubyCritic</title>
+    <link href="../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <header class="project-header group">
+      <div class="container">
+        <h1 class="logo"><a href="../../overview.html" class="logo-link">RubyCritic</a></h1>
+        <nav class="project-nav">
+          <a href="../../overview.html" class="project-nav-item">Overview</a>
+          <a href="../../code_index.html" class="project-nav-item">Code</a>
+          <a href="../../smells_index.html" class="project-nav-item">Smells</a>
+        </nav>
+      </div>
+    </header>
+    <div class="container">
+      <div class="file-header group rated">
+  <span class="rating rating-f circled-text circle">
+    F
+  </span>
+  <h2 class="file-name">ProjectsControllerSpec</h2>
+
+  <span class="file-committed-at">
+    
+      Updated <time class='js-timeago' datetime='2015-12-03 13:55:46 +0200'>2015-12-03 13:55:46 +0200</time>
+    
+  </span>
+
+  <div class="file-stats group">
+    <div class="file-stat">
+      104 complexity
+    </div>
+    <div class="file-stat">
+      N/A complexity per method
+    </div>
+    <div class="file-stat">
+      4 churn
+    </div>
+    <div class="file-stat">
+      0 methods
+    </div>
+    <div class="file-stat">
+      22 duplication
+    </div>
+  </div>
+
+  
+    <button id="js-toggle-smells" class="smells-toggle-button button">Toggle Smells</button>
+  
+</div>
+
+<code class="prettyprint linenums lang-ruby file-code js-file-code">require &#39;spec_helper&#39;
+
+describe ProjectsController, type: :controller do
+  describe &#39;controller filters and includes&#39; do
+    it &#39;includes sign_in &amp;&amp; entry_accessed filters&#39; do
+      expect(ProjectsController).to receive(:before_filter).with(:ensure_user_is_signed_in?)
+      expect(ProjectsController).to receive(:before_filter).with(:entry_accessed?, {only: :index})
+      load File.join(Rails.root, &#39;app/controllers/projects_controller.rb&#39;)
+    end
+  end
+
+  context &#39;controller actions&#39; do
+
+    let(:user){FactoryGirl.create(:user)}
+
+    before :each do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flay/" target="_blank">DuplicateCode</a>)      Identical code found in 5 nodes                        <a href="assignments_controller_spec.html#L22" class="js-smell-location">0</a>                  <a href="attachments_controller_spec.html#L8" class="js-smell-location">1</a>                  <a href="dashboards_controller_spec.html#L13" class="js-smell-location">2</a>                  <a href="profiles_controller_spec.html#L13" class="js-smell-location">3</a>                  <a href="projects_controller_spec.html#L16" class="js-smell-location">4</a>                  </span>  </li></ul>
+      User.destroy_all
+      Project.destroy_all
+      Attachment.destroy_all
+      Requirement.destroy_all
+
+      @request.env[&quot;devise.mapping&quot;] = Devise.mappings[:user]
+      sign_in user
+    end
+
+
+    describe &#39;GET show&#39; do
+      let(:project){FactoryGirl.create(:project)}
+      context &#39;valid param&#39; do
+        it &#39;passes project id param to show template and assigns @project with found project&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">HighComplexity</a>)      context(controller actions)::describe(GET show)::context(valid param)::it#passes project id param to show template and assigns @project with found project has a flog score of 35          </span>  </li></ul>
+          get :show, id: project.id
+
+          expect(controller.params[:id]).to eq(project.id.to_s)
+          expect(assigns(:project)).to eq(project)
+        end
+      end
+      context &#39;invalid param&#39; do
+        it &#39;renders nothing if param is not valid&#39; do
+          get :show, id: &#39;-&#39;
+
+          expect(response.body).to eq(&quot;&quot;)
+          expect(response.status).to eq(200)
+        end
+      end
+    end
+  end
+
+
+
+end
+</code>
+
+    </div>
+    <script src='../../assets/javascripts/jquery-2.1.0.js'></script>
+    <script src='../../assets/javascripts/jquery.tablesorter.js'></script>
+    <script src='../../assets/javascripts/jquery.floatThead-v1.2.7.js'></script>
+    <script src='../../assets/javascripts/jquery.timeago-v1.4.1.js'></script>
+    <script src='../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../assets/javascripts/jquery.scrollTo-1.4.11.js'></script>
+    <script src='../../assets/javascripts/prettify-4-Mar-2013.js'></script>
+    <script src='../../assets/javascripts/application.js'></script>
+  </body>
+</html>

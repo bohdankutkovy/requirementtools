@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>RubyCritic</title>
+    <link href="../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <header class="project-header group">
+      <div class="container">
+        <h1 class="logo"><a href="../../overview.html" class="logo-link">RubyCritic</a></h1>
+        <nav class="project-nav">
+          <a href="../../overview.html" class="project-nav-item">Overview</a>
+          <a href="../../code_index.html" class="project-nav-item">Code</a>
+          <a href="../../smells_index.html" class="project-nav-item">Smells</a>
+        </nav>
+      </div>
+    </header>
+    <div class="container">
+      <div class="file-header group rated">
+  <span class="rating rating-f circled-text circle">
+    F
+  </span>
+  <h2 class="file-name">RequirementsControllerSpec</h2>
+
+  <span class="file-committed-at">
+    
+      Updated <time class='js-timeago' datetime='2015-12-02 19:11:32 +0200'>2015-12-02 19:11:32 +0200</time>
+    
+  </span>
+
+  <div class="file-stats group">
+    <div class="file-stat">
+      825 complexity
+    </div>
+    <div class="file-stat">
+      N/A complexity per method
+    </div>
+    <div class="file-stat">
+      13 churn
+    </div>
+    <div class="file-stat">
+      0 methods
+    </div>
+    <div class="file-stat">
+      104 duplication
+    </div>
+  </div>
+
+  
+    <button id="js-toggle-smells" class="smells-toggle-button button">Toggle Smells</button>
+  
+</div>
+
+<code class="prettyprint linenums lang-ruby file-code js-file-code">require &#39;spec_helper&#39;
+
+
+describe RequirementsController, type: :controller do
+
+  describe &#39;controller filters and includes&#39; do
+    it &#39;includes UrlHelper &amp;&amp; RequirementsHelper module&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">HighComplexity</a>)      describe(controller filters and includes)::it#includes UrlHelper && RequirementsHelper module has a flog score of 28          </span>  </li></ul>
+      expect(subject.class).to receive(:include).with(RequirementsHelper)
+      expect(subject.class).to receive(:include).with(ActionView::Helpers::UrlHelper)
+      load File.join(Rails.root, &#39;app/controllers/requirements_controller.rb&#39;)
+    end
+
+    it &#39;includes sign_in &amp;&amp; entry_accessed filters&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flay/" target="_blank">DuplicateCode</a>)      Similar code found in 2 nodes                        <a href="assignments_controller_spec.html#L11" class="js-smell-location">0</a>                  <a href="requirements_controller_spec.html#L13" class="js-smell-location">1</a>                  </span>  </li></ul>
+      expect(RequirementsController).to receive(:before_filter).with(:ensure_user_is_signed_in?)
+      expect(RequirementsController).to receive(:before_filter).with(:entry_accessed?)
+      load File.join(Rails.root, &#39;app/controllers/requirements_controller.rb&#39;)
+    end
+  end
+
+  describe &#39;controller actions&#39; do
+
+    user = FactoryGirl.create(:user)
+
+    before :each do
+      @request.env[&quot;devise.mapping&quot;] = Devise.mappings[:user]
+      sign_in user
+    end
+
+    describe &#39;GET index&#39;do
+
+      it &#39;get index page with no requirements&#39; do
+        get :index, :project_id =&gt; 1
+        expect(assigns(:requirements)).to eq([])
+        expect(response.status).to eq(200)
+      end
+
+      it &#39;get index page with not valid project_id param&#39; do
+        get :index, :project_id =&gt; &#39;abc&#39;
+        expect(assigns(:requirements)).to eq([])
+        expect(response.status).to eq(200)
+      end
+
+      it &#39;assigns @requirements with :parent_id =&gt; 0 and param[:project_id] requirements&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">HighComplexity</a>)      describe(controller actions)::describe(GET index)::it#assigns @requirements with :parent_id => 0 and param[:project_id] requirements has a flog score of 38          </span>  </li></ul>
+        r1 = FactoryGirl.create(:requirement, author_id: user.id, :project_id=&gt; 1)
+        r2 = FactoryGirl.create(:requirement, author_id: user.id, :project_id=&gt; 1, parent_id: r1.id)
+        r3 = FactoryGirl.create(:requirement, author_id: user.id, :project_id=&gt; 4)
+        r4 = FactoryGirl.create(:requirement, author_id: user.id, :project_id=&gt; 1)
+        get :index, :project_id =&gt; 1
+        expect(assigns(:requirements)).to eq([r1, r4])
+        expect(response.status).to eq(200)
+      end
+
+      it &#39;assigns @requirements with only active requirements&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">HighComplexity</a>)      describe(controller actions)::describe(GET index)::it#assigns @requirements with only active requirements has a flog score of 50          </span>  </li></ul>
+        r1 = FactoryGirl.create(:requirement, author_id: user.id, :project_id=&gt; 1)
+        r2 = FactoryGirl.create(:requirement, author_id: user.id, :project_id=&gt; 1, is_active: false)
+        r4 = FactoryGirl.create(:requirement, author_id: user.id, :project_id=&gt; 1, is_active: true, parent_id: r2.id) #if parent is non-active it will not be added to json
+        r3 = FactoryGirl.create(:requirement, author_id: user.id, :project_id=&gt; 1, parent_id: r1.id)
+        get :index, :project_id =&gt; 1
+        expect(response.body).to eq(&quot;{\&quot;requirements\&quot;:[{\&quot;text\&quot;:\&quot;&lt;a class=\\\&quot;treerequirement frame-link\\\&quot; id=\\\&quot;#{r1.id}\\\&quot; href=\\\&quot;/requirements/#{r1.id}\\\&quot;&gt;some title&lt;/a&gt;\&quot;,\&quot;nodes\&quot;:[{\&quot;text\&quot;:\&quot;&lt;a class=\\\&quot;treerequirement frame-link\\\&quot; id=\\\&quot;#{r3.id}\\\&quot; href=\\\&quot;/requirements/#{r3.id}\\\&quot;&gt;some title&lt;/a&gt;\&quot;,\&quot;nodes\&quot;:[]}]}]}&quot;)
+        expect(response.status).to eq(200)
+      end
+    end
+
+    describe &#39;GET show&#39; do
+
+      it &#39;assigns the requested requirement to @requirement&#39; do
+        r1 = FactoryGirl.create(:requirement, author_id: user.id)
+        get :show, :id =&gt; r1
+        expect(assigns(:requirement)).to eq(r1)
+        expect(response.status).to eq(200)
+      end
+
+      it &#39;renders the #show view&#39; do
+        get :show, id: FactoryGirl.create(:requirement)
+        expect(response).to render_template :show
+      end
+
+      it &#39;assigns the associated requirement attachment to @requirement_attachments&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">HighComplexity</a>)      describe(controller actions)::describe(GET show)::it#assigns the associated requirement attachment to @requirement_attachments has a flog score of 31          </span>  </li></ul>
+        r1 = FactoryGirl.create(:requirement, author_id: user.id)
+        r1.attachments &lt;&lt; FactoryGirl.create(:attachment)
+        get :show, :id =&gt; r1
+        expect(assigns(:requirement_attachments)).to eq(r1.attachments)
+        expect(response.status).to eq(200)
+      end
+    end
+
+    describe &#39;GET new&#39; do
+
+      let(:project){ FactoryGirl.create(:project) }
+
+      it &#39;passes project_id params to new action&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">HighComplexity</a>)      describe(controller actions)::describe(GET new)::it#passes project_id params to new action has a flog score of 25          </span>  </li></ul>
+        params = {:project_id =&gt; project.id}
+        get :new, :requirement =&gt; params
+        expect(controller.params[:requirement]).to eq({&quot;project_id&quot; =&gt; project.id.to_s})
+      end
+
+      it &#39;assigns the requirement build to @requirement&#39; do
+        params = {:project_id =&gt; project.id}
+        get :new, :requirement =&gt; params
+        expect(assigns(:requirement).project_id).to eq(project.id)
+      end
+
+      it &#39;assigns the attachment build to @requirement_attachments&#39; do
+        params = {project_id: project.id}
+        get :new, :requirement =&gt; params
+        expect(assigns(:requirement_attachment)).not_to be_nil
+        expect(assigns(:requirement_attachment)).not_to eq([])
+      end
+    end
+
+    describe &#39;POST create&#39; do
+
+      context &#39;creates with valid attributes&#39; do
+        it &#39;creates a new requirement&#39; do
+          expect{
+            post :create, requirement: FactoryGirl.attributes_for(:requirement)
+          }.to change(Requirement,:count).by(1)
+        end
+
+        it &#39;renders requirement show path (json)&#39; do
+          post :create, requirement: { project_id: 1, parent_id: 0, title: &quot;some title&quot;, description: &quot;some description&quot;, priority: 5, worth: 10, created_at: &quot;2015-11-26 15:17:55&quot;, updated_at: &quot;2015-11-26 15:17:55&quot;, author_id: nil, is_active: true}<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flay/" target="_blank">DuplicateCode</a>)      Identical code found in 2 nodes                        <a href="requirements_controller_spec.html#L121" class="js-smell-location">0</a>                  <a href="requirements_controller_spec.html#L126" class="js-smell-location">1</a>                  </span>  </li></ul>
+          expect(response.body).to eq(&quot;{\&quot;page\&quot;:\&quot;/requirements/#{Requirement.last.id}\&quot;}&quot;)
+        end
+
+        it &#39;creates a new attachment for requirement&#39; do
+          post :create, requirement: { project_id: 1, parent_id: 0, title: &quot;some title&quot;, description: &quot;some description&quot;, priority: 5, worth: 10, created_at: &quot;2015-11-26 15:17:55&quot;, updated_at: &quot;2015-11-26 15:17:55&quot;, author_id: nil, is_active: true}, attachments: {file: [fixture_file_upload(&#39;spec/fixtures/file/pdf.pdf&#39;, &#39;pdf/pdf&#39;)]}<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flay/" target="_blank">DuplicateCode</a>)      Identical code found in 2 nodes                        <a href="requirements_controller_spec.html#L121" class="js-smell-location">0</a>                  <a href="requirements_controller_spec.html#L126" class="js-smell-location">1</a>                  </span>  </li></ul>
+          expect(assigns(:requirement).attachments).not_to eq([])
+        end
+      end
+
+      context &#39;with invalid attributes&#39; do
+        it &#39;does not save requirement&#39; do
+          expect{
+            post :create, requirement: FactoryGirl.attributes_for(:requirement, title: &#39;&#39; )
+          }.not_to change(Requirement,:count)
+        end
+
+        it &#39;renders new requirement path (json)&#39; do
+          post :create, requirement: FactoryGirl.attributes_for(:requirement, title: &#39;&#39; )
+          expect(response.body).to eq(&quot;{\&quot;page\&quot;:\&quot;/requirements/new\&quot;}&quot;)
+        end
+      end
+
+    end
+
+    describe &#39;GET edit&#39; do
+      let(:requirement){ FactoryGirl.create(:requirement) }
+
+      it &#39;passes requrement &amp; id params to edit action&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">HighComplexity</a>)      describe(controller actions)::describe(GET edit)::it#passes requrement & id params to edit action has a flog score of 48          </span>  </li></ul>
+        get :edit, {requirement: requirement.id, id: requirement.id}
+        expect(controller.params[:requirement]).to eq(requirement.id.to_s)
+        expect(controller.params[:id]).to eq(requirement.id.to_s)
+      end
+
+      it &#39;finds existing requirement and assigns it to @requirement&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flay/" target="_blank">DuplicateCode</a>)      Similar code found in 4 nodes                        <a href="assignments_controller_spec.html#L79" class="js-smell-location">0</a>                  <a href="assignments_controller_spec.html#L89" class="js-smell-location">1</a>                  <a href="requirements_controller_spec.html#L155" class="js-smell-location">2</a>                  <a href="requirements_controller_spec.html#L183" class="js-smell-location">3</a>                  </span>  </li></ul>
+
+        get :edit, {requirement: requirement.id, id: requirement.id}
+        expect(assigns(:requirement)).to eq(requirement)
+      end
+
+      it &#39;finds all attachments of @requirement and assigns them to @attachments&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">HighComplexity</a>)      describe(controller actions)::describe(GET edit)::it#finds all attachments of @requirement and assigns them to @attachments has a flog score of 25          </span>  </li></ul>
+
+        get :edit, {requirement: requirement.id, id: requirement.id}
+        expect(assigns(:attachments)).to eq(assigns(:requirement).attachments.all)
+      end
+
+      it &#39;initalize @requirement_attachment in case of new attachment&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">HighComplexity</a>)      describe(controller actions)::describe(GET edit)::it#initalize @requirement_attachment in case of new attachment has a flog score of 25          </span>  </li></ul>
+        get :edit, {requirement: requirement.id, id: requirement.id}
+        expect(assigns(:requirement_attachment)).not_to be_nil
+        expect(assigns(:requirement_attachment)).not_to eq([])
+      end
+    end
+
+    describe &#39;PUT update&#39; do
+      let(:requirement){FactoryGirl.create(:requirement)}
+
+      it &#39;passes id &amp; requirement params to update action&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">HighComplexity</a>)      describe(controller actions)::describe(PUT update)::it#passes id & requirement params to update action has a flog score of 41          </span>  </li></ul>
+        put :update, {id: requirement.id, requirement: requirement.attributes}
+        expect(controller.params[:id]).to eq(requirement.id.to_s)
+        expect(controller.params[:requirement]).not_to be_nil
+      end
+
+      it &#39;finds the requirement and assigns it to @requirement&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flay/" target="_blank">DuplicateCode</a>)      Similar code found in 4 nodes                        <a href="assignments_controller_spec.html#L79" class="js-smell-location">0</a>                  <a href="assignments_controller_spec.html#L89" class="js-smell-location">1</a>                  <a href="requirements_controller_spec.html#L155" class="js-smell-location">2</a>                  <a href="requirements_controller_spec.html#L183" class="js-smell-location">3</a>                  </span>  </li></ul>
+        put :update, {id: requirement.id, requirement: requirement.attributes}
+        expect(assigns(:requirement)).to eq(requirement)
+      end
+
+
+      context &#39;updates with invalid attributes&#39; do
+
+        it &#39;does not update a requirement and redirects to edit_requirement path&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">HighComplexity</a>)      describe(controller actions)::describe(PUT update)::context(updates with invalid attributes)::it#does not update a requirement and redirects to edit_requirement path has a flog score of 29          </span>  </li></ul>
+          put :update, {id: requirement.id, requirement: FactoryGirl.attributes_for(:requirement, title: &#39;&#39;,
+                                                                                                  description: &quot;invalid update&quot;)}
+          assigns(:requirement).reload
+          expect(assigns(:requirement).description).not_to eq(&#39;invalid update&#39;)
+          expect(response).to render_template :edit
+        end
+      end
+
+      context &#39;updates with valid attributes&#39; do
+        it &#39;updates with valid attributes and renders requirement_path json&#39; do
+          put :update, {id: requirement.id, requirement: requirement.attributes}
+          expect(response.body).to eq(&quot;{\&quot;page\&quot;:\&quot;/requirements/#{requirement.id}\&quot;}&quot;)
+        end
+      end
+    end
+
+    describe &#39;POST clear&#39; do
+      it &#39;renders fathers show template&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">HighComplexity</a>)      describe(controller actions)::describe(POST clear)::it#renders fathers show template has a flog score of 27          </span>  </li></ul>
+        project = FactoryGirl.create(:project)
+        requirement_father = FactoryGirl.create(:requirement, project_id: project.id)
+        requirement_child = FactoryGirl.create(:requirement, project_id: project.id, parent_id: requirement_father.id)
+
+        post :clear, requirement_id: requirement_child.id
+        expect(response.body).to eq(&quot;{\&quot;page\&quot;:\&quot;/requirements/#{requirement_father.id}\&quot;}&quot;)
+      end
+
+      it &#39;renders projects show template&#39; do
+        project = FactoryGirl.create(:project)
+        requirement_father = FactoryGirl.create(:requirement, project_id: project.id)
+
+        post :clear, requirement_id: requirement_father.id
+        expect(response.body).to eq(&quot;{\&quot;page\&quot;:\&quot;/projects/#{project.id}\&quot;}&quot;)
+      end
+    end
+
+    describe &#39;POST version_rollback&#39; do
+      let(:requirement){FactoryGirl.create(:requirement)}
+      it &#39;passes requirement_id and version_id and and assigns @requirement&#39; do
+        post :version_rollback, {version: 1, requirement_id: requirement.id}
+        expect(assigns(:requirement)).to eq(requirement)
+      end
+
+      context &#39;with valid version param&#39; do
+        it &#39;passes requirement_id and version_id, rollbacks to the previous version and renders requirement_path json&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">VeryHighComplexity</a>)      describe(controller actions)::describe(POST version_rollback)::context(with valid version param)::it#passes requirement_id and version_id, rollbacks to the previous version and renders requirement_path json has a flog score of 67          </span>  </li></ul>
+          requirement.update_attributes(title: &#39;Updated&#39;)
+          post :version_rollback, {version: 1, requirement_id: requirement.id}
+
+          expect(controller.params[:requirement_id]).to eq(requirement.id.to_s)
+          expect(controller.params[:version]).to eq(1.to_s)
+          expect(assigns(:requirement).title).to eq(&quot;some title&quot;)
+          expect(response.body).to eq(&quot;{\&quot;page\&quot;:\&quot;/requirements/#{requirement.id}\&quot;}&quot;)
+        end
+      end
+
+      context &#39;with invalid version param&#39; do
+        it &#39;doesnt rollback to previous version&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">HighComplexity</a>)      describe(controller actions)::describe(POST version_rollback)::context(with invalid version param)::it#doesnt rollback to previous version has a flog score of 33          </span>  </li></ul>
+          requirement.update_attributes(title: &#39;Updated&#39;)
+          post :version_rollback, {version: &#39;300&#39;, requirement_id: requirement.id}
+
+          expect(assigns(:requirement).title).to eq(&quot;Updated&quot;)
+          expect(response.body).to eq(&quot;{\&quot;page\&quot;:\&quot;/requirements/#{requirement.id}\&quot;}&quot;)
+        end
+      end
+
+    end
+
+  end
+
+end
+</code>
+
+    </div>
+    <script src='../../assets/javascripts/jquery-2.1.0.js'></script>
+    <script src='../../assets/javascripts/jquery.tablesorter.js'></script>
+    <script src='../../assets/javascripts/jquery.floatThead-v1.2.7.js'></script>
+    <script src='../../assets/javascripts/jquery.timeago-v1.4.1.js'></script>
+    <script src='../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../assets/javascripts/jquery.scrollTo-1.4.11.js'></script>
+    <script src='../../assets/javascripts/prettify-4-Mar-2013.js'></script>
+    <script src='../../assets/javascripts/application.js'></script>
+  </body>
+</html>

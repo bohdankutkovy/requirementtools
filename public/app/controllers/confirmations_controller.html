@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>RubyCritic</title>
+    <link href="../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <header class="project-header group">
+      <div class="container">
+        <h1 class="logo"><a href="../../overview.html" class="logo-link">RubyCritic</a></h1>
+        <nav class="project-nav">
+          <a href="../../overview.html" class="project-nav-item">Overview</a>
+          <a href="../../code_index.html" class="project-nav-item">Code</a>
+          <a href="../../smells_index.html" class="project-nav-item">Smells</a>
+        </nav>
+      </div>
+    </header>
+    <div class="container">
+      <div class="file-header group rated">
+  <span class="rating rating-a circled-text circle">
+    A
+  </span>
+  <h2 class="file-name">ConfirmationsController</h2>
+
+  <span class="file-committed-at">
+    
+      Updated <time class='js-timeago' datetime='2015-11-23 11:18:25 +0200'>2015-11-23 11:18:25 +0200</time>
+    
+  </span>
+
+  <div class="file-stats group">
+    <div class="file-stat">
+      49 complexity
+    </div>
+    <div class="file-stat">
+      9.8 complexity per method
+    </div>
+    <div class="file-stat">
+      1 churn
+    </div>
+    <div class="file-stat">
+      5 methods
+    </div>
+    <div class="file-stat">
+      0 duplication
+    </div>
+  </div>
+
+  
+    <button id="js-toggle-smells" class="smells-toggle-button button">Toggle Smells</button>
+  
+</div>
+
+<code class="prettyprint linenums lang-ruby file-code js-file-code">class ConfirmationsController &lt; Devise::ConfirmationsController<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank">IrresponsibleModule</a>)      ConfirmationsController has no descriptive comment          </span>  </li></ul>
+  # Remove the first skip_before_filter (:require_no_authentication) if you
+  # don&#39;t want to enable logged users to access the confirmation page.
+  skip_before_filter :require_no_authentication
+  skip_before_filter :authenticate_user!
+
+  # PUT /resource/confirmation
+  def update<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank">TooManyStatements</a>)      ConfirmationsController#update has approx 7 statements          </span>  </li></ul>
+    with_unconfirmed_confirmable do
+      if @confirmable.has_no_password?
+        @confirmable.attempt_set_password(params[:user])
+        if @confirmable.valid?
+          do_confirm
+        else
+          do_show
+          @confirmable.errors.clear #so that we wont render :new<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank">DuplicateMethodCall</a>)      ConfirmationsController#update calls @confirmable.errors 2 times                        <a href="confirmations_controller.html#L16" class="js-smell-location">0</a>                  <a href="confirmations_controller.html#L23" class="js-smell-location">1</a>                  </span>  </li></ul>
+        end
+      else
+        self.class.add_error_on(self, :email, :password_already_set)
+      end
+    end
+
+    if !@confirmable.errors.empty?<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="https://github.com/troessner/reek/blob/master/docs/Duplicate-Method-Call.md" target="_blank">DuplicateMethodCall</a>)      ConfirmationsController#update calls @confirmable.errors 2 times                        <a href="confirmations_controller.html#L16" class="js-smell-location">0</a>                  <a href="confirmations_controller.html#L23" class="js-smell-location">1</a>                  </span>  </li></ul>
+      render :new
+    end
+  end
+
+  # GET /resource/confirmation?confirmation_token=abcdef
+  def show
+    with_unconfirmed_confirmable do
+      if @confirmable.has_no_password?
+        do_show
+      else
+        do_confirm
+      end
+    end
+    if !@confirmable.errors.empty?
+      self.resource = @confirmable
+      render :new
+    end
+  end
+
+  protected
+
+  def with_unconfirmed_confirmable
+    @confirmable = User.find_or_initialize_with_error_by(:confirmation_token, params[:confirmation_token])
+    if !@confirmable.new_record?
+      @confirmable.only_if_unconfirmed {yield}
+    end
+  end
+
+  def do_show
+    @confirmation_token = params[:confirmation_token]
+    @requires_password  = true
+    self.resource = @confirmable
+    render :show
+  end
+
+  def do_confirm
+    @confirmable.confirm!
+    set_flash_message :notice, :confirmed
+    sign_in_and_redirect(resource_name, @confirmable)
+  end
+end
+</code>
+
+    </div>
+    <script src='../../assets/javascripts/jquery-2.1.0.js'></script>
+    <script src='../../assets/javascripts/jquery.tablesorter.js'></script>
+    <script src='../../assets/javascripts/jquery.floatThead-v1.2.7.js'></script>
+    <script src='../../assets/javascripts/jquery.timeago-v1.4.1.js'></script>
+    <script src='../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../assets/javascripts/jquery.scrollTo-1.4.11.js'></script>
+    <script src='../../assets/javascripts/prettify-4-Mar-2013.js'></script>
+    <script src='../../assets/javascripts/application.js'></script>
+  </body>
+</html>

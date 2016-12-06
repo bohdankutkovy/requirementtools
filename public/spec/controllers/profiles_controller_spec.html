@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>RubyCritic</title>
+    <link href="../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <header class="project-header group">
+      <div class="container">
+        <h1 class="logo"><a href="../../overview.html" class="logo-link">RubyCritic</a></h1>
+        <nav class="project-nav">
+          <a href="../../overview.html" class="project-nav-item">Overview</a>
+          <a href="../../code_index.html" class="project-nav-item">Code</a>
+          <a href="../../smells_index.html" class="project-nav-item">Smells</a>
+        </nav>
+      </div>
+    </header>
+    <div class="container">
+      <div class="file-header group rated">
+  <span class="rating rating-f circled-text circle">
+    F
+  </span>
+  <h2 class="file-name">ProfilesControllerSpec</h2>
+
+  <span class="file-committed-at">
+    
+      Updated <time class='js-timeago' datetime='2015-12-02 22:47:41 +0200'>2015-12-02 22:47:41 +0200</time>
+    
+  </span>
+
+  <div class="file-stats group">
+    <div class="file-stat">
+      312 complexity
+    </div>
+    <div class="file-stat">
+      N/A complexity per method
+    </div>
+    <div class="file-stat">
+      2 churn
+    </div>
+    <div class="file-stat">
+      0 methods
+    </div>
+    <div class="file-stat">
+      226 duplication
+    </div>
+  </div>
+
+  
+    <button id="js-toggle-smells" class="smells-toggle-button button">Toggle Smells</button>
+  
+</div>
+
+<code class="prettyprint linenums lang-ruby file-code js-file-code">require &#39;spec_helper&#39;
+
+
+describe ProfilesController, type: :controller do
+  it &#39;includes set_user filters&#39; do
+    expect(ProfilesController).to receive(:before_filter).with(:set_user, {:only=&gt;[:show, :edit, :update]})
+    load File.join(Rails.root, &#39;app/controllers/profiles_controller.rb&#39;)
+  end
+
+  context &#39;controller actions&#39; do
+    let(:user){FactoryGirl.create(:user)}
+
+    before :each do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flay/" target="_blank">DuplicateCode</a>)      Identical code found in 5 nodes                        <a href="assignments_controller_spec.html#L22" class="js-smell-location">0</a>                  <a href="attachments_controller_spec.html#L8" class="js-smell-location">1</a>                  <a href="dashboards_controller_spec.html#L13" class="js-smell-location">2</a>                  <a href="profiles_controller_spec.html#L13" class="js-smell-location">3</a>                  <a href="projects_controller_spec.html#L16" class="js-smell-location">4</a>                  </span>  </li></ul>
+      User.destroy_all
+      Project.destroy_all
+      Attachment.destroy_all
+      Requirement.destroy_all
+
+      @request.env[&quot;devise.mapping&quot;] = Devise.mappings[:user]
+      sign_in user
+    end
+
+
+    describe &#39;GET show&#39; do
+      it &#39;assigns @user with found user&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flay/" target="_blank">DuplicateCode</a>)      Similar code found in 2 nodes                        <a href="assignments_controller_spec.html#L115" class="js-smell-location">0</a>                  <a href="profiles_controller_spec.html#L25" class="js-smell-location">1</a>                  </span>  </li></ul>
+        get :show, id: user.id
+        expect(assigns(:user)).to eq(user)
+      end
+    end
+
+    describe &#39;GET edit&#39; do
+      it &#39;triggers @Edit your password@ message if user didnt edit password&#39; do
+        user.update_attributes(info_edited: false)
+        get :edit, id: user.id
+        expect(flash[:notice]).to eq(&#39;Edit your password!&#39;)
+      end
+    end
+
+    describe &#39;PUT update&#39; do
+      let(:user_1){FactoryGirl.create(:user)}
+      let(:admin){FactoryGirl.create(:user, is_super_admin: true)}
+      context &#39;with valid params&#39; do
+        it &#39;updates attributes of @user flashes notice and redirects to edit path&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flay/" target="_blank">DuplicateCode</a>)      Identical code found in 2 nodes                        <a href="profiles_controller_spec.html#L43" class="js-smell-location">0</a>                  <a href="profiles_controller_spec.html#L51" class="js-smell-location">1</a>                  </span>  </li></ul>
+          put :update, id: user.id, user: {name: &#39;Updated&#39;, email: user.email, password: &#39;&#39;, password_confirmation: &#39;&#39;, avatar_cache: &#39;&#39;}
+          assigns(:user).reload
+          expect(assigns(:user).name).to eq(&#39;Updated&#39;)
+          expect(flash[:notice]).to eq(&#39;Profile updated!&#39;)
+          expect(redirect_to(profile_path(assigns(:user))))
+        end
+
+        it &#39;updates attributes of @user flashes notice and redirects to edit path&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flay/" target="_blank">DuplicateCode</a>)      Identical code found in 2 nodes                        <a href="profiles_controller_spec.html#L43" class="js-smell-location">0</a>                  <a href="profiles_controller_spec.html#L51" class="js-smell-location">1</a>                  </span>  </li>  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">VeryHighComplexity</a>)      context(controller actions)::describe(PUT update)::context(with valid params)::it#updates attributes of @user flashes notice and redirects to edit path has a flog score of 85          </span>  </li></ul>
+          put :update, id: user.id, user: {name: &#39;Updated&#39;, email: user.email, password: &#39;&#39;, password_confirmation: &#39;&#39;, avatar_cache: &#39;&#39;}
+          assigns(:user).reload
+          expect(assigns(:user).name).to eq(&#39;Updated&#39;)
+          expect(flash[:notice]).to eq(&#39;Profile updated!&#39;)
+          expect(redirect_to(profile_path(assigns(:user))))
+        end
+
+        it &#39;updates attributes of admin user flashes notice and redirects to edit path&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flay/" target="_blank">DuplicateCode</a>)      Similar code found in 2 nodes                        <a href="profiles_controller_spec.html#L59" class="js-smell-location">0</a>                  <a href="profiles_controller_spec.html#L70" class="js-smell-location">1</a>                  </span>  </li>  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">HighComplexity</a>)      context(controller actions)::describe(PUT update)::context(with valid params)::it#updates attributes of admin user flashes notice and redirects to edit path has a flog score of 50          </span>  </li></ul>
+          sign_out user
+          sign_in admin
+
+          put :update, id: admin.id, user: {name: &#39;Updated&#39;, email: admin.email, password: &#39;&#39;, password_confirmation: &#39;&#39;, avatar_cache: &#39;&#39;}
+          assigns(:user).reload
+          expect(assigns(:user).name).to eq(&#39;Updated&#39;)
+          expect(flash[:notice]).to eq(&#39;Profile updated!&#39;)
+          expect(redirect_to(profile_path(assigns(:user))))
+        end
+
+        it &#39;updates attributes of user by admin flashes notice and redirects to user_profile path&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flay/" target="_blank">DuplicateCode</a>)      Similar code found in 2 nodes                        <a href="profiles_controller_spec.html#L59" class="js-smell-location">0</a>                  <a href="profiles_controller_spec.html#L70" class="js-smell-location">1</a>                  </span>  </li>  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">HighComplexity</a>)      context(controller actions)::describe(PUT update)::context(with valid params)::it#updates attributes of user by admin flashes notice and redirects to user_profile path has a flog score of 50          </span>  </li></ul>
+          sign_out user
+          sign_in admin
+          put :update, id: user.id, user: {name: &#39;Updated&#39;, email: user.email, password: &#39;&#39;, password_confirmation: &#39;&#39;, avatar_cache: &#39;&#39;}
+          assigns(:user).reload
+          expect(assigns(:user).name).to eq(&#39;Updated&#39;)
+          expect(flash[:notice]).to eq(&#39;Profile updated!&#39;)
+          expect(redirect_to(profile_path(assigns(:user))))
+        end
+
+      end
+
+      context &#39;with invalid params&#39; do
+        it &#39;updates attributes of @user flashes notice and redirects to edit path&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">HighComplexity</a>)      context(controller actions)::describe(PUT update)::context(with invalid params)::it#updates attributes of @user flashes notice and redirects to edit path has a flog score of 48          </span>  </li></ul>
+          put :update, id: user.id, user: {name: user_1.name, email: user_1.email, password: &#39;&#39;, password_confirmation: &#39;&#39;, avatar_cache: &#39;&#39;}
+          assigns(:user).reload
+          expect(assigns(:user).name).to eq(user.name)
+          expect(flash[:error]).to eq(&#39;Profile was not updated! Some attribute is invalid!&#39;)
+          expect(response).to render_template(:edit)
+        end
+      end
+
+    end
+  end
+
+
+end
+
+</code>
+
+    </div>
+    <script src='../../assets/javascripts/jquery-2.1.0.js'></script>
+    <script src='../../assets/javascripts/jquery.tablesorter.js'></script>
+    <script src='../../assets/javascripts/jquery.floatThead-v1.2.7.js'></script>
+    <script src='../../assets/javascripts/jquery.timeago-v1.4.1.js'></script>
+    <script src='../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../assets/javascripts/jquery.scrollTo-1.4.11.js'></script>
+    <script src='../../assets/javascripts/prettify-4-Mar-2013.js'></script>
+    <script src='../../assets/javascripts/application.js'></script>
+  </body>
+</html>

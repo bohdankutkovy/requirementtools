@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>RubyCritic</title>
+    <link href="../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <header class="project-header group">
+      <div class="container">
+        <h1 class="logo"><a href="../overview.html" class="logo-link">RubyCritic</a></h1>
+        <nav class="project-nav">
+          <a href="../overview.html" class="project-nav-item">Overview</a>
+          <a href="../code_index.html" class="project-nav-item">Code</a>
+          <a href="../smells_index.html" class="project-nav-item">Smells</a>
+        </nav>
+      </div>
+    </header>
+    <div class="container">
+      <div class="file-header group rated">
+  <span class="rating rating-a circled-text circle">
+    A
+  </span>
+  <h2 class="file-name">Routes</h2>
+
+  <span class="file-committed-at">
+    
+      Updated <time class='js-timeago' datetime='2015-11-23 11:18:25 +0200'>2015-11-23 11:18:25 +0200</time>
+    
+  </span>
+
+  <div class="file-stats group">
+    <div class="file-stat">
+      30 complexity
+    </div>
+    <div class="file-stat">
+      N/A complexity per method
+    </div>
+    <div class="file-stat">
+      1 churn
+    </div>
+    <div class="file-stat">
+      0 methods
+    </div>
+    <div class="file-stat">
+      0 duplication
+    </div>
+  </div>
+
+  
+</div>
+
+<code class="prettyprint linenums lang-ruby file-code js-file-code">Rails.application.routes.draw do
+
+  devise_for :users, :controllers =&gt; { :confirmations =&gt; &quot;confirmations&quot;, :passwords =&gt; &quot;passwords&quot; }
+  get &#39;welcome/index&#39;
+
+  namespace :admin do
+    as :user do
+      patch &#39;/users/confirmation&#39; =&gt; &#39;confirmations#update&#39;, :via =&gt; :patch, :as =&gt; :update_user_confirmation
+    end
+    resources :projects
+    resources :requirements do
+      collection do
+        get :edit_associated
+        get :list
+      end
+    end
+    resources :people do
+      collection do
+        get :edit_associated
+      end
+      put :change_user_status, :on =&gt; :member
+    end
+    resources :assignments
+    resources :attachments
+  end
+
+
+  resources :dashboards
+  resources :profiles, :only =&gt; [:show, :edit, :update]
+  resources :requirements do
+    post &quot;clear&quot;
+    post &quot;version_rollback&quot;
+  end
+  resources :projects, :only =&gt; :show
+  resources :assignments do
+    post &quot;clear&quot;
+  end
+  resources :attachments do
+    post &quot;clear&quot;
+  end
+
+
+
+  authenticated :user do
+    root &#39;dashboards#index&#39;, as: &quot;authenticated_root&quot;
+  end
+
+  root &#39;welcome#index&#39;
+end
+</code>
+
+    </div>
+    <script src='../assets/javascripts/jquery-2.1.0.js'></script>
+    <script src='../assets/javascripts/jquery.tablesorter.js'></script>
+    <script src='../assets/javascripts/jquery.floatThead-v1.2.7.js'></script>
+    <script src='../assets/javascripts/jquery.timeago-v1.4.1.js'></script>
+    <script src='../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../assets/javascripts/jquery.scrollTo-1.4.11.js'></script>
+    <script src='../assets/javascripts/prettify-4-Mar-2013.js'></script>
+    <script src='../assets/javascripts/application.js'></script>
+  </body>
+</html>

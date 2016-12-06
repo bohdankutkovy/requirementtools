@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>RubyCritic</title>
+    <link href="../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <header class="project-header group">
+      <div class="container">
+        <h1 class="logo"><a href="../../overview.html" class="logo-link">RubyCritic</a></h1>
+        <nav class="project-nav">
+          <a href="../../overview.html" class="project-nav-item">Overview</a>
+          <a href="../../code_index.html" class="project-nav-item">Code</a>
+          <a href="../../smells_index.html" class="project-nav-item">Smells</a>
+        </nav>
+      </div>
+    </header>
+    <div class="container">
+      <div class="file-header group rated">
+  <span class="rating rating-f circled-text circle">
+    F
+  </span>
+  <h2 class="file-name">RequirementSpec</h2>
+
+  <span class="file-committed-at">
+    
+      Updated <time class='js-timeago' datetime='2015-12-08 00:26:36 +0200'>2015-12-08 00:26:36 +0200</time>
+    
+  </span>
+
+  <div class="file-stats group">
+    <div class="file-stat">
+      583 complexity
+    </div>
+    <div class="file-stat">
+      N/A complexity per method
+    </div>
+    <div class="file-stat">
+      4 churn
+    </div>
+    <div class="file-stat">
+      0 methods
+    </div>
+    <div class="file-stat">
+      80 duplication
+    </div>
+  </div>
+
+  
+    <button id="js-toggle-smells" class="smells-toggle-button button">Toggle Smells</button>
+  
+</div>
+
+<code class="prettyprint linenums lang-ruby file-code js-file-code">require &#39;spec_helper&#39;
+
+
+describe Requirement do
+
+
+  it &#39;has a valid factory&#39; do
+    expect(FactoryGirl.build(:requirement)).to be_valid
+  end
+
+  let(:requirement){FactoryGirl.create(:requirement)}
+
+  let(:user){FactoryGirl.create(:user)}
+  before :each do
+    Requirement.destroy_all
+    Project.destroy_all
+    Assignment.destroy_all
+  end
+
+  describe &#39;ActiveModel validations&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">HighComplexity</a>)      describe#ActiveModel validations has a flog score of 35          </span>  </li></ul>
+    it { expect(FactoryGirl.create(:requirement)).to validate_presence_of(:title) }
+    it { expect(FactoryGirl.create(:requirement)).to validate_presence_of(:description) }
+    it { expect(FactoryGirl.create(:requirement)).to validate_presence_of(:priority) }
+    it { expect(FactoryGirl.create(:requirement)).to validate_presence_of(:worth) }
+
+    it &#39;validates present of project_id&#39; do
+      parent = FactoryGirl.create(:requirement)
+      requirement.update_attributes(parent_id: parent.id)
+       expect(requirement).to validate_presence_of(:project_id)
+    end
+
+    it &#39;validates numericality of priority&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flay/" target="_blank">DuplicateCode</a>)      Similar code found in 2 nodes                        <a href="requirement_spec.html#L32" class="js-smell-location">0</a>                  <a href="requirement_spec.html#L39" class="js-smell-location">1</a>                  </span>  </li>  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">HighComplexity</a>)      describe(ActiveModel validations)::it#validates numericality of priority has a flog score of 30          </span>  </li></ul>
+      expect(FactoryGirl.build(:requirement, priority: 11 )).not_to be_valid
+      expect(FactoryGirl.build(:requirement, priority: -1 )).not_to be_valid
+      expect(FactoryGirl.build(:requirement, priority: 1 )).to be_valid
+      expect(FactoryGirl.build(:requirement, priority: 10 )).to be_valid
+    end
+
+    it &#39;validates numericality of worth&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flay/" target="_blank">DuplicateCode</a>)      Similar code found in 2 nodes                        <a href="requirement_spec.html#L32" class="js-smell-location">0</a>                  <a href="requirement_spec.html#L39" class="js-smell-location">1</a>                  </span>  </li>  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">HighComplexity</a>)      describe(ActiveModel validations)::it#validates numericality of worth has a flog score of 30          </span>  </li></ul>
+      expect(FactoryGirl.build(:requirement, worth: 11 )).not_to be_valid
+      expect(FactoryGirl.build(:requirement, worth: -1 )).not_to be_valid
+      expect(FactoryGirl.build(:requirement, worth: 1 )).to be_valid
+      expect(FactoryGirl.build(:requirement, worth: 10 )).to be_valid
+    end
+
+    describe &#39;Model methods&#39; do
+
+      let(:project){FactoryGirl.create(:project)}
+      let(:parent){FactoryGirl.create(:requirement, project_id: project.id)}
+
+      it &#39;returns true if parent exists&#39; do
+        requirement.update_attributes(parent_id: parent.id)
+        expect(requirement.send(:parent_exists?)).to eq(true)
+      end
+
+      it &#39;sets project id if requirement has parent&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">HighComplexity</a>)      describe(ActiveModel validations)::describe(Model methods)::it#sets project id if requirement has parent has a flog score of 26          </span>  </li></ul>
+        requirement.update_attributes(parent_id: parent.id)
+        expect(requirement.send(:set_project_id)).to eq(parent.id)
+      end
+
+      it &#39;sets author of requirement&#39; do
+
+      end
+
+      it &#39;disables requirement&#39; do
+        requirement.disable_requirement
+        expect(requirement.is_active).to eq(false)
+      end
+
+      it &#39;return requirement and its descendents ids&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">HighComplexity</a>)      describe(ActiveModel validations)::describe(Model methods)::it#return requirement and its descendents ids has a flog score of 43          </span>  </li></ul>
+        requirement.update_attributes(parent_id: parent.id)
+        r1 = FactoryGirl.create(:requirement)
+        expect(parent.self_and_descendents_ids).to include(parent.id, requirement.id)
+        expect(parent.self_and_descendents_ids).not_to include(r1.id)
+      end
+
+      context &#39;requirement is_active&#39; do
+        it &#39;returns requirement and its descendents&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">HighComplexity</a>)      describe(ActiveModel validations)::describe(Model methods)::context(requirement is_active)::it#returns requirement and its descendents has a flog score of 39          </span>  </li></ul>
+          requirement.update_attributes(parent_id: parent.id)
+          r1 = FactoryGirl.create(:requirement)
+          expect(parent.self_and_descendents).to include(parent, requirement)
+          expect(parent.self_and_descendents).not_to include(r1)
+        end
+
+        it &#39;returns only descendents&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">HighComplexity</a>)      describe(ActiveModel validations)::describe(Model methods)::context(requirement is_active)::it#returns only descendents has a flog score of 43          </span>  </li></ul>
+          requirement.update_attributes(parent_id: parent.id)
+          r1 = FactoryGirl.create(:requirement, parent_id: requirement.id)
+          expect(parent.descendents).to include(r1, requirement)
+          expect(parent.descendents).not_to include(parent)
+        end
+
+      end
+
+      context &#39;requirement is disabled&#39; do
+        it &#39;returns nothing&#39; do
+          requirement.update_attributes(parent_id: parent.id)
+          parent.update_attributes(is_active: false)
+          expect(parent.self_and_descendents).to be_nil
+        end
+        it &#39;returns nothing&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">HighComplexity</a>)      describe(ActiveModel validations)::describe(Model methods)::context(requirement is disabled)::it#returns nothing has a flog score of 51          </span>  </li></ul>
+          requirement.update_attributes(parent_id: parent.id)
+          r1 = FactoryGirl.create(:requirement, parent_id: requirement.id)
+          requirement.update_attributes(is_active: false)
+          expect(parent.descendents).to eq([])
+        end
+      end
+
+      context &#39;assigned to project with rich rights&#39; do
+        let!(:assignment){FactoryGirl.create(:assignment, user_id: user.id, project_id: project.id, acl_level: 1)}
+        it &#39;allows to read, create, update and delete requirement&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">HighComplexity</a>)      describe(ActiveModel validations)::describe(Model methods)::context(assigned to project with rich rights)::it#allows to read, create, update and delete requirement has a flog score of 58          </span>  </li></ul>
+          requirement.update_attributes(project_id: project.id)
+          expect(requirement.available_for_read?(user)).to eq(true)
+          expect(requirement.available_for_create?(user)).to eq(true)
+          expect(requirement.available_for_update?(user)).to eq(true)
+          expect(requirement.available_for_delete?(user)).to eq(true)
+        end
+      end
+
+      context &#39;assigned to project with poor rights&#39; do
+        let!(:assignment){FactoryGirl.create(:assignment, user_id: user.id, project_id: project.id, acl_level: 3)}
+        it &#39;allows to read, create, update and delete requirement&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">HighComplexity</a>)      describe(ActiveModel validations)::describe(Model methods)::context(assigned to project with poor rights)::it#allows to read, create, update and delete requirement has a flog score of 58          </span>  </li></ul>
+          requirement.update_attributes(project_id: project.id)
+          expect(requirement.available_for_read?(user)).to eq(true)
+          expect(requirement.available_for_create?(user)).to eq(false)
+          expect(requirement.available_for_update?(user)).to eq(false)
+          expect(requirement.available_for_delete?(user)).to eq(false)
+        end
+      end
+      context &#39;assigned to project with super_admin rights&#39; do
+        it &#39;allows to read, create, update and delete requirement&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">HighComplexity</a>)      describe(ActiveModel validations)::describe(Model methods)::context(assigned to project with super_admin rights)::it#allows to read, create, update and delete requirement has a flog score of 59          </span>  </li></ul>
+          user.update_attributes(is_super_admin: true)
+          requirement.update_attributes(project_id: project.id)
+          expect(requirement.available_for_read?(user)).to eq(true)
+          expect(requirement.available_for_create?(user)).to eq(true)
+          expect(requirement.available_for_update?(user)).to eq(true)
+          expect(requirement.available_for_delete?(user)).to eq(true)
+        end
+      end
+
+
+    end
+  end
+
+end
+
+</code>
+
+    </div>
+    <script src='../../assets/javascripts/jquery-2.1.0.js'></script>
+    <script src='../../assets/javascripts/jquery.tablesorter.js'></script>
+    <script src='../../assets/javascripts/jquery.floatThead-v1.2.7.js'></script>
+    <script src='../../assets/javascripts/jquery.timeago-v1.4.1.js'></script>
+    <script src='../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../assets/javascripts/jquery.scrollTo-1.4.11.js'></script>
+    <script src='../../assets/javascripts/prettify-4-Mar-2013.js'></script>
+    <script src='../../assets/javascripts/application.js'></script>
+  </body>
+</html>

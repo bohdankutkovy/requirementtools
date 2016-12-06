@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>RubyCritic</title>
+    <link href="../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <header class="project-header group">
+      <div class="container">
+        <h1 class="logo"><a href="../overview.html" class="logo-link">RubyCritic</a></h1>
+        <nav class="project-nav">
+          <a href="../overview.html" class="project-nav-item">Overview</a>
+          <a href="../code_index.html" class="project-nav-item">Code</a>
+          <a href="../smells_index.html" class="project-nav-item">Smells</a>
+        </nav>
+      </div>
+    </header>
+    <div class="container">
+      <div class="file-header group rated">
+  <span class="rating rating-a circled-text circle">
+    A
+  </span>
+  <h2 class="file-name">RailsHelper</h2>
+
+  <span class="file-committed-at">
+    
+      Updated <time class='js-timeago' datetime='2015-11-30 20:37:45 +0200'>2015-11-30 20:37:45 +0200</time>
+    
+  </span>
+
+  <div class="file-stats group">
+    <div class="file-stat">
+      0 complexity
+    </div>
+    <div class="file-stat">
+      N/A complexity per method
+    </div>
+    <div class="file-stat">
+      5 churn
+    </div>
+    <div class="file-stat">
+      0 methods
+    </div>
+    <div class="file-stat">
+      0 duplication
+    </div>
+  </div>
+
+  
+</div>
+
+<code class="prettyprint linenums lang-ruby file-code js-file-code"># This file is copied to spec/ when you run &#39;rails generate rspec:install&#39;
+ENV[&#39;RAILS_ENV&#39;] ||= &#39;test&#39;
+require File.expand_path(&#39;../../config/environment&#39;, __FILE__)
+# Prevent database truncation if the environment is production
+abort(&quot;The Rails environment is running in production mode!&quot;) if Rails.env.production?
+require &#39;spec_helper&#39;
+require &#39;rspec/rails&#39;
+# Add additional requires below this line. Rails is not loaded until this point!
+
+require &#39;devise&#39;
+
+# Requires supporting ruby files with custom matchers and macros, etc, in
+# spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
+# run as spec files by default. This means that files in spec/support that end
+# in _spec.rb will both be required and run as specs, causing the specs to be
+# run twice. It is recommended that you do not name files matching this glob to
+# end with _spec.rb. You can configure this pattern with the --pattern
+# option on the command line or in ~/.rspec, .rspec or `.rspec-local`.
+#
+# The following line is provided for convenience purposes. It has the downside
+# of increasing the boot-up time by auto-requiring all files in the support
+# directory. Alternatively, in the individual `*_spec.rb` files, manually
+# require only the support files necessary.
+#
+Dir[Rails.root.join(&#39;spec/support/**/*.rb&#39;)].each { |f| require f }
+
+# Checks for pending migrations before tests are run.
+# If you are not using ActiveRecord, you can remove this line.
+ActiveRecord::Migration.maintain_test_schema!
+
+RSpec.configure do |config|
+  # Remove this line if you&#39;re not using ActiveRecord or ActiveRecord fixtures
+  config.fixture_path = &quot;#{::Rails.root}/spec/fixtures&quot;
+
+  # If you&#39;re not using ActiveRecord, or you&#39;d prefer not to run each of your
+  # examples within a transaction, remove the following line or assign false
+  # instead of true.
+  config.use_transactional_fixtures = false
+
+
+
+  # RSpec Rails can automatically mix in different behaviours to your tests
+  # based on their file location, for example enabling you to call `get` and
+  # `post` in specs under `spec/controllers`.
+  #
+  # You can disable this behaviour by removing the line below, and instead
+  # explicitly tag your specs with their type, e.g.:
+  #
+  #     RSpec.describe UsersController, :type =&gt; :controller do
+  #       # ...
+  #     end
+  #
+  # The different available types are documented in the features, such as in
+  # https://relishapp.com/rspec/rspec-rails/docs
+  config.infer_spec_type_from_file_location!
+
+
+
+
+  RSpec.configure do |config|
+    config.include Devise::TestHelpers, type: :controller
+    config.extend ControllerMacros, :type =&gt; :controller
+  end
+end
+</code>
+
+    </div>
+    <script src='../assets/javascripts/jquery-2.1.0.js'></script>
+    <script src='../assets/javascripts/jquery.tablesorter.js'></script>
+    <script src='../assets/javascripts/jquery.floatThead-v1.2.7.js'></script>
+    <script src='../assets/javascripts/jquery.timeago-v1.4.1.js'></script>
+    <script src='../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../assets/javascripts/jquery.scrollTo-1.4.11.js'></script>
+    <script src='../assets/javascripts/prettify-4-Mar-2013.js'></script>
+    <script src='../assets/javascripts/application.js'></script>
+  </body>
+</html>

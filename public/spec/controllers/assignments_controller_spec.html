@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>RubyCritic</title>
+    <link href="../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <header class="project-header group">
+      <div class="container">
+        <h1 class="logo"><a href="../../overview.html" class="logo-link">RubyCritic</a></h1>
+        <nav class="project-nav">
+          <a href="../../overview.html" class="project-nav-item">Overview</a>
+          <a href="../../code_index.html" class="project-nav-item">Code</a>
+          <a href="../../smells_index.html" class="project-nav-item">Smells</a>
+        </nav>
+      </div>
+    </header>
+    <div class="container">
+      <div class="file-header group rated">
+  <span class="rating rating-f circled-text circle">
+    F
+  </span>
+  <h2 class="file-name">AssignmentsControllerSpec</h2>
+
+  <span class="file-committed-at">
+    
+      Updated <time class='js-timeago' datetime='2015-12-02 22:47:41 +0200'>2015-12-02 22:47:41 +0200</time>
+    
+  </span>
+
+  <div class="file-stats group">
+    <div class="file-stat">
+      356 complexity
+    </div>
+    <div class="file-stat">
+      N/A complexity per method
+    </div>
+    <div class="file-stat">
+      1 churn
+    </div>
+    <div class="file-stat">
+      0 methods
+    </div>
+    <div class="file-stat">
+      100 duplication
+    </div>
+  </div>
+
+  
+    <button id="js-toggle-smells" class="smells-toggle-button button">Toggle Smells</button>
+  
+</div>
+
+<code class="prettyprint linenums lang-ruby file-code js-file-code">require &#39;spec_helper&#39;
+
+describe AssignmentsController, type: :controller do
+
+  describe &#39;include helpers and filters&#39; do
+    it &#39;includes AssignmentsHelper module&#39; do
+      expect(subject.class).to receive(:include).with(AssignmentsHelper)
+      load File.join(Rails.root, &#39;app/controllers/assignments_controller.rb&#39;)
+    end
+
+    it &#39;includes sign_in &amp;&amp; entry_accessed filters&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flay/" target="_blank">DuplicateCode</a>)      Similar code found in 2 nodes                        <a href="assignments_controller_spec.html#L11" class="js-smell-location">0</a>                  <a href="requirements_controller_spec.html#L13" class="js-smell-location">1</a>                  </span>  </li></ul>
+      expect(AssignmentsController).to receive(:before_filter).with(:ensure_user_is_signed_in?)
+      expect(AssignmentsController).to receive(:before_filter).with(:entry_accessed?)
+      load File.join(Rails.root, &#39;app/controllers/assignments_controller.rb&#39;)
+    end
+  end
+
+  context &#39;controller actions&#39; do
+
+    let(:user){FactoryGirl.create(:user)}
+
+    before :each do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flay/" target="_blank">DuplicateCode</a>)      Identical code found in 5 nodes                        <a href="assignments_controller_spec.html#L22" class="js-smell-location">0</a>                  <a href="attachments_controller_spec.html#L8" class="js-smell-location">1</a>                  <a href="dashboards_controller_spec.html#L13" class="js-smell-location">2</a>                  <a href="profiles_controller_spec.html#L13" class="js-smell-location">3</a>                  <a href="projects_controller_spec.html#L16" class="js-smell-location">4</a>                  </span>  </li></ul>
+      User.destroy_all
+      Project.destroy_all
+      Attachment.destroy_all
+      Requirement.destroy_all
+
+      @request.env[&quot;devise.mapping&quot;] = Devise.mappings[:user]
+      sign_in user
+    end
+
+    describe &#39;GET show&#39; do
+      it &#39;assigns @project and @assignments with assignments of this project&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">HighComplexity</a>)      context(controller actions)::describe(GET show)::it#assigns @project and @assignments with assignments of this project has a flog score of 25          </span>  </li></ul>
+        p = FactoryGirl.create(:project)
+        assignment = FactoryGirl.create(:assignment, project_id: p.id)
+        get :show, id: p.id
+        expect(assigns(:project)).to eq(p)
+        expect(assigns(:assignments)).to include(assignment)
+      end
+    end
+
+    describe &#39;GET new&#39; do
+      it &#39;assign @assignment with new Assignment&#39; do
+        p = FactoryGirl.create(:project)
+        FactoryGirl.create(:assignment, project_id: p.id, user_id: user.id) #current project assignment with user
+        get :new, assignment: {project_id: p.id}
+        expect(assigns(:assignment)).to be_a_new(Assignment)
+      end
+    end
+
+    describe &#39;POST create&#39; do
+      context &#39;valid params&#39; do
+        it &#39;assigns @assignment with created assignment&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">HighComplexity</a>)      context(controller actions)::describe(POST create)::context(valid params)::it#assigns @assignment with created assignment has a flog score of 28          </span>  </li></ul>
+          p = FactoryGirl.create(:project)
+
+          expect{post :create, assignment: {project_id: p.id, user_id: user.id, acl_level: 3}
+          }.to change(Assignment, :count).by(1)
+          expect(assigns(:assignment)).not_to be_nil
+        end
+
+        it &#39;renders assignment_path json&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">HighComplexity</a>)      context(controller actions)::describe(POST create)::context(valid params)::it#renders assignment_path json has a flog score of 26          </span>  </li></ul>
+          p = FactoryGirl.create(:project)
+          post :create, assignment: {project_id: p.id, user_id: user.id, acl_level: 3}
+          expect(response.body).to eq(&quot;{\&quot;page\&quot;:\&quot;/assignments/#{Assignment.last.id}\&quot;}&quot;)
+        end
+      end
+      context &#39;invalid params&#39; do
+        it &#39;renders new_assignment_path&#39; do
+          post :create, assignment: {project_id: nil, user_id: user.id, acl_level: 3}
+          expect(response.body).to eq(&quot;{\&quot;page\&quot;:\&quot;/assignments/new\&quot;}&quot;)
+        end
+      end
+    end
+
+    describe &#39;GET edit&#39; do
+      let(:assignment){FactoryGirl.create(:assignment, project_id: project.id, user_id: user.id)}
+      let(:project){FactoryGirl.create(:project)}
+
+      it &#39;finds assignment and assign it to @assignment&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flay/" target="_blank">DuplicateCode</a>)      Similar code found in 4 nodes                        <a href="assignments_controller_spec.html#L79" class="js-smell-location">0</a>                  <a href="assignments_controller_spec.html#L89" class="js-smell-location">1</a>                  <a href="requirements_controller_spec.html#L155" class="js-smell-location">2</a>                  <a href="requirements_controller_spec.html#L183" class="js-smell-location">3</a>                  </span>  </li></ul>
+        get :edit, assignment: assignment.id, id: project.id
+        expect(assigns(:assignment)).to eq(assignment)
+      end
+    end
+
+    describe &#39;PUT update&#39; do
+      let(:assignment){FactoryGirl.create(:assignment, project_id: project.id, user_id: user.id)}
+      let(:project){FactoryGirl.create(:project)}
+
+      it &#39;finds assignment and assign it to @assignment&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flay/" target="_blank">DuplicateCode</a>)      Similar code found in 4 nodes                        <a href="assignments_controller_spec.html#L79" class="js-smell-location">0</a>                  <a href="assignments_controller_spec.html#L89" class="js-smell-location">1</a>                  <a href="requirements_controller_spec.html#L155" class="js-smell-location">2</a>                  <a href="requirements_controller_spec.html#L183" class="js-smell-location">3</a>                  </span>  </li></ul>
+        put :update, id: assignment.id, assignment: assignment.attributes
+        expect(assigns(:assignment)).to eq(assignment)
+      end
+
+      context &#39;valid params&#39; do
+        it &#39;changes @assignment attr &amp;&amp; renders assignment_path json&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">HighComplexity</a>)      context(controller actions)::describe(PUT update)::context(valid params)::it#changes @assignment attr && renders assignment_path json has a flog score of 40          </span>  </li></ul>
+          a1 = FactoryGirl.create(:assignment, project_id: project.id, user_id: user.id, acl_level: 3)
+          put :update, id: a1.id, assignment: {project_id: a1.project_id, user_id: a1.user_id, acl_level: 2}
+          expect(assigns(:assignment).acl_level).to eq(2)
+          expect(response.body).to eq(&quot;{\&quot;page\&quot;:\&quot;/assignments/#{a1.id}\&quot;}&quot;)
+        end
+      end
+
+      context &#39;invalid params&#39; do
+        it &#39;changes @assignment attr &amp;&amp; renders assignment_path json&#39; do
+          put :update, id: assignment.id, assignment: {project_id: nil, user_id: nil}
+          expect(response).to render_template(:edit)
+        end
+      end
+    end
+
+    describe &#39;POST clear&#39; do
+      let(:assignment){FactoryGirl.create(:assignment, project_id: project.id, user_id: user.id)}
+      let(:project){FactoryGirl.create(:project)}
+
+      it &#39;assigns @assignment with found assignment&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flay/" target="_blank">DuplicateCode</a>)      Similar code found in 2 nodes                        <a href="assignments_controller_spec.html#L115" class="js-smell-location">0</a>                  <a href="profiles_controller_spec.html#L25" class="js-smell-location">1</a>                  </span>  </li></ul>
+        post :clear, assignment_id: assignment.id
+        expect(assigns(:assignment)).to eq(assignment)
+      end
+
+      it &#39;destroys @assignment&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">HighComplexity</a>)      context(controller actions)::describe(POST clear)::it#destroys @assignment has a flog score of 32          </span>  </li></ul>
+        user2 = FactoryGirl.create(:user)
+        assign1 = FactoryGirl.create(:assignment, project_id: project.id, user_id: user2.id, acl_level: 3)
+        FactoryGirl.create(:assignment, project_id: project.id, user_id: user.id, acl_level: 1)
+        expect{ post :clear, assignment_id: assign1.id
+        }.to change(Assignment, :count).by(-1)
+      end
+    end
+
+  end
+end
+</code>
+
+    </div>
+    <script src='../../assets/javascripts/jquery-2.1.0.js'></script>
+    <script src='../../assets/javascripts/jquery.tablesorter.js'></script>
+    <script src='../../assets/javascripts/jquery.floatThead-v1.2.7.js'></script>
+    <script src='../../assets/javascripts/jquery.timeago-v1.4.1.js'></script>
+    <script src='../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../assets/javascripts/jquery.scrollTo-1.4.11.js'></script>
+    <script src='../../assets/javascripts/prettify-4-Mar-2013.js'></script>
+    <script src='../../assets/javascripts/application.js'></script>
+  </body>
+</html>

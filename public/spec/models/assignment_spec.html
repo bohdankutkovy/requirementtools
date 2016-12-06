@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>RubyCritic</title>
+    <link href="../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <header class="project-header group">
+      <div class="container">
+        <h1 class="logo"><a href="../../overview.html" class="logo-link">RubyCritic</a></h1>
+        <nav class="project-nav">
+          <a href="../../overview.html" class="project-nav-item">Overview</a>
+          <a href="../../code_index.html" class="project-nav-item">Code</a>
+          <a href="../../smells_index.html" class="project-nav-item">Smells</a>
+        </nav>
+      </div>
+    </header>
+    <div class="container">
+      <div class="file-header group rated">
+  <span class="rating rating-f circled-text circle">
+    F
+  </span>
+  <h2 class="file-name">AssignmentSpec</h2>
+
+  <span class="file-committed-at">
+    
+      Updated <time class='js-timeago' datetime='2015-12-11 17:30:50 +0200'>2015-12-11 17:30:50 +0200</time>
+    
+  </span>
+
+  <div class="file-stats group">
+    <div class="file-stat">
+      406 complexity
+    </div>
+    <div class="file-stat">
+      N/A complexity per method
+    </div>
+    <div class="file-stat">
+      3 churn
+    </div>
+    <div class="file-stat">
+      0 methods
+    </div>
+    <div class="file-stat">
+      178 duplication
+    </div>
+  </div>
+
+  
+    <button id="js-toggle-smells" class="smells-toggle-button button">Toggle Smells</button>
+  
+</div>
+
+<code class="prettyprint linenums lang-ruby file-code js-file-code">require &#39;spec_helper&#39;
+
+
+describe Assignment do
+
+  it &#39;has a valid factory&#39; do
+    expect(FactoryGirl.build(:assignment)).to be_valid
+  end
+
+  let(:assignment){FactoryGirl.create(:assignment)}
+  let(:project){FactoryGirl.create(:project)}
+  let(:user){FactoryGirl.create(:user)}
+
+  before :each do
+    Project.destroy_all
+    Assignment.destroy_all
+    User.destroy_all
+  end
+
+  describe &#39;ActiveModel validations&#39; do
+    it { expect(assignment).to validate_presence_of(:acl_level) }
+    it { expect(assignment).to validate_presence_of(:project_id) }
+    # it { should validate_uniqueness_of(:user_id).scoped_to(:project_id) }
+
+    it &#39;validates the numericality of acl_level&#39; do
+      assignment.update_attributes(acl_level: -1)
+      expect(assignment).to be_invalid
+      assignment.update_attributes(acl_level: 3)
+      expect(assignment).to be_valid
+      assignment.update_attributes(acl_level: 4)
+      expect(assignment).to be_invalid
+    end
+
+    it &#39;validates uniqueness of user scope project and raises a message&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">HighComplexity</a>)      describe(ActiveModel validations)::it#validates uniqueness of user scope project and raises a message has a flog score of 41          </span>  </li></ul>
+      expect(FactoryGirl.create(:assignment, project_id: project.id, user_id: user.id))
+          .to be_valid
+      invalid_assignment = FactoryGirl.build(:assignment, project_id: project.id, user_id: user.id)
+      expect(invalid_assignment).not_to be_valid
+      expect(invalid_assignment.errors[:user_id]).to include(&#39;cannot be assigned to one project more than once&#39;)
+    end
+  end
+
+  describe &#39;model methods&#39; do
+    it &#39;return users name of current assignment&#39; do
+      expect(FactoryGirl.create(:assignment, user_id: user.id, project_id: project.id).name).to eq(user.name)
+    end
+
+
+    context &#39;assigned with rich rights&#39; do
+      it &#39;allows user to create assignment&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flay/" target="_blank">DuplicateCode</a>)      Similar code found in 2 nodes                        <a href="assignment_spec.html#L50" class="js-smell-location">0</a>                  <a href="assignment_spec.html#L55" class="js-smell-location">1</a>                  </span>  </li></ul>
+        user_assignment = FactoryGirl.create(:assignment, project_id: project.id, user_id: user.id, acl_level: 1)
+        expect(user_assignment.available_for_create?(user)).to eq(true)
+      end
+
+      it &#39;allows user to read assignment&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flay/" target="_blank">DuplicateCode</a>)      Similar code found in 2 nodes                        <a href="assignment_spec.html#L50" class="js-smell-location">0</a>                  <a href="assignment_spec.html#L55" class="js-smell-location">1</a>                  </span>  </li></ul>
+        user_assignment = FactoryGirl.create(:assignment, project_id: project.id, user_id: user.id, acl_level: 3)
+        expect(user_assignment.available_for_read?(user)).to eq(true)
+      end
+
+      it &#39;allows user to update assignment if current user acl &gt; assignments acl&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flay/" target="_blank">DuplicateCode</a>)      Similar code found in 2 nodes                        <a href="assignment_spec.html#L60" class="js-smell-location">0</a>                  <a href="assignment_spec.html#L75" class="js-smell-location">1</a>                  </span>  </li></ul>
+        user_assignment = FactoryGirl.create(:assignment, project_id: project.id, user_id: user.id, acl_level: 0)
+        some_user = FactoryGirl.create(:user)
+        some_assignment = FactoryGirl.create(:assignment, project_id: project.id, user_id: some_user.id, acl_level: 3)
+        expect(some_assignment.available_for_update?(user)).to eq(true)
+
+        #acl_level = 1 &gt; assignment.acl = 3
+        user_assignment.update_attributes(acl_level: 1)
+        expect(some_assignment.available_for_update?(user)).to eq(true)
+
+        #acl_level = 2 &gt; assignment.acl = 3
+        user_assignment.update_attributes(acl_level: 2)
+        expect(some_assignment.available_for_update?(user)).to eq(true)
+      end
+
+      it &#39;allows user to update assignment if current user acl &gt; assignments acl&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flay/" target="_blank">DuplicateCode</a>)      Similar code found in 2 nodes                        <a href="assignment_spec.html#L60" class="js-smell-location">0</a>                  <a href="assignment_spec.html#L75" class="js-smell-location">1</a>                  </span>  </li>  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">VeryHighComplexity</a>)      describe(model methods)::context(assigned with rich rights)::it#allows user to update assignment if current user acl > assignments acl has a flog score of 105          </span>  </li></ul>
+        user_assignment = FactoryGirl.create(:assignment, project_id: project.id, user_id: user.id, acl_level: 0)
+        some_user = FactoryGirl.create(:user)
+        some_assignment = FactoryGirl.create(:assignment, project_id: project.id, user_id: some_user.id, acl_level: 3)
+        expect(some_assignment.available_for_delete?(user)).to eq(true)
+
+        #acl_level = 1 &gt; assignment.acl = 3
+        user_assignment.update_attributes(acl_level: 1)
+        expect(some_assignment.available_for_delete?(user)).to eq(true)
+
+        #acl_level = 2 &gt; assignment.acl = 3
+        user_assignment.update_attributes(acl_level: 2)
+        expect(some_assignment.available_for_delete?(user)).to eq(true)
+      end
+    end
+
+    context &#39;assigned with poor rights&#39; do
+      it &#39;doesnt allow user to create assignment&#39; do
+        user_assignment = FactoryGirl.create(:assignment, project_id: project.id, user_id: user.id, acl_level: 3)
+        expect(user_assignment.available_for_create?(user)).to eq(false)
+      end
+
+      it &#39;doesnt allow to update assignments if current_user.acl &lt; assignments.acl&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">HighComplexity</a>)      describe(model methods)::context(assigned with poor rights)::it#doesnt allow to update assignments if current_user.acl < assignments.acl has a flog score of 56          </span>  </li></ul>
+        user_assignment = FactoryGirl.create(:assignment, project_id: project.id, user_id: user.id, acl_level: 3)
+        some_user = FactoryGirl.create(:user)
+        some_assignment = FactoryGirl.create(:assignment, project_id: project.id, user_id: some_user.id, acl_level: 0)
+        expect(some_assignment.available_for_update?(user)).to eq(false)
+
+        #acl_level = 2 &lt; assignment.acl = 1
+        user_assignment.update_attributes(acl_level: 2)
+        some_assignment.update_attributes(acl_level: 1)
+        expect(some_assignment.available_for_update?(user)).to be_nil
+
+        #acl_level = 1 &lt; assignment.acl = 0
+        user_assignment.update_attributes(acl_level: 1)
+        some_assignment.update_attributes(acl_level: 0)
+        expect(some_assignment.available_for_update?(user)).to be_nil
+      end
+
+      it &#39;doesnt allow to delete assignments if current_user.acl &lt; assignments.acl&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">HighComplexity</a>)      describe(model methods)::context(assigned with poor rights)::it#doesnt allow to delete assignments if current_user.acl < assignments.acl has a flog score of 56          </span>  </li></ul>
+        user_assignment = FactoryGirl.create(:assignment, project_id: project.id, user_id: user.id, acl_level: 3)
+        some_user = FactoryGirl.create(:user)
+        some_assignment = FactoryGirl.create(:assignment, project_id: project.id, user_id: some_user.id, acl_level: 0)
+        expect(some_assignment.available_for_delete?(user)).to eq(false)
+
+        #acl_level = 2 &lt; assignment.acl = 1
+        user_assignment.update_attributes(acl_level: 2)
+        some_assignment.update_attributes(acl_level: 1)
+        expect(some_assignment.available_for_delete?(user)).to eq(false)
+
+        #acl_level = 1 &lt; assignment.acl = 0
+        user_assignment.update_attributes(acl_level: 1)
+        some_assignment.update_attributes(acl_level: 0)
+        expect(some_assignment.available_for_delete?(user)).to eq(false)
+      end
+
+    end
+
+
+
+
+  end
+
+
+end
+</code>
+
+    </div>
+    <script src='../../assets/javascripts/jquery-2.1.0.js'></script>
+    <script src='../../assets/javascripts/jquery.tablesorter.js'></script>
+    <script src='../../assets/javascripts/jquery.floatThead-v1.2.7.js'></script>
+    <script src='../../assets/javascripts/jquery.timeago-v1.4.1.js'></script>
+    <script src='../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../assets/javascripts/jquery.scrollTo-1.4.11.js'></script>
+    <script src='../../assets/javascripts/prettify-4-Mar-2013.js'></script>
+    <script src='../../assets/javascripts/application.js'></script>
+  </body>
+</html>

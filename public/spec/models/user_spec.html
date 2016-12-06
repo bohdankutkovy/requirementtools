@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>RubyCritic</title>
+    <link href="../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <header class="project-header group">
+      <div class="container">
+        <h1 class="logo"><a href="../../overview.html" class="logo-link">RubyCritic</a></h1>
+        <nav class="project-nav">
+          <a href="../../overview.html" class="project-nav-item">Overview</a>
+          <a href="../../code_index.html" class="project-nav-item">Code</a>
+          <a href="../../smells_index.html" class="project-nav-item">Smells</a>
+        </nav>
+      </div>
+    </header>
+    <div class="container">
+      <div class="file-header group rated">
+  <span class="rating rating-c circled-text circle">
+    C
+  </span>
+  <h2 class="file-name">UserSpec</h2>
+
+  <span class="file-committed-at">
+    
+      Updated <time class='js-timeago' datetime='2015-12-03 18:23:19 +0200'>2015-12-03 18:23:19 +0200</time>
+    
+  </span>
+
+  <div class="file-stats group">
+    <div class="file-stat">
+      203 complexity
+    </div>
+    <div class="file-stat">
+      N/A complexity per method
+    </div>
+    <div class="file-stat">
+      2 churn
+    </div>
+    <div class="file-stat">
+      0 methods
+    </div>
+    <div class="file-stat">
+      0 duplication
+    </div>
+  </div>
+
+  
+    <button id="js-toggle-smells" class="smells-toggle-button button">Toggle Smells</button>
+  
+</div>
+
+<code class="prettyprint linenums lang-ruby file-code js-file-code">require &#39;spec_helper&#39;
+
+
+describe User do
+
+  it &#39;has a valid factory&#39; do
+    expect(FactoryGirl.build(:user)).to be_valid
+  end
+
+  let(:user){FactoryGirl.create(:user)}
+
+  before :each do
+    User.destroy_all
+  end
+
+  describe &#39;ActiveModel validations&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">HighComplexity</a>)      describe#ActiveModel validations has a flog score of 26          </span>  </li></ul>
+
+
+    it { expect(FactoryGirl.create(:user)).to validate_presence_of(:name) }
+    it { expect(FactoryGirl.create(:user)).to validate_presence_of(:email) }
+    it { expect(FactoryGirl.create(:user)).to validate_uniqueness_of(:name) }
+    it &#39;has unique email&#39; do
+      expect(FactoryGirl.build(:user, email: user.email)).not_to be_valid
+    end
+    it &#39;validates password length&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">HighComplexity</a>)      describe(ActiveModel validations)::it#validates password length has a flog score of 29          </span>  </li></ul>
+      expect(FactoryGirl.build(:user, password: &quot;123&quot; , password_confirmation: &quot;123&quot;)).not_to be_valid
+      expect(FactoryGirl.build(:user, password: &quot;1234&quot;, password_confirmation: &quot;1234&quot;)).to be_valid
+      expect(FactoryGirl.build(:user, password: &quot;1234567890123456&quot;, password_confirmation: &quot;1234567890123456&quot;)).to be_valid
+      expect(FactoryGirl.build(:user, password: &quot;12345678901234567&quot;, password_confirmation: &quot;12345678901234567&quot;)).not_to be_valid
+    end
+
+    it &#39;validates password confirmation&#39; do
+      expect(FactoryGirl.build(:user, password: &quot;1234&quot;, password_confirmation: &quot;4321&quot;)).not_to be_valid
+    end
+  end
+
+  describe &#39;Model methods&#39; do
+    it &#39;disables the User&#39; do
+      user.disable_account
+      expect(user.is_active).to eq(false)
+    end
+
+    it &#39;activates the User&#39; do
+      user_1 = FactoryGirl.create(:user, is_active: false)
+      user_1.activate_account
+      expect(user.is_active).to eq(true)
+    end
+
+    it &#39;returns status of user&#39;  do
+      expect(user.status).to eq(true)
+    end
+
+    it &#39;checks the password is changed&#39; do
+      user_1 = FactoryGirl.create(:user, sign_in_count: 1)
+      user_1.update_attributes(info_edited: false)
+      user_1.update_attributes(password: &#39;1234&#39;, password_confirmation: &#39;1234&#39;)
+      user_1.send(:check_password_changed)
+      expect(user_1.info_edited).to eq(true)
+    end
+
+    it &#39;checks if password is blank&#39; do
+      user.update_attributes(encrypted_password: &#39;&#39;)
+      expect(user.has_no_password?).to eq(true)
+    end
+
+    it &#39;confirms user authentication&#39; do
+      expect(user.active_for_authentication?).to eq(true)
+    end
+
+    it &#39;rejects user authentication&#39; do
+      user.update_attributes(is_active: false)
+      expect(user.active_for_authentication?).to eq(false)
+    end
+
+    it &#39;sets the password&#39; do
+      user.attempt_set_password({password: &#39;1234&#39;, password_confirmation: &#39;1234&#39;})
+      expect(user.password).to eq(&#39;1234&#39;)
+    end
+
+    it &#39;checks if authorized for delete&#39; do
+      expect(user.authorized_for?({crud_type: &#39;create&#39;})).to eq(true)
+    end
+
+  end
+
+
+end
+</code>
+
+    </div>
+    <script src='../../assets/javascripts/jquery-2.1.0.js'></script>
+    <script src='../../assets/javascripts/jquery.tablesorter.js'></script>
+    <script src='../../assets/javascripts/jquery.floatThead-v1.2.7.js'></script>
+    <script src='../../assets/javascripts/jquery.timeago-v1.4.1.js'></script>
+    <script src='../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../assets/javascripts/jquery.scrollTo-1.4.11.js'></script>
+    <script src='../../assets/javascripts/prettify-4-Mar-2013.js'></script>
+    <script src='../../assets/javascripts/application.js'></script>
+  </body>
+</html>

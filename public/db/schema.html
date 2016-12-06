@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>RubyCritic</title>
+    <link href="../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <header class="project-header group">
+      <div class="container">
+        <h1 class="logo"><a href="../overview.html" class="logo-link">RubyCritic</a></h1>
+        <nav class="project-nav">
+          <a href="../overview.html" class="project-nav-item">Overview</a>
+          <a href="../code_index.html" class="project-nav-item">Code</a>
+          <a href="../smells_index.html" class="project-nav-item">Smells</a>
+        </nav>
+      </div>
+    </header>
+    <div class="container">
+      <div class="file-header group rated">
+  <span class="rating rating-b circled-text circle">
+    B
+  </span>
+  <h2 class="file-name">Schema</h2>
+
+  <span class="file-committed-at">
+    
+      Updated <time class='js-timeago' datetime='2015-11-23 11:18:25 +0200'>2015-11-23 11:18:25 +0200</time>
+    
+  </span>
+
+  <div class="file-stats group">
+    <div class="file-stat">
+      97 complexity
+    </div>
+    <div class="file-stat">
+      N/A complexity per method
+    </div>
+    <div class="file-stat">
+      1 churn
+    </div>
+    <div class="file-stat">
+      0 methods
+    </div>
+    <div class="file-stat">
+      0 duplication
+    </div>
+  </div>
+
+  
+    <button id="js-toggle-smells" class="smells-toggle-button button">Toggle Smells</button>
+  
+</div>
+
+<code class="prettyprint linenums lang-ruby file-code js-file-code"># encoding: UTF-8
+# This file is auto-generated from the current state of the database. Instead
+# of editing this file, please use the migrations feature of Active Record to
+# incrementally modify your database, and then regenerate this schema definition.
+#
+# Note that this schema.rb definition is the authoritative source for your
+# database schema. If you need to create the application database on another
+# system, you should be using db:schema:load, not running all the migrations
+# from scratch. The latter is a flawed and unsustainable approach (the more migrations
+# you&#39;ll amass, the slower it&#39;ll run and the greater likelihood for issues).
+#
+# It&#39;s strongly recommended that you check this file into your version control system.
+
+ActiveRecord::Schema.define(version: 20151109110208) do
+
+  create_table &quot;assignments&quot;, force: :cascade do |t|
+    t.integer  &quot;project_id&quot;,             null: false
+    t.integer  &quot;user_id&quot;,                null: false
+    t.integer  &quot;acl_level&quot;,  default: 3, null: false
+    t.datetime &quot;created_at&quot;,             null: false
+    t.datetime &quot;updated_at&quot;,             null: false
+  end
+
+  create_table &quot;attachments&quot;, force: :cascade do |t|
+    t.datetime &quot;created_at&quot;,     null: false
+    t.datetime &quot;updated_at&quot;,     null: false
+    t.string   &quot;file&quot;
+    t.integer  &quot;requirement_id&quot;
+  end
+
+  create_table &quot;gritter_notices&quot;, force: :cascade do |t|
+    t.integer  &quot;owner_id&quot;,     null: false
+    t.string   &quot;owner_type&quot;,   null: false
+    t.text     &quot;message&quot;,      null: false
+    t.text     &quot;options&quot;,      null: false
+    t.datetime &quot;delivered_at&quot;
+    t.datetime &quot;created_at&quot;
+    t.datetime &quot;updated_at&quot;
+  end
+
+  add_index &quot;gritter_notices&quot;, [&quot;owner_id&quot;, &quot;delivered_at&quot;], name: &quot;index_gritter_notices_on_owner_id_and_delivered_at&quot;
+
+  create_table &quot;projects&quot;, force: :cascade do |t|
+    t.string   &quot;title&quot;
+    t.text     &quot;description&quot;
+    t.datetime &quot;created_at&quot;,  null: false
+    t.datetime &quot;updated_at&quot;,  null: false
+    t.integer  &quot;user_id&quot;
+  end
+
+  create_table &quot;requirements&quot;, force: :cascade do |t|
+    t.integer  &quot;project_id&quot;,                 null: false
+    t.integer  &quot;parent_id&quot;,   default: 0,    null: false
+    t.string   &quot;title&quot;
+    t.text     &quot;description&quot;
+    t.integer  &quot;priority&quot;,                   null: false
+    t.integer  &quot;worth&quot;,                      null: false
+    t.datetime &quot;created_at&quot;,                 null: false
+    t.datetime &quot;updated_at&quot;,                 null: false
+    t.integer  &quot;author_id&quot;
+    t.boolean  &quot;is_active&quot;,   default: true
+  end
+
+  create_table &quot;users&quot;, force: :cascade do |t|<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">HighComplexity</a>)      create_table#users has a flog score of 27          </span>  </li></ul>
+    t.string   &quot;email&quot;,                  default: &quot;&quot;,    null: false
+    t.string   &quot;encrypted_password&quot;,     default: &quot;&quot;,    null: false
+    t.string   &quot;reset_password_token&quot;
+    t.datetime &quot;reset_password_sent_at&quot;
+    t.datetime &quot;remember_created_at&quot;
+    t.integer  &quot;sign_in_count&quot;,          default: 0,     null: false
+    t.datetime &quot;current_sign_in_at&quot;
+    t.datetime &quot;last_sign_in_at&quot;
+    t.string   &quot;current_sign_in_ip&quot;
+    t.string   &quot;last_sign_in_ip&quot;
+    t.string   &quot;confirmation_token&quot;
+    t.datetime &quot;confirmed_at&quot;
+    t.datetime &quot;confirmation_sent_at&quot;
+    t.datetime &quot;created_at&quot;,                             null: false
+    t.datetime &quot;updated_at&quot;,                             null: false
+    t.string   &quot;name&quot;
+    t.boolean  &quot;info_edited&quot;,            default: false, null: false
+    t.boolean  &quot;is_super_admin&quot;,         default: false, null: false
+    t.string   &quot;avatar&quot;
+    t.boolean  &quot;is_active&quot;,              default: true
+  end
+
+  add_index &quot;users&quot;, [&quot;confirmation_token&quot;], name: &quot;index_users_on_confirmation_token&quot;, unique: true
+  add_index &quot;users&quot;, [&quot;email&quot;], name: &quot;index_users_on_email&quot;, unique: true
+  add_index &quot;users&quot;, [&quot;reset_password_token&quot;], name: &quot;index_users_on_reset_password_token&quot;, unique: true
+
+  create_table &quot;versions&quot;, force: :cascade do |t|
+    t.integer  &quot;versioned_id&quot;
+    t.string   &quot;versioned_type&quot;
+    t.integer  &quot;requirement_id&quot;
+    t.string   &quot;requirement_type&quot;
+    t.string   &quot;user_name&quot;
+    t.integer  &quot;project_id&quot;
+    t.integer  &quot;parent_id&quot;
+    t.string   &quot;title&quot;
+    t.text     &quot;description&quot;
+    t.integer  &quot;priority&quot;
+    t.integer  &quot;worth&quot;
+    t.text     &quot;modifications&quot;
+    t.integer  &quot;number&quot;
+    t.integer  &quot;reverted_from&quot;
+    t.string   &quot;tag&quot;
+    t.datetime &quot;created_at&quot;
+    t.datetime &quot;updated_at&quot;
+  end
+
+end
+</code>
+
+    </div>
+    <script src='../assets/javascripts/jquery-2.1.0.js'></script>
+    <script src='../assets/javascripts/jquery.tablesorter.js'></script>
+    <script src='../assets/javascripts/jquery.floatThead-v1.2.7.js'></script>
+    <script src='../assets/javascripts/jquery.timeago-v1.4.1.js'></script>
+    <script src='../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../assets/javascripts/jquery.scrollTo-1.4.11.js'></script>
+    <script src='../assets/javascripts/prettify-4-Mar-2013.js'></script>
+    <script src='../assets/javascripts/application.js'></script>
+  </body>
+</html>

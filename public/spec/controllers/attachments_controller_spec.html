@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>RubyCritic</title>
+    <link href="../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <header class="project-header group">
+      <div class="container">
+        <h1 class="logo"><a href="../../overview.html" class="logo-link">RubyCritic</a></h1>
+        <nav class="project-nav">
+          <a href="../../overview.html" class="project-nav-item">Overview</a>
+          <a href="../../code_index.html" class="project-nav-item">Code</a>
+          <a href="../../smells_index.html" class="project-nav-item">Smells</a>
+        </nav>
+      </div>
+    </header>
+    <div class="container">
+      <div class="file-header group rated">
+  <span class="rating rating-f circled-text circle">
+    F
+  </span>
+  <h2 class="file-name">AttachmentsControllerSpec</h2>
+
+  <span class="file-committed-at">
+    
+      Updated <time class='js-timeago' datetime='2015-12-03 15:31:36 +0200'>2015-12-03 15:31:36 +0200</time>
+    
+  </span>
+
+  <div class="file-stats group">
+    <div class="file-stat">
+      107 complexity
+    </div>
+    <div class="file-stat">
+      N/A complexity per method
+    </div>
+    <div class="file-stat">
+      3 churn
+    </div>
+    <div class="file-stat">
+      0 methods
+    </div>
+    <div class="file-stat">
+      22 duplication
+    </div>
+  </div>
+
+  
+    <button id="js-toggle-smells" class="smells-toggle-button button">Toggle Smells</button>
+  
+</div>
+
+<code class="prettyprint linenums lang-ruby file-code js-file-code">require &#39;spec_helper&#39;
+
+describe AttachmentsController, type: :controller do
+  context &#39;controller actions&#39; do
+
+    let(:user){FactoryGirl.create(:user)}
+
+    before :each do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flay/" target="_blank">DuplicateCode</a>)      Identical code found in 5 nodes                        <a href="assignments_controller_spec.html#L22" class="js-smell-location">0</a>                  <a href="attachments_controller_spec.html#L8" class="js-smell-location">1</a>                  <a href="dashboards_controller_spec.html#L13" class="js-smell-location">2</a>                  <a href="profiles_controller_spec.html#L13" class="js-smell-location">3</a>                  <a href="projects_controller_spec.html#L16" class="js-smell-location">4</a>                  </span>  </li></ul>
+      User.destroy_all
+      Project.destroy_all
+      Attachment.destroy_all
+      Requirement.destroy_all
+
+      @request.env[&quot;devise.mapping&quot;] = Devise.mappings[:user]
+      sign_in user
+    end
+
+    describe &#39;POST create&#39; do
+      it &#39;passes attachment params to action&#39; do
+        r = FactoryGirl.create(:requirement)
+        post :create, attachment: {requirement_id: r.id, file: [fixture_file_upload(&#39;spec/fixtures/file/pdf.pdf&#39;, &#39;pdf/pdf&#39;)]}
+        expect(controller.params[:attachment]).not_to be_nil
+      end
+
+      it &#39;creates new attachment and renders the edit_requirement path json&#39; do<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flog/" target="_blank">HighComplexity</a>)      context(controller actions)::describe(POST create)::it#creates new attachment and renders the edit_requirement path json has a flog score of 32          </span>  </li></ul>
+        r = FactoryGirl.create(:requirement, author_id: user.id)
+        expect{
+          post :create, attachment: {requirement_id: r.id, file: [fixture_file_upload(&#39;spec/fixtures/file/pdf.pdf&#39;, &#39;pdf/pdf&#39;)]}
+        }.to change(Attachment,:count).by(1)
+
+        expect(response.body).to eq(&quot;{\&quot;page\&quot;:\&quot;/requirements/#{r.id}/edit?requirement=#{r.id}\&quot;}&quot;)
+      end
+
+    end
+
+    describe &#39;POST clear&#39; do
+      it &#39;finds the attachment and assigns it to @attachment&#39; do
+        attachment = FactoryGirl.create(:attachment)
+        post :clear, attachment_id: attachment.id
+        expect(assigns(:attachment)).to eq(attachment)
+      end
+
+      it &#39;destroys the @attachment and renders the edit_requirement path json&#39; do
+        r = FactoryGirl.create(:requirement)
+        attachment = FactoryGirl.create(:attachment, requirement_id: r.id)
+        post :clear, attachment_id: attachment.id
+        expect(response.body).to eq(&quot;{\&quot;page\&quot;:\&quot;/requirements/#{r.id}/edit?requirement=#{r.id}\&quot;}&quot;)
+      end
+
+    end
+
+  end
+end
+</code>
+
+    </div>
+    <script src='../../assets/javascripts/jquery-2.1.0.js'></script>
+    <script src='../../assets/javascripts/jquery.tablesorter.js'></script>
+    <script src='../../assets/javascripts/jquery.floatThead-v1.2.7.js'></script>
+    <script src='../../assets/javascripts/jquery.timeago-v1.4.1.js'></script>
+    <script src='../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../assets/javascripts/jquery.scrollTo-1.4.11.js'></script>
+    <script src='../../assets/javascripts/prettify-4-Mar-2013.js'></script>
+    <script src='../../assets/javascripts/application.js'></script>
+  </body>
+</html>

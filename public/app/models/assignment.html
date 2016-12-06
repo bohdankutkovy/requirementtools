@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>RubyCritic</title>
+    <link href="../../assets/stylesheets/application.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <link href="../../assets/stylesheets/prettify.custom_theme.css" media="screen, projection, print" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <header class="project-header group">
+      <div class="container">
+        <h1 class="logo"><a href="../../overview.html" class="logo-link">RubyCritic</a></h1>
+        <nav class="project-nav">
+          <a href="../../overview.html" class="project-nav-item">Overview</a>
+          <a href="../../code_index.html" class="project-nav-item">Code</a>
+          <a href="../../smells_index.html" class="project-nav-item">Smells</a>
+        </nav>
+      </div>
+    </header>
+    <div class="container">
+      <div class="file-header group rated">
+  <span class="rating rating-c circled-text circle">
+    C
+  </span>
+  <h2 class="file-name">Assignment</h2>
+
+  <span class="file-committed-at">
+    
+      Updated <time class='js-timeago' datetime='2015-12-11 12:40:51 +0200'>2015-12-11 12:40:51 +0200</time>
+    
+  </span>
+
+  <div class="file-stats group">
+    <div class="file-stat">
+      73 complexity
+    </div>
+    <div class="file-stat">
+      12.2 complexity per method
+    </div>
+    <div class="file-stat">
+      2 churn
+    </div>
+    <div class="file-stat">
+      6 methods
+    </div>
+    <div class="file-stat">
+      64 duplication
+    </div>
+  </div>
+
+  
+    <button id="js-toggle-smells" class="smells-toggle-button button">Toggle Smells</button>
+  
+</div>
+
+<code class="prettyprint linenums lang-ruby file-code js-file-code">class Assignment &lt; ActiveRecord::Base<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="https://github.com/troessner/reek/blob/master/docs/Irresponsible-Module.md" target="_blank">IrresponsibleModule</a>)      Assignment has no descriptive comment          </span>  </li></ul>
+  belongs_to :project
+  belongs_to :user
+
+  validates_presence_of :acl_level
+  validates_presence_of :project_id
+
+  validates_numericality_of :acl_level, greater_than_or_equal_to: 0, less_than: 4
+  
+  validates_uniqueness_of :user_id, scope: [:project_id], message: &#39;cannot be assigned to one project more than once&#39;
+
+  ACL_LEVELS = {
+      0 =&gt; &#39;SuperAdmin&#39;,
+      1 =&gt; &#39;ProjectAdmin&#39;,
+      2 =&gt; &#39;ProjectUser&#39;,
+      3 =&gt; &#39;ProjectViewer&#39;
+  }.freeze
+
+  def name
+    &quot;#{user.name}&quot; 
+  end
+
+  def authorized_for?(action)<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="https://github.com/troessner/reek/blob/master/docs/Unused-Parameters.md" target="_blank">UnusedParameters</a>)      Assignment#authorized_for? has unused parameter 'action'          </span>  </li></ul>
+    if current_user.is_super_admin?
+      true
+    end
+  end
+
+  def available_for_create?(user)
+    user_has_ability = user.assignments.where(project_id: project_id).first.acl_level &lt; 3<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank">FeatureEnvy</a>)      Assignment#available_for_create? refers to user more than self (maybe move it to another class?)                        <a href="assignment.html#L30" class="js-smell-location">0</a>                  <a href="assignment.html#L31" class="js-smell-location">1</a>                  </span>  </li></ul>
+    user.is_super_admin? || user_has_ability<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank">FeatureEnvy</a>)      Assignment#available_for_create? refers to user more than self (maybe move it to another class?)                        <a href="assignment.html#L30" class="js-smell-location">0</a>                  <a href="assignment.html#L31" class="js-smell-location">1</a>                  </span>  </li></ul>
+  end
+
+  def available_for_read?(user)
+    user_has_ability = user.assignments.where(project_id: project.id).first.acl_level &gt;= 0<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank">FeatureEnvy</a>)      Assignment#available_for_read? refers to user more than self (maybe move it to another class?)                        <a href="assignment.html#L35" class="js-smell-location">0</a>                  <a href="assignment.html#L36" class="js-smell-location">1</a>                  </span>  </li></ul>
+    user.is_super_admin? || user_has_ability<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="https://github.com/troessner/reek/blob/master/docs/Feature-Envy.md" target="_blank">FeatureEnvy</a>)      Assignment#available_for_read? refers to user more than self (maybe move it to another class?)                        <a href="assignment.html#L35" class="js-smell-location">0</a>                  <a href="assignment.html#L36" class="js-smell-location">1</a>                  </span>  </li></ul>
+  end
+
+  def available_for_update?(user)<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank">TooManyStatements</a>)      Assignment#available_for_update? has approx 6 statements          </span>  </li></ul>
+    current_user_acl = user.assignments.where(project_id: project.id).first.acl_level
+
+    case current_user_acl<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flay/" target="_blank">DuplicateCode</a>)      Identical code found in 2 nodes                        <a href="assignment.html#L42" class="js-smell-location">0</a>                  <a href="assignment.html#L58" class="js-smell-location">1</a>                  </span>  </li></ul>
+      when 0
+        user_has_ability = true
+      when 1, 2
+        assignment = User.find_by_id(user_id).assignments.find_by_id(id)
+        user_has_ability = true if assignment &amp;&amp; assignment.acl_level &gt; current_user_acl
+      when 3
+        user_has_ability = false
+    end
+    user.is_super_admin? || user_has_ability
+  end
+
+  def available_for_delete?(user)<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="https://github.com/troessner/reek/blob/master/docs/Too-Many-Statements.md" target="_blank">TooManyStatements</a>)      Assignment#available_for_delete? has approx 7 statements          </span>  </li></ul>
+    user_has_ability = false
+    current_user_acl = user.assignments.where(project_id: project.id).first.acl_level
+
+    case current_user_acl<ul class="nocode smells js-smells">  <li class="smell ">    <span class="description">      (<a href="http://docs.seattlerb.org/flay/" target="_blank">DuplicateCode</a>)      Identical code found in 2 nodes                        <a href="assignment.html#L42" class="js-smell-location">0</a>                  <a href="assignment.html#L58" class="js-smell-location">1</a>                  </span>  </li></ul>
+      when 0
+        user_has_ability = true
+      when 1, 2
+        assignment = User.find_by_id(user_id).assignments.find_by_id(id)
+        user_has_ability = true if assignment &amp;&amp; assignment.acl_level &gt; current_user_acl
+      when 3
+        user_has_ability = false
+    end
+    user.is_super_admin? || user_has_ability
+  end
+
+end
+</code>
+
+    </div>
+    <script src='../../assets/javascripts/jquery-2.1.0.js'></script>
+    <script src='../../assets/javascripts/jquery.tablesorter.js'></script>
+    <script src='../../assets/javascripts/jquery.floatThead-v1.2.7.js'></script>
+    <script src='../../assets/javascripts/jquery.timeago-v1.4.1.js'></script>
+    <script src='../../assets/javascripts/highcharts.src-4.0.1.js'></script>
+    <script src='../../assets/javascripts/jquery.scrollTo-1.4.11.js'></script>
+    <script src='../../assets/javascripts/prettify-4-Mar-2013.js'></script>
+    <script src='../../assets/javascripts/application.js'></script>
+  </body>
+</html>
