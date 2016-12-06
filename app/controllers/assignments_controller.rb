@@ -1,4 +1,6 @@
 class AssignmentsController < ApplicationController
+  # this controller is responsible for assigning users to different projects with different roles
+
   include AssignmentsHelper
 
   layout "simple"
