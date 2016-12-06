@@ -65,7 +65,7 @@ gem 'bootswatch-rails'
 
 gem 'faker', '~> 1.5.0'
 
-
+gem 'rubycritic', :require => false
 
 group :test do
   gem 'simplecov'
