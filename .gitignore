@@ -17,5 +17,6 @@
 /tmp
 /public
 /doc
+/coverage
 
 .idea/*
