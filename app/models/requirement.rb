@@ -1,6 +1,7 @@
 class Requirement < ActiveRecord::Base
 	versioned
 
+	
 	before_create :set_project_id
 
 	has_many :attachments, dependent: :destroy
