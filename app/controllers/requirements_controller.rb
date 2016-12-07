@@ -1,3 +1,4 @@
+# this controller is responsible for requirement functionality
 class RequirementsController < ApplicationController
   include ActionView::Helpers::UrlHelper
   include RequirementsHelper
@@ -10,15 +11,17 @@ class RequirementsController < ApplicationController
   def index
     @requirements = []
 
-    if params[:project_id]
-      @requirements = Requirement.where(project_id: params[:project_id], parent_id: 0)
+    project_id = params[:project_id]
+    if project_id
+      @requirements = Requirement.where(project_id: project_id, parent_id: 0)
     end
     render json: JSON::dump({ requirements: @requirements.map { |req| requirement_to_bootstrap_tree_item(req) if req.is_active }.compact})
   end
 
   def show
-    if params[:id]
-      @requirement = Requirement.find(params[:id])
+    requirement_id = params[:id]
+    if requirement_id
+      @requirement = Requirement.find(requirement_id)
       @requirement_attachments = @requirement.attachments.all
     end
   end
@@ -27,16 +30,15 @@ class RequirementsController < ApplicationController
     @requirement = Requirement.create(params.require(:requirement).permit(:title, :description,  :priority, :worth, :parent_id, :project_id, attachments_attributes: [:id, :requirement_id, :file])
                                           .merge(author_id: current_user.id) )
     if @requirement.save
-      if params[:attachments]
-        params[:attachments]['file'].each do |a|
-          @requirement_attachment = @requirement.attachments.create!(:file => a)
+      attachments = params[:attachments]
+      if attachments
+        attachments['file'].each do |attachment|
+          @requirement_attachment = @requirement.attachments.create!(:file => attachment)
         end
       end
 
       page_path = after_change_path(@requirement.id)
       render json: {page: page_path}
-    else
-      render json: {page: new_requirement_path}
     end
   end
 
@@ -66,8 +68,9 @@ class RequirementsController < ApplicationController
   end
 
   def clear
-    if params[:requirement_id]
-      requirement = Requirement.find(params[:requirement_id])
+    requirement_id = params[:requirement_id]
+    if requirement_id
+      requirement = Requirement.find(requirement_id)
       parent_id   = requirement.parent_id
       disable_requirements(requirement)
 
@@ -79,25 +82,21 @@ class RequirementsController < ApplicationController
   end
 
   def version_rollback
-    if params[:requirement_id] && params[:version]
+    requirement_id = params[:requirement_id]
+    version = params[:version]
+    if requirement_id && version
 
-      page_path = after_change_path(params[:requirement_id])
+      page_path = after_change_path(requirement_id)
 
-      @requirement = Requirement.find(params[:requirement_id])
+      @requirement = Requirement.find(requirement_id)
 
-      if @requirement.revert_to!(params[:version].to_i)
+      if @requirement.revert_to!(version.to_i)
         render json: {page: page_path}
       end
     end
   end
 
   private
-
-  def disable_requirements(requirement)
-    requirement.self_and_descendents.each do |requirement|
-      requirement.disable_requirement
-    end
-  end
 
   def after_clear_path(parent_id)
     if parent_id > 0

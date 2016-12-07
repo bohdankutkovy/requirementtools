@@ -66,6 +66,12 @@ class Requirement < ActiveRecord::Base
 		self.save
 	end
 
+	def disable_requirements(requirement)
+		requirement.self_and_descendents.each do |requirement|
+			requirement.disable_requirement
+		end
+	end
+
 	private
 	def set_project_id
 		if self.parent

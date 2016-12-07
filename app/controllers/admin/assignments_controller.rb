@@ -1,4 +1,6 @@
+# this controller is responsible for assigning users to different projects with different roles
 class Admin::AssignmentsController < ApplicationController
+  # it does provide various methods to handle assignment functionality
   include Admin::AssignmentsHelper
 
   before_filter :update_config
@@ -14,7 +16,7 @@ class Admin::AssignmentsController < ApplicationController
     columns[:user].form_ui      = :select
     columns[:project].form_ui   = :select
     columns[:acl_level].form_ui = :select
-    columns[:acl_level].options = {options: Assignment::ACL_LEVELS.map{|k,v| [v,k]} }
+    columns[:acl_level].options = {options: Assignment::ACL_LEVELS.map{|key,value| [value,key]} }
 
     # !!!
     # config.columns[:user].form_ui = :select
@@ -22,21 +24,12 @@ class Admin::AssignmentsController < ApplicationController
 
   def update_config
     if current_user.is_super_admin
-      active_scaffold_config.columns[:acl_level].options = {options: Assignment::ACL_LEVELS.map{|k,v| [v, k] } }
+      acl_level = 0
     else
-        if current_user.assignments.where(project_id: params[:project_id]).first
-        case current_user.assignments.where(project_id: params[:project_id]).first.acl_level
-          when 0
-            active_scaffold_config.columns[:acl_level].options = {options: Assignment::ACL_LEVELS.map{|k,v| [v, k] if k>=0}.compact }
-          when 1
-            active_scaffold_config.columns[:acl_level].options = {options: Assignment::ACL_LEVELS.map{|k,v| [v, k] if k>1}.compact }
-          when 2
-            active_scaffold_config.columns[:acl_level].options = {options: Assignment::ACL_LEVELS.map{|k,v| [v, k] if k>2}.compact }
-          when 3
-            active_scaffold_config.columns[:acl_level].options = {options: Assignment::ACL_LEVELS.map{|k,v| [v, k] if k>3}.compact }
-        end
-      end
+      assignment = current_user.assignments.where(project_id: params[:project_id]).first
+      acl_level = assignment.acl_level if assignment
     end
+    active_scaffold_config.columns[:acl_level].options = {options: Assignment::ACL_LEVELS.map{|key, value| [value, key] if key>acl_level}.compact }
   end
 
 end
